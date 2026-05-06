@@ -1,113 +1,580 @@
-<nav>
-  <a class="logo" href="index.html">
-    <div class="logo-box">BP</div>
-    <span>BennethPerez</span>
-  </a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Platforms & Systems</title>
 
-  <div class="nav-links">
-    <a href="index.html">Biography</a>
-    <a href="GNC.html">GN&amp;C</a>
-    <a href="career_map.html">Career Map</a>
-    <a href="day-to-day.html">Day to Day</a>
-    <a class="active" href="platform.html">Platform</a>
-    <a href="community.html">Community</a>
-  </div>
-</nav>
+  <style>
 
-<style>
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background: rgba(5, 5, 8, 0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 0, 0, 0.25);
-    padding: 18px 8%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    text-decoration: none;
-  }
-
-  .logo-box {
-    width: 54px;
-    height: 54px;
-    border-radius: 14px;
-    border: 1px solid rgba(255, 0, 0, 0.7);
-
-    background:
-      radial-gradient(circle at top left, rgba(255, 80, 80, 0.25), transparent 60%),
-      linear-gradient(145deg, #050505, #090909);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: #ff2d2d;
-    font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: 1px;
-
-    box-shadow:
-      0 0 18px rgba(255, 0, 0, 0.25),
-      inset 0 0 12px rgba(255, 0, 0, 0.08);
-
-    transition: 0.3s ease;
-  }
-
-  .logo-box:hover {
-    transform: scale(1.05);
-    box-shadow:
-      0 0 24px rgba(255, 0, 0, 0.45),
-      inset 0 0 14px rgba(255, 0, 0, 0.15);
-  }
-
-  .logo span {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #f0f0f0;
-    letter-spacing: 0.5px;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 22px;
-    flex-wrap: wrap;
-  }
-
-  .nav-links a {
-    color: #d8d8d8;
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: 0.3s ease;
-  }
-
-  .nav-links a:hover,
-  .nav-links .active {
-    color: #ff3333;
-  }
-
-  @media (max-width: 768px) {
-    nav {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 14px;
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
     }
 
-    .logo span {
-      font-size: 1.5rem;
+    body{
+      font-family: "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(255,0,0,0.15), transparent 35%),
+        linear-gradient(135deg,#050505,#0b0b12,#120000);
+      color:white;
+      overflow-x:hidden;
     }
 
-    .logo-box {
-      width: 48px;
-      height: 48px;
-      font-size: 1.6rem;
+    nav{
+      position:sticky;
+      top:0;
+      z-index:1000;
+
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+
+      padding:18px 6%;
+
+      background:rgba(5,5,8,0.94);
+      backdrop-filter:blur(10px);
+
+      border-bottom:1px solid rgba(255,0,0,0.2);
     }
-  }
-</style>
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      text-decoration:none;
+    }
+
+    .logo img{
+      width:54px;
+      height:54px;
+      object-fit:contain;
+    }
+
+    .logo span{
+      font-size:2rem;
+      font-weight:700;
+      color:#f3f3f3;
+      letter-spacing:0.5px;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:22px;
+      flex-wrap:wrap;
+    }
+
+    .nav-links a{
+      color:#d4d4d4;
+      text-decoration:none;
+      font-size:0.95rem;
+      transition:0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links .active{
+      color:#ff2f2f;
+    }
+
+    .hero{
+      padding:100px 8% 70px;
+      text-align:center;
+    }
+
+    .status{
+      display:inline-block;
+
+      padding:8px 16px;
+
+      border-radius:999px;
+
+      border:1px solid rgba(255,0,0,0.45);
+
+      background:rgba(255,0,0,0.08);
+
+      color:#ff5555;
+
+      font-size:0.8rem;
+      letter-spacing:2px;
+
+      margin-bottom:24px;
+    }
+
+    .hero h1{
+      font-size:clamp(2.8rem,6vw,5rem);
+      line-height:1;
+      margin-bottom:24px;
+
+      text-transform:uppercase;
+
+      background:linear-gradient(
+        90deg,
+        #ffffff,
+        #ff3c3c,
+        #7c0000
+      );
+
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+
+    .hero p{
+      max-width:850px;
+      margin:auto;
+
+      color:#c9c9c9;
+
+      font-size:1.15rem;
+      line-height:1.7;
+    }
+
+    .dashboard{
+      padding:40px 8% 100px;
+    }
+
+    .section-title{
+      margin-bottom:30px;
+    }
+
+    .section-title h2{
+      font-size:2rem;
+      margin-bottom:10px;
+    }
+
+    .section-title p{
+      color:#b9b9b9;
+      max-width:760px;
+      line-height:1.6;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:24px;
+    }
+
+    .card{
+      position:relative;
+
+      padding:28px;
+
+      min-height:300px;
+
+      border-radius:24px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.05),
+          rgba(255,255,255,0.015)
+        ),
+        rgba(8,8,12,0.95);
+
+      border:1px solid rgba(255,0,0,0.18);
+
+      overflow:hidden;
+
+      transition:0.35s ease;
+
+      box-shadow:
+        0 0 25px rgba(255,0,0,0.08);
+    }
+
+    .card::before{
+      content:"";
+
+      position:absolute;
+      inset:0;
+
+      background:
+        linear-gradient(
+          120deg,
+          transparent,
+          rgba(255,0,0,0.14),
+          transparent
+        );
+
+      transform:translateX(-100%);
+      transition:0.7s;
+    }
+
+    .card:hover::before{
+      transform:translateX(100%);
+    }
+
+    .card:hover{
+      transform:translateY(-8px);
+
+      border-color:rgba(255,60,60,0.55);
+
+      box-shadow:
+        0 0 40px rgba(255,0,0,0.22);
+    }
+
+    .card-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+
+      margin-bottom:22px;
+
+      position:relative;
+      z-index:2;
+    }
+
+    .icon{
+      font-size:2.3rem;
+      filter:drop-shadow(0 0 10px rgba(255,0,0,0.5));
+    }
+
+    .tag{
+      font-size:0.72rem;
+
+      padding:6px 10px;
+
+      border-radius:999px;
+
+      border:1px solid rgba(255,0,0,0.35);
+
+      background:rgba(255,0,0,0.08);
+
+      color:#ff4b4b;
+
+      letter-spacing:1px;
+    }
+
+    .card h3{
+      font-size:1.35rem;
+      margin-bottom:14px;
+
+      position:relative;
+      z-index:2;
+    }
+
+    .card p{
+      color:#c0c0c0;
+
+      line-height:1.6;
+
+      margin-bottom:18px;
+
+      position:relative;
+      z-index:2;
+    }
+
+    .systems{
+      list-style:none;
+
+      display:grid;
+      gap:8px;
+
+      position:relative;
+      z-index:2;
+    }
+
+    .systems li{
+      color:#ececec;
+      font-size:0.92rem;
+
+      padding-left:18px;
+
+      position:relative;
+    }
+
+    .systems li::before{
+      content:"▸";
+      position:absolute;
+      left:0;
+      color:#ff3030;
+    }
+
+    .architecture{
+      margin-top:80px;
+
+      padding:40px;
+
+      border-radius:28px;
+
+      background:rgba(255,255,255,0.03);
+
+      border:1px solid rgba(255,0,0,0.2);
+    }
+
+    .flow{
+      margin-top:30px;
+
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+      gap:18px;
+    }
+
+    .flow-step{
+      text-align:center;
+
+      padding:22px 18px;
+
+      border-radius:18px;
+
+      background:rgba(10,10,14,0.92);
+
+      border:1px solid rgba(255,0,0,0.22);
+
+      transition:0.3s;
+    }
+
+    .flow-step:hover{
+      transform:scale(1.04);
+
+      background:rgba(255,0,0,0.1);
+    }
+
+    .flow-step span{
+      display:block;
+      font-size:2rem;
+      margin-bottom:12px;
+    }
+
+    .flow-step h4{
+      margin-bottom:10px;
+    }
+
+    .flow-step p{
+      color:#b8b8b8;
+      font-size:0.88rem;
+      line-height:1.5;
+    }
+
+    footer{
+      padding:30px 8%;
+      text-align:center;
+
+      color:#888;
+
+      border-top:1px solid rgba(255,0,0,0.15);
+
+      background:rgba(0,0,0,0.35);
+    }
+
+    @media(max-width:768px){
+
+      nav{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:16px;
+      }
+
+      .logo span{
+        font-size:1.5rem;
+      }
+
+      .logo img{
+        width:48px;
+        height:48px;
+      }
+
+      .hero{
+        padding-top:80px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <nav>
+
+    <a class="logo" href="index.html">
+      <img src="images/logo-red.png" alt="BP Logo">
+      <span>BennethPerez</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">Biography</a>
+      <a href="GNC.html">GN&amp;C</a>
+      <a href="career_map.html">Career Map</a>
+      <a href="day-to-day.html">Day to Day</a>
+      <a class="active" href="platforms.html">Platform</a>
+      <a href="community.html">Community</a>
+    </div>
+
+  </nav>
+
+  <section class="hero">
+
+    <div class="status">
+      MISSION SYSTEMS PLATFORM
+    </div>
+
+    <h1>Platforms & Systems</h1>
+
+    <p>
+      A futuristic showcase of advanced aerospace and defense systems integrating
+      guidance, navigation, control, tracking, avionics, autonomy, and sensor fusion.
+    </p>
+
+  </section>
+
+  <main class="dashboard">
+
+    <div class="section-title">
+      <h2>Interactive Defense-Tech Showcase</h2>
+
+      <p>
+        Aerospace platforms where real-time sensing, estimation, tracking,
+        mission systems, and guidance technologies operate together.
+      </p>
+    </div>
+
+    <section class="grid">
+
+      <div class="card">
+
+        <div class="card-top">
+          <div class="icon">🚀</div>
+          <div class="tag">INTERCEPT</div>
+        </div>
+
+        <h3>Hypersonic Interceptor</h3>
+
+        <p>
+          High-speed intercept systems using advanced tracking,
+          terminal guidance, and rapid control response.
+        </p>
+
+        <ul class="systems">
+          <li>Terminal Guidance</li>
+          <li>Seeker Tracking</li>
+          <li>Trajectory Shaping</li>
+          <li>High-Speed Control</li>
+        </ul>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-top">
+          <div class="icon">📡</div>
+          <div class="tag">RADAR</div>
+        </div>
+
+        <h3>AESA Radar Tracking</h3>
+
+        <p>
+          Modern phased-array radar systems supporting
+          detection, estimation, and multi-target tracking.
+        </p>
+
+        <ul class="systems">
+          <li>Range-Doppler Processing</li>
+          <li>Measurement Gating</li>
+          <li>Track Correlation</li>
+          <li>Covariance Estimation</li>
+        </ul>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-top">
+          <div class="icon">🛩️</div>
+          <div class="tag">AUTONOMY</div>
+        </div>
+
+        <h3>Autonomous UAV Swarm</h3>
+
+        <p>
+          Coordinated unmanned systems using distributed autonomy,
+          navigation, communication, and sensor fusion.
+        </p>
+
+        <ul class="systems">
+          <li>Swarm Coordination</li>
+          <li>Autonomous Navigation</li>
+          <li>Mission Planning</li>
+          <li>Distributed Sensing</li>
+        </ul>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-top">
+          <div class="icon">🛰️</div>
+          <div class="tag">SPACE</div>
+        </div>
+
+        <h3>Satellite Early Warning</h3>
+
+        <p>
+          Space-based sensing systems used for launch detection,
+          tracking, and strategic warning operations.
+        </p>
+
+        <ul class="systems">
+          <li>Infrared Detection</li>
+          <li>Orbital Tracking</li>
+          <li>Launch Monitoring</li>
+          <li>Space Surveillance</li>
+        </ul>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-top">
+          <div class="icon">🛡️</div>
+          <div class="tag">DEFENSE</div>
+        </div>
+
+        <h3>Missile Defense Architecture</h3>
+
+        <p>
+          Integrated sensor and interceptor networks supporting
+          layered missile defense operations.
+        </p>
+
+        <ul class="systems">
+          <li>Sensor-to-Shooter Chain</li>
+          <li>Track Management</li>
+          <li>Engagement Planning</li>
+          <li>Integrated Fire Control</li>
+        </ul>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-top">
+          <div class="icon">🧠</div>
+          <div class="tag">FUSION</div>
+        </div>
+
+        <h3>Sensor Fusion Engine</h3>
+
+        <p>
+          Combining radar, IMU, GPS, EO/IR, and other measurements
+          into a unified state estimate.
+        </p>
+
+        <ul class="systems">
+          <li>Kalman Filtering</li>
+          <li>Coordinate Transforms</li>
+          <li>State Estimation</li>
+          <li>Covariance Tuning</li>
+        </ul>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    Platforms & Systems | Aerospace • Defense • GN&amp;C • Tracking • Sensor Fusion
+  </footer>
+
+</body>
+</html>
