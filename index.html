@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day-to-Day Technical Tasks · Aerospace Electrical Systems</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-900: #040b18;
+  --navy-800: #071628;
+  --navy-700: #0c2040;
+  --navy-600: #102a52;
+  --navy-500: #163564;
+  --steel: #1e4080;
+  --steel-light: #2a5aa8;
+  --border: rgba(42,90,168,0.25);
+  --border-bright: rgba(42,90,168,0.5);
+
+  --cyan: #00d4ff;
+  --cyan-dim: rgba(0,212,255,0.12);
+  --cyan-glow: rgba(0,212,255,0.25);
+  --amber: #f5a623;
+  --amber-dim: rgba(245,166,35,0.12);
+  --green: #00e5a0;
+  --green-dim: rgba(0,229,160,0.1);
+  --rose: #ff6b8a;
+  --rose-dim: rgba(255,107,138,0.1);
+  --violet: #9d6fff;
+  --violet-dim: rgba(157,111,255,0.1);
+
+  --text-primary: #e4edf8;
+  --text-secondary: #8ba4c2;
+  --text-dim: #4a6080;
+
+  --card-bg: rgba(12,32,64,0.7);
+  --card-hover: rgba(22,53,100,0.85);
+  --radius: 8px;
+  --radius-lg: 14px;
+  --transition: 0.24s cubic-bezier(0.4,0,0.2,1);
+
+  --nav-h: 62px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy-900);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── STARFIELD BG ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, rgba(0,212,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 38% 72%, rgba(255,255,255,0.25) 0%, transparent 100%),
+    radial-gradient(1px 1px at 65% 31%, rgba(0,212,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 81% 84%, rgba(255,255,255,0.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 55%, rgba(157,111,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 27% 44%, rgba(255,255,255,0.15) 0%, transparent 100%),
+    radial-gradient(1px 1px at 92% 12%, rgba(0,212,255,0.25) 0%, transparent 100%),
+    radial-gradient(600px 400px at 20% 80%, rgba(14,40,90,0.6) 0%, transparent 70%),
+    radial-gradient(600px 500px at 80% 20%, rgba(10,25,70,0.5) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* diagonal grid overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(42,90,168,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(42,90,168,0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  background: rgba(4,11,24,0.88);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(16px, 4vw, 48px);
+  z-index: 100;
+}
+
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.12em;
+  color: var(--cyan);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  gap: 6px;
+  list-style: none;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.nav-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.nav-links a:hover {
+  color: var(--cyan);
+  border-color: var(--border-bright);
+  background: var(--cyan-dim);
+}
+
+/* ── SECTIONS ── */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 48px);
+}
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: var(--nav-h);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,212,255,0.07) 0%, transparent 65%);
+  top: 50%; left: 50%;
+  transform: translate(-60%, -50%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  padding: 80px clamp(16px,4vw,48px) 60px;
+  max-width: 1080px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--cyan);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: fadeUp 0.7s ease both;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 32px; height: 1px;
+  background: var(--cyan);
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 10vw, 110px);
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+
+.hero-title span { color: var(--cyan); }
+
+.hero-subtitle {
+  font-size: clamp(15px, 2.2vw, 18px);
+  color: var(--text-secondary);
+  max-width: 560px;
+  line-height: 1.65;
+  margin-bottom: 40px;
+  font-weight: 300;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+
+/* ── IMAGE PLACEHOLDER ── */
+.image-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 2px dashed var(--border-bright);
+  border-radius: var(--radius-lg);
+  background: var(--cyan-dim);
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-align: center;
+  padding: 24px;
+  transition: border-color var(--transition);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-placeholder:hover {
+  border-color: var(--cyan);
+  color: var(--text-secondary);
+}
+
+
+.image-placeholder img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-placeholder .ph-icon {
+  font-size: 28px;
+  opacity: 0.5;
+}
+
+.image-placeholder .ph-dims {
+  font-size: 10px;
+  opacity: 0.5;
+}
+
+.hero-image-slot {
+  animation: fadeUp 0.7s 0.3s ease both;
+  margin-bottom: 40px;
+  max-width: 680px;
+}
+
+.hero-image-slot .image-placeholder {
+  height: 220px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.7s 0.35s ease both;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: var(--cyan);
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── SECTION HEADER ── */
+.section-header {
+  margin-bottom: 40px;
+}
+
+.section-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--cyan);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(32px, 5vw, 52px);
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.section-rule {
+  width: 48px; height: 2px;
+  background: var(--cyan);
+  margin-top: 14px;
+  border-radius: 2px;
+}
+
+/* ── SECTION SPACING ── */
+.section-pad {
+  padding: 90px 0;
+}
+
+/* ── SEARCH ── */
+.search-bar {
+  position: relative;
+  max-width: 420px;
+  margin-bottom: 32px;
+}
+
+.search-bar input {
+  width: 100%;
+  background: var(--card-bg);
+  border: 1px solid var(--border-bright);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  padding: 11px 38px 11px 16px;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  backdrop-filter: blur(8px);
+}
+
+.search-bar input::placeholder { color: var(--text-dim); }
+
+.search-bar input:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px var(--cyan-glow);
+}
+
+.search-bar .si {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-dim);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+/* ── TIMELINE ── */
+#workflow .section-pad { border-top: 1px solid var(--border); }
+
+.timeline {
+  position: relative;
+  padding-left: 40px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 11px; top: 8px; bottom: 8px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--cyan), var(--violet), var(--amber));
+  border-radius: 2px;
+}
+
+.tl-item {
+  position: relative;
+  margin-bottom: 36px;
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.tl-item.visible { opacity: 1; transform: none; }
+
+.tl-dot {
+  position: absolute;
+  left: -34px; top: 6px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--cyan);
+  background: var(--navy-900);
+  display: flex; align-items: center; justify-content: center;
+}
+
+.tl-dot::after {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+}
+
+.tl-item:nth-child(2) .tl-dot { border-color: var(--violet); }
+.tl-item:nth-child(2) .tl-dot::after { background: var(--violet); }
+.tl-item:nth-child(3) .tl-dot { border-color: var(--amber); }
+.tl-item:nth-child(3) .tl-dot::after { background: var(--amber); }
+
+.tl-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.tl-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.tl-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.tl-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  backdrop-filter: blur(8px);
+  transition: all var(--transition);
+}
+
+.tl-card:hover {
+  border-color: var(--border-bright);
+  color: var(--text-primary);
+  background: var(--card-hover);
+}
+
+.tl-card .icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+/* ── TASK CARDS GRID ── */
+.tasks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 16px;
+}
+
+.task-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  backdrop-filter: blur(10px);
+  transition: all var(--transition);
+  opacity: 0;
+  transform: translateY(16px);
+  position: relative;
+  overflow: hidden;
+}
+
+.task-card.visible { opacity: 1; transform: none; }
+
+.task-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  transition: opacity var(--transition);
+  opacity: 0.6;
+}
+
+.task-card:hover {
+  border-color: var(--border-bright);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 40px rgba(0,212,255,0.04);
+}
+
+.task-card:hover::before { opacity: 1; }
+
+.tc-cyan::before   { background: var(--cyan); }
+.tc-violet::before { background: var(--violet); }
+.tc-amber::before  { background: var(--amber); }
+.tc-green::before  { background: var(--green); }
+.tc-rose::before   { background: var(--rose); }
+
+.tc-cyan:hover   { box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 40px var(--cyan-glow); }
+.tc-violet:hover { box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 40px var(--violet-dim); }
+.tc-amber:hover  { box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 40px var(--amber-dim); }
+.tc-green:hover  { box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 40px var(--green-dim); }
+.tc-rose:hover   { box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 40px var(--rose-dim); }
+
+.tc-icon {
+  font-size: 28px;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.tc-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.tc-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.tc-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tc-bullets li {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  padding-left: 14px;
+  position: relative;
+}
+
+.tc-bullets li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--cyan);
+}
+
+.task-card.hidden { display: none; }
+
+/* ── IMAGE ROW ── */
+.image-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 40px 0;
+}
+
+.image-row .image-placeholder {
+  height: 180px;
+}
+
+/* ── CAREER PATHS ── */
+.career-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.career-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  transition: border-color var(--transition);
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.career-card.visible { opacity: 1; transform: none; }
+.career-card:hover { border-color: var(--border-bright); }
+.career-card.hidden { display: none; }
+
+.career-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  cursor: pointer;
+  user-select: none;
+  transition: background var(--transition);
+}
+
+.career-header:hover { background: var(--card-hover); }
+
+.career-icon { font-size: 22px; flex-shrink: 0; }
+
+.career-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+  flex: 1;
+  line-height: 1.2;
+}
+
+.career-level {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.lvl-mid   { background: rgba(0,212,255,0.12);   color: var(--cyan);   border: 1px solid rgba(0,212,255,0.3); }
+.lvl-senior{ background: rgba(157,111,255,0.12); color: var(--violet); border: 1px solid rgba(157,111,255,0.3); }
+.lvl-lead  { background: rgba(245,166,35,0.12);  color: var(--amber);  border: 1px solid rgba(245,166,35,0.3); }
+.lvl-mgr   { background: rgba(0,229,160,0.10);   color: var(--green);  border: 1px solid rgba(0,229,160,0.3); }
+
+.career-chevron {
+  color: var(--text-dim);
+  font-size: 11px;
+  transition: transform var(--transition);
+  margin-left: 6px;
+}
+
+.career-card.open .career-chevron { transform: rotate(180deg); }
+
+.career-body {
+  display: none;
+  padding: 0 20px 18px;
+  border-top: 1px solid var(--border);
+  animation: fadeDown 0.22s ease;
+}
+
+.career-card.open .career-body { display: block; }
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.career-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-top: 14px;
+  margin-bottom: 12px;
+}
+
+.career-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ctag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 3px 8px;
+  background: var(--navy-700);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-dim);
+}
+
+/* ── SKILLS ── */
+.skills-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skill-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border-bright);
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  cursor: default;
+  transition: all var(--transition);
+  backdrop-filter: blur(8px);
+  letter-spacing: 0.04em;
+}
+
+.skill-tag:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  box-shadow: 0 0 12px var(--cyan-glow);
+}
+
+/* ── CALLOUT ── */
+#callout {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.callout-inner {
+  padding: 80px clamp(16px,4vw,48px);
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+  position: relative;
+}
+
+.callout-glow {
+  position: absolute;
+  width: 500px; height: 300px;
+  background: radial-gradient(ellipse, rgba(0,212,255,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.callout-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--cyan);
+  text-transform: uppercase;
+}
+
+.callout-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(24px, 4vw, 42px);
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  max-width: 760px;
+}
+
+.callout-text span { color: var(--cyan); }
+
+.callout-sub {
+  font-size: 14px;
+  color: var(--text-secondary);
+  max-width: 520px;
+  font-weight: 300;
+}
+
+/* ── FOOTER ── */
+footer {
+  position: relative;
+  z-index: 1;
+  padding: 28px clamp(16px,4vw,48px);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+.footer-note {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.08em;
+}
+
+/* ── NO RESULTS ── */
+.no-results {
+  display: none;
+  text-align: center;
+  padding: 40px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .tasks-grid { grid-template-columns: 1fr; }
+  .career-grid { grid-template-columns: 1fr; }
+  .tl-cards { grid-template-columns: 1fr; }
+  .hero-stats { gap: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#hero" class="nav-logo">AERO · ELECTRICAL</a>
+  <ul class="nav-links">
+    <li><a href="#workflow">Workflow</a></li>
+    <li><a href="#tasks">Tasks</a></li>
+    <li><a href="#careers">Career Paths</a></li>
+    <li><a href="#skills">Skills</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Aerospace · Electrical Systems Engineering</div>
+    <h1 class="hero-title">DAY-TO-DAY<br><span>TECHNICAL</span><br>TASKS</h1>
+    <p class="hero-subtitle">A practical look at daily engineering work in aerospace electrical systems, avionics integration, testing, and design.</p>
+
+    <!-- 📸 IMAGE SLOT — Replace with your own photo -->
+    <div class="image-placeholder" style="padding:0; max-width:680px; height:260px;">
+        <img 
+             src="Images/Avionics.png"
+             alt="Aerospace Engineering"
+             style="width:100%; height:100%; object-fit:cover; border-radius:14px;">
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">8+</span>
+        <span class="stat-label">Task Categories</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">10</span>
+        <span class="stat-label">Career Paths</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">MIL</span>
+        <span class="stat-label">-SPEC Certified</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WORKFLOW TIMELINE ── -->
+<section id="workflow">
+  <div class="section-pad">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">// DAILY SCHEDULE</div>
+        <h2 class="section-title">DAILY WORKFLOW</h2>
+        <div class="section-rule"></div>
+      </div>
+
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-time">Morning · 0700 – 1200</div>
+          <div class="tl-title">STANDUP & DESIGN REVIEW</div>
+          <div class="tl-cards">
+            <div class="tl-card"><span class="icon">📋</span><span>Team standup — review open action items, schedule changes, and engineering priorities</span></div>
+            <div class="tl-card"><span class="icon">📐</span><span>Review updated wire harness specs, routing drawings, and ICD revisions from overnight pushes</span></div>
+            <div class="tl-card"><span class="icon">💻</span><span>CAD session — route new harness segments, update connector pinouts, resolve routing conflicts</span></div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-time">Afternoon · 1200 – 1700</div>
+          <div class="tl-title">INTEGRATION & TESTING</div>
+          <div class="tl-cards">
+            <div class="tl-card"><span class="icon">🔧</span><span>Lab time — continuity checks, crimping verification, connector installation on prototype harnesses</span></div>
+            <div class="tl-card"><span class="icon">🤝</span><span>Cross-functional sync with avionics, structures, and systems teams on interface definitions</span></div>
+            <div class="tl-card"><span class="icon">📊</span><span>Run power distribution models, EMI/EMC analysis, or signal integrity checks in simulation tools</span></div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-time">End of Day · 1700 – 1800</div>
+          <div class="tl-title">DOCUMENTATION & CLOSEOUT</div>
+          <div class="tl-cards">
+            <div class="tl-card"><span class="icon">📝</span><span>Update design logs, test records, and issue trackers with day's findings and decisions</span></div>
+            <div class="tl-card"><span class="icon">📦</span><span>Coordinate with suppliers — RFQs, lead time checks, material conformance records</span></div>
+            <div class="tl-card"><span class="icon">🔁</span><span>Queue next-day priorities: outstanding ECOs, peer review requests, integration schedule</span></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 📸 IMAGE SLOT -->
+      <div class="image-row" style="margin-top:48px;">
+        <div class="image-placeholder" style="height:180px; padding:0;">
+          <img 
+            src="Images/Harnesses.png"
+            alt="Aerospace lab and workflow image"
+            style="width:100%; height:100%; object-fit:cover; border-radius:14px;">
+        </div>
+        <div class="image-placeholder" style="height:180px; padding:0;">
+          <img 
+            src="Images/AI.png"
+            alt="Aerospace CAD and design image"
+            style="width:100%; height:100%; object-fit:cover; border-radius:14px;">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── TASK CARDS ── -->
+<section id="tasks" style="background: linear-gradient(180deg, transparent, rgba(7,22,40,0.6) 30%, rgba(7,22,40,0.6) 70%, transparent);">
+  <div class="section-pad">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">// TECHNICAL RESPONSIBILITIES</div>
+        <h2 class="section-title">DAILY TASK BREAKDOWN</h2>
+        <div class="section-rule"></div>
+      </div>
+
+      <div class="search-bar">
+        <input type="text" id="taskSearch" placeholder="Filter tasks (e.g. CAD, testing, supplier...)" autocomplete="off">
+        <span class="si">⌕</span>
+      </div>
+
+      <div class="tasks-grid" id="tasksGrid">
+
+        <div class="task-card tc-cyan" data-kw="meetings project briefings standup agile">
+          <span class="tc-icon">🗣️</span>
+          <div class="tc-title">Team Meetings & Briefings</div>
+          <p class="tc-desc">Daily standups, design reviews, and program briefings keep the team synchronized on schedule, open issues, and priority shifts.</p>
+          <ul class="tc-bullets">
+            <li>Agile standups and sprint planning</li>
+            <li>Engineering review boards (ERBs)</li>
+            <li>Program milestone briefings</li>
+            <li>Interface alignment meetings with subsystems</li>
+          </ul>
+        </div>
+
+        <div class="task-card tc-violet" data-kw="design specifications review ICD interface drawings mil-spec">
+          <span class="tc-icon">📐</span>
+          <div class="tc-title">Reviewing Design Specifications</div>
+          <p class="tc-desc">Daily review of the latest wire harness drawings, ICDs, and connector specifications to catch conflicts before they reach fabrication.</p>
+          <ul class="tc-bullets">
+            <li>Wire harness routing drawings and BOM review</li>
+            <li>ICD and interface data sheet analysis</li>
+            <li>MIL-SPEC / AS9100 compliance checks</li>
+            <li>ECO review and disposition</li>
+          </ul>
+        </div>
+
+        <div class="task-card tc-cyan" data-kw="CAD routing CATIA SolidWorks design harness 3D">
+          <span class="tc-icon">💻</span>
+          <div class="tc-title">CAD Design Work</div>
+          <p class="tc-desc">Hands-on harness routing in 3D CAD tools — placing connectors, routing wire bundles, managing bend radii and clamp spacing to meet form-fit-function requirements.</p>
+          <ul class="tc-bullets">
+            <li>3D harness routing and clamp placement</li>
+            <li>Connector pinout assignment and verification</li>
+            <li>Clearance and bend radius checks</li>
+            <li>Drawing releases and revision control</li>
+          </ul>
+        </div>
+
+        <div class="task-card tc-green" data-kw="cross-functional collaboration avionics structures systems interface">
+          <span class="tc-icon">🤝</span>
+          <div class="tc-title">Cross-Functional Collaboration</div>
+          <p class="tc-desc">Constant interface work with avionics, structures, mechanical, and systems teams to resolve conflicts, align on requirements, and validate integration approaches.</p>
+          <ul class="tc-bullets">
+            <li>Avionics integration coordination</li>
+            <li>Structural interface and clamp negotiation</li>
+            <li>Systems-level requirements traceability</li>
+            <li>Ground support equipment coordination</li>
+          </ul>
+        </div>
+
+        <div class="task-card tc-amber" data-kw="prototyping testing continuity harness lab bench verification">
+          <span class="tc-icon">🔧</span>
+          <div class="tc-title">Prototyping & Testing</div>
+          <p class="tc-desc">Lab-based work building, inspecting, and testing prototype harnesses — from first-article inspection to continuity and insulation resistance testing.</p>
+          <ul class="tc-bullets">
+            <li>Harness assembly and first-article inspection</li>
+            <li>Continuity and dielectric withstand testing</li>
+            <li>Connector insertion/extraction force checks</li>
+            <li>Functional power-up verification</li>
+          </ul>
+        </div>
+
+        <div class="task-card tc-violet" data-kw="simulation analysis EMI power distribution signal integrity modeling">
+          <span class="tc-icon">📊</span>
+          <div class="tc-title">Simulation & Analysis</div>
+          <p class="tc-desc">Analytical work covering power loads, EMI/EMC risk, signal integrity, and thermal margin to validate harness designs before hardware build.</p>
+          <ul class="tc-bullets">
+            <li>Power distribution and load analysis</li>
+            <li>EMI/EMC susceptibility assessments</li>
+            <li>Signal integrity and crosstalk analysis</li>
+            <li>Thermal derating and wire sizing</li>
+          </ul>
+        </div>
+
+        <div class="task-card tc-rose" data-kw="troubleshooting design adjustments fault analysis debug root cause">
+          <span class="tc-icon">🛠️</span>
+          <div class="tc-title">Troubleshooting & Design Adjustments</div>
+          <p class="tc-desc">Investigating test failures, integration anomalies, and field reports to identify root cause and disposition corrective action through the design or process.</p>
+          <ul class="tc-bullets">
+            <li>Fault isolation and root cause analysis</li>
+            <li>Design change disposition (ECO/DRB)</li>
+            <li>Chafe protection and routing rework</li>
+            <li>Non-conformance report (NCR) processing</li>
+          </ul>
+        </div>
+
+        <div class="task-card tc-amber" data-kw="supplier coordination documentation procurement RFQ lead time material">
+          <span class="tc-icon">📦</span>
+          <div class="tc-title">Supplier Coordination & Documentation</div>
+          <p class="tc-desc">Manages the supply chain interface: issuing RFQs, reviewing supplier data packages, validating material certifications, and keeping documentation current.</p>
+          <ul class="tc-bullets">
+            <li>RFQ issuance and supplier selection support</li>
+            <li>Material and specification conformance review</li>
+            <li>Supplier data package (SDP) audits</li>
+            <li>CDRL and technical data package updates</li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="no-results" id="taskNoResults">⚠ No tasks match that filter</div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CAREER PATHS ── -->
+<section id="careers">
+  <div class="section-pad">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">// CAREER PROGRESSION</div>
+        <h2 class="section-title">WHAT'S NEXT?</h2>
+        <div class="section-rule"></div>
+      </div>
+
+      <div class="search-bar">
+        <input type="text" id="careerSearch" placeholder="Filter career paths (e.g. systems, manager...)" autocomplete="off">
+        <span class="si">⌕</span>
+      </div>
+
+      <div class="career-grid" id="careerGrid">
+
+        <div class="career-card" data-kw="senior wire harness engineer lead">
+          <div class="career-header" onclick="toggleCareer(this)">
+            <span class="career-icon">⚡</span>
+            <div class="career-title">Senior Wire Harness Engineer</div>
+            <span class="career-level lvl-senior">SENIOR</span>
+            <span class="career-chevron">▼</span>
+          </div>
+          <div class="career-body">
+            <p class="career-desc">The most direct progression — own complex harness designs end-to-end, mentor junior engineers, drive standards and best practices. Deepens technical authority in electrical design and integration.</p>
+            <div class="career-tags">
+              <span class="ctag">Harness Design Lead</span>
+              <span class="ctag">Mentorship</span>
+              <span class="ctag">Design Standards</span>
+              <span class="ctag">MIL-W-22759</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="career-card" data-kw="systems engineer requirements architecture integration V&V">
+          <div class="career-header" onclick="toggleCareer(this)">
+            <span class="career-icon">🛰️</span>
+            <div class="career-title">Systems Engineer</div>
+            <span class="career-level lvl-senior">SENIOR</span>
+            <span class="career-chevron">▼</span>
+          </div>
+          <div class="career-body">
+            <p class="career-desc">Leverage integration and ICD experience to move into system-level requirements, architecture, and V&V. Your harness background makes you uniquely credible at interface boundaries.</p>
+            <div class="career-tags">
+              <span class="ctag">MBSE</span>
+              <span class="ctag">Requirements</span>
+              <span class="ctag">V&V Plans</span>
+              <span class="ctag">Architecture</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="career-card" data-kw="project engineer manager schedule cost program">
+          <div class="career-header" onclick="toggleCareer(this)">
+            <span class="career-icon">📋</span>
+            <div class="career-title">Project Engineer / Project Manager</div>
+            <span class="career-level lvl-lead">LEAD</span>
+            <span class="career-chevron">▼</span>
+          </div>
+          <div class="career-body">
+            <p class="career-desc">Transition technical depth into program leadership — managing schedule, cost, and risk across harness and avionics deliverables. Strong fit for engineers who enjoy stakeholder coordination.</p>
+            <div class="career-tags">
+              <span class="ctag">EVM</span>
+              <span class="ctag">Risk Management</span>
+              <span class="ctag">IMP/IMS</span>
+              <span class="ctag">CDR/PDR</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="career-card" data-kw="lead electrical engineer power avionics integration">
+          <div class="career-header" onclick="toggleCareer(this)">
+            <span class="career-icon">🔌</span>
+            <div class="career-title">Lead Electrical Engineer</div>
+            <span class="career-level lvl-lead">LEAD</span>
+            <span class="career-chevron">▼</span>
+          </div>
+          <div class="career-body">
+            <p class="career-desc">Own the electrical architecture across a vehicle or system — power distribution, grounding, bonding, and EMC strategy. Leadership role that expands well beyond harness into full EE scope.</p>
+            <div class="career-tags">
+              <span class="ctag">Power Architecture</span>
+              <span class="ctag">Grounding</span>
+              <span class="ctag">EMC Strategy</span>
+              <span class="ctag">Team Lead</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="career-card" data-kw="technical specialist SME subject matter expert expert connector">
+          <div class="career-header" onclick="toggleCareer(this)">
+            <span class="career-icon">🎯</span>
+            <div class="career-title">Technical Specialist / SME</div>
+            <span class="career-level lvl-senior">SENIOR</span>
+            <span class="career-chevron">▼</span>
+          </div>
+          <div class="career-body">
+            <p class="career-desc">Become the organization's go-to expert in wire harness design, connector selection, or avionics wiring standards. SME roles carry high influence with minimal management overhead.</p>
+            <div class="career-tags">
+              <span class="ctag">MIL-SPEC Authority</span>
+              <span class="ctag">Design Reviews</span>
+              <span class="ctag">Standards Bodies</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="career-card" data-kw="aerospace R&D research development advanced concepts">
+          <div class="career-header" onclick="toggleCareer(this)">
+            <span class="career-icon">🔬</span>
+            <div class="career-title">Aerospace R&D Engineer</div>
+            <span class="career-level lvl-senior">SENIOR</span>
+            <span class="career-chevron">▼</span>
+          </div>
+          <div class="career-body">
+            <p class="career-desc">Apply hands-on experience to next-generation programs — advanced materials, optical fiber harnesses, high-voltage aircraft, or novel connector technologies for DARPA/AFRL programs.</p>
+            <div class="career-tags">
+              <span class="ctag">Advanced Concepts</span>
+              <span class="ctag">IRAD/CRAD</span>
+              <span class="ctag">Technology Maturation</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="career-card" data-kw="manufacturing quality engineer DFM production process">
+          <div class="career-header" onclick="toggleCareer(this)">
+            <span class="career-icon">🏭</span>
+            <div class="career-title">Manufacturing / Quality Engineer</div>
+            <span class="career-level lvl-mid">MID</span>
+            <span class="career-chevron">▼</span>
+          </div>
+          <div class="career-body">
+            <p class="career-desc">Move into production and quality assurance — translating design intent into manufacturability, writing work instructions, and driving AS9100 / NADCAP process compliance.</p>
+            <div class="career-tags">
+              <span class="ctag">AS9100</span>
+              <span class="ctag">DFM/DFA</span>
+              <span class="ctag">NCR / SCAR</span>
+              <span class="ctag">NADCAP</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="career-card" data-kw="certification engineer DO-160 FAA FAR airworthiness">
+          <div class="career-header" onclick="toggleCareer(this)">
+            <span class="career-icon">✅</span>
+            <div class="career-title">Certification Engineer</div>
+            <span class="career-level lvl-senior">SENIOR</span>
+            <span class="career-chevron">▼</span>
+          </div>
+          <div class="career-body">
+            <p class="career-desc">Specialize in airworthiness certification — guiding harness and electrical system compliance through FAA/EASA processes, DO-160 environmental qualification, and DAL assurance.</p>
+            <div class="career-tags">
+              <span class="ctag">DO-160</span>
+              <span class="ctag">FAR 25</span>
+              <span class="ctag">DER Coordination</span>
+              <span class="ctag">Airworthiness</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="career-card" data-kw="engineering manager people leadership team management director">
+          <div class="career-header" onclick="toggleCareer(this)">
+            <span class="career-icon">👥</span>
+            <div class="career-title">Engineering Manager</div>
+            <span class="career-level lvl-mgr">MANAGER</span>
+            <span class="career-chevron">▼</span>
+          </div>
+          <div class="career-body">
+            <p class="career-desc">Lead a team of electrical and harness engineers — staffing, development, performance, and technical strategy. Requires balancing people leadership with technical credibility.</p>
+            <div class="career-tags">
+              <span class="ctag">People Management</span>
+              <span class="ctag">Hiring</span>
+              <span class="ctag">Budget</span>
+              <span class="ctag">Strategic Planning</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="career-card" data-kw="consultant consulting aerospace electrical systems independent">
+          <div class="career-header" onclick="toggleCareer(this)">
+            <span class="career-icon">💼</span>
+            <div class="career-title">Aerospace Electrical Systems Consultant</div>
+            <span class="career-level lvl-lead">LEAD</span>
+            <span class="career-chevron">▼</span>
+          </div>
+          <div class="career-body">
+            <p class="career-desc">Apply 10+ years of expertise independently — supporting startups, primes, or government labs on harness design, airworthiness, or avionics integration on a contract basis.</p>
+            <div class="career-tags">
+              <span class="ctag">Independent Consulting</span>
+              <span class="ctag">Contract Work</span>
+              <span class="ctag">Multi-Client</span>
+              <span class="ctag">SME</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="no-results" id="careerNoResults">⚠ No career paths match that filter</div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills" style="background: linear-gradient(180deg, transparent, rgba(7,22,40,0.5) 50%, transparent);">
+  <div class="section-pad">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">// CORE COMPETENCIES</div>
+        <h2 class="section-title">SKILLS PROFILE</h2>
+        <div class="section-rule"></div>
+      </div>
+
+      <!-- 📸 IMAGE SLOT -->
+      <div style="margin-bottom:36px;">
+        <div class="image-placeholder" style="height:160px; max-width:640px; padding:0;">
+          <img 
+            src="Images/8162928e-e737-4caf-a2ad-af2a343abd1f.png"
+            alt="Aerospace engineering workspace image"
+            style="width:100%; height:100%; object-fit:cover; border-radius:14px;">
+        </div>
+      </div>
+
+      <div class="skills-wrap">
+        <span class="skill-tag">Wire Harness Design</span>
+        <span class="skill-tag">Avionics Integration</span>
+        <span class="skill-tag">CAD Routing</span>
+        <span class="skill-tag">EMI / EMC Analysis</span>
+        <span class="skill-tag">Power Distribution</span>
+        <span class="skill-tag">Sensor Integration</span>
+        <span class="skill-tag">MIL-SPEC Compliance</span>
+        <span class="skill-tag">AS9100</span>
+        <span class="skill-tag">Testing & Validation</span>
+        <span class="skill-tag">Supplier Coordination</span>
+        <span class="skill-tag">Signal Integrity</span>
+        <span class="skill-tag">Connector Engineering</span>
+        <span class="skill-tag">Thermal Derating</span>
+        <span class="skill-tag">DO-160</span>
+        <span class="skill-tag">Ground & Bonding</span>
+        <span class="skill-tag">Drawing Releases</span>
+        <span class="skill-tag">NCR Processing</span>
+        <span class="skill-tag">CATIA / SolidWorks</span>
+        <span class="skill-tag">Cross-Functional Leadership</span>
+        <span class="skill-tag">DFM / DFA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CALLOUT ── -->
+<section id="callout">
+  <div class="callout-inner">
+    <div class="callout-glow"></div>
+    <span class="callout-label">// CAREER FOUNDATION</span>
+    <p class="callout-text">This path builds strong foundations in <span>aerospace electrical systems,</span> systems engineering, integration, verification, and technical leadership.</p>
+    <p class="callout-sub">Each daily task compounds into expertise. The engineers who master the details become the architects of tomorrow's aircraft and spacecraft.</p>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-brand">AEROSPACE · ELECTRICAL SYSTEMS ENGINEERING</span>
+  <span class="footer-note">Day-to-Day Technical Tasks · Career Profile</span>
+</footer>
+
+<script>
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), e.target.dataset.delay || 0);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.tl-item, .task-card, .career-card').forEach((el, i) => {
+  el.dataset.delay = (i % 4) * 70;
+  observer.observe(el);
+});
+
+// ── TASK FILTER ──
+document.getElementById('taskSearch').addEventListener('input', function() {
+  const q = this.value.toLowerCase().trim();
+  let count = 0;
+  document.querySelectorAll('#tasksGrid .task-card').forEach(card => {
+    const kw = (card.dataset.kw + card.querySelector('.tc-title').textContent + card.querySelector('.tc-desc').textContent).toLowerCase();
+    const show = !q || kw.includes(q);
+    card.classList.toggle('hidden', !show);
+    if (show) count++;
+  });
+  document.getElementById('taskNoResults').style.display = (!q || count > 0) ? 'none' : 'block';
+});
+
+// ── CAREER FILTER ──
+document.getElementById('careerSearch').addEventListener('input', function() {
+  const q = this.value.toLowerCase().trim();
+  let count = 0;
+  document.querySelectorAll('#careerGrid .career-card').forEach(card => {
+    const kw = (card.dataset.kw + card.querySelector('.career-title').textContent).toLowerCase();
+    const show = !q || kw.includes(q);
+    card.classList.toggle('hidden', !show);
+    if (show) count++;
+  });
+  document.getElementById('careerNoResults').style.display = (!q || count > 0) ? 'none' : 'block';
+});
+
+// ── CAREER EXPAND ──
+function toggleCareer(header) {
+  const card = header.closest('.career-card');
+  card.classList.toggle('open');
+}
+</script>
+</body>
+</html>
