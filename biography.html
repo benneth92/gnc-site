@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Benneth Perez | Technical Biography</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg-deep: #080c10;
+  --bg-panel: #0d1117;
+  --bg-card: #111820;
+  --bg-hover: #161f2a;
+  --border: #1e2d3d;
+  --border-bright: #2a3f55;
+  --text-primary: #dce8f3;
+  --text-secondary: #9aa8b8;
+  --text-dim: #647284;
+  --accent-cyan: #38bdf8;
+  --accent-blue: #3b82f6;
+  --accent-green: #22c55e;
+  --accent-gold: #eab308;
+  --radius: 10px;
+  --transition: 0.25s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: 'Exo 2', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 42px 42px;
+  opacity: 0.28;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  background: rgba(8, 12, 16, 0.88);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #eef8ff;
+  text-decoration: none;
+}
+
+.logo-mark {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--accent-cyan);
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: var(--accent-cyan);
+  font-family: 'Share Tech Mono', monospace;
+  box-shadow: 0 0 16px rgba(56,189,248,0.25);
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--accent-cyan);
+  background: rgba(56,189,248,0.08);
+}
+
+.hero {
+  position: relative;
+  z-index: 1;
+  padding: 82px 24px 52px;
+  text-align: center;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(56,189,248,0.17), transparent 42%),
+    linear-gradient(180deg, rgba(56,189,248,0.04), transparent);
+  border-bottom: 1px solid var(--border);
+}
+
+.eyebrow {
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--accent-cyan);
+  font-size: 12px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.hero h1 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(38px, 7vw, 82px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #eef8ff;
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  color: var(--accent-cyan);
+  text-shadow: 0 0 24px rgba(56,189,248,0.45);
+}
+
+.hero-subtitle {
+  max-width: 860px;
+  margin: 0 auto;
+  color: var(--text-secondary);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.hero-tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: var(--accent-cyan);
+  border: 1px solid rgba(56,189,248,0.35);
+  background: rgba(56,189,248,0.07);
+  padding: 6px 11px;
+  border-radius: 999px;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 46px 20px 72px;
+}
+
+.section-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--accent-cyan);
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.bio-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 22px;
+  margin-bottom: 44px;
+}
+
+.panel {
+  background: linear-gradient(135deg, rgba(56,189,248,0.08), var(--bg-card));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.28);
+}
+
+.panel h2 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  color: #f0f8ff;
+}
+
+.panel p {
+  color: var(--text-secondary);
+  line-height: 1.78;
+  font-size: 15.5px;
+  margin-bottom: 16px;
+}
+
+.highlight {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.stats-card {
+  display: grid;
+  gap: 14px;
+}
+
+.stat {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px;
+  transition: var(--transition);
+}
+
+.stat:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-bright);
+  background: var(--bg-hover);
+}
+
+.stat-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  font-family: 'Rajdhani', sans-serif;
+  color: var(--accent-cyan);
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 48px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--accent-cyan);
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-bright);
+  background: var(--bg-hover);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.32);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 21px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #eef8ff;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-size: 14.5px;
+}
+
+.timeline {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 22px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: var(--transition);
+}
+
+.timeline-item:hover {
+  border-color: var(--border-bright);
+  background: var(--bg-hover);
+}
+
+.timeline-date {
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--accent-cyan);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.timeline-content h3 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 22px;
+  color: #eef8ff;
+  margin-bottom: 8px;
+}
+
+.timeline-content p {
+  color: var(--text-secondary);
+  line-height: 1.68;
+  font-size: 14.5px;
+}
+
+.leadership-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 20px;
+  color: var(--text-dim);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 860px) {
+  .navbar {
+    height: auto;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .bio-grid,
+  .cards,
+  .leadership-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+  <a class="logo" href="index.html">
+    <div class="logo-mark">BP</div>
+    BennethPerez
+  </a>
+
+  <div class="nav-links">
+    <a class="active" href="biography.html">Technical Biography</a>
+    <a href="gnc.html">GN&amp;C</a>
+    <a href="career_map.html">Career Map</a>
+    <a href="mentoring.html">Mentoring 101</a>
+    <a href="community.html">Inspiring a Community</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">Aerospace · Defense · Autonomy · Engineering Leadership</div>
+  <h1>Technical <span>Biography</span></h1>
+  <p class="hero-subtitle">
+    Guidance, Navigation, and Controls engineer focused on aerospace and defense systems,
+    estimation, control, avionics integration, mission-critical autonomy, and technical leadership.
+  </p>
+
+  <div class="hero-tags">
+    <span class="tag">GN&amp;C</span>
+    <span class="tag">State Estimation</span>
+    <span class="tag">Sensor Fusion</span>
+    <span class="tag">Avionics Systems</span>
+    <span class="tag">Aerospace Defense</span>
+    <span class="tag">Engineering Leadership</span>
+  </div>
+</section>
+
+<main>
+
+  <div class="section-title">Professional Profile</div>
+
+  <section class="bio-grid">
+    <div class="panel">
+      <h2>Benneth Perez</h2>
+
+      <p>
+        <span class="highlight">Benneth Perez</span> is a
+        <span class="highlight">Guidance, Navigation, and Controls engineer</span>
+        working on advanced aerospace and defense systems that require high-performance estimation,
+        control, and mission-critical autonomy.
+      </p>
+
+      <p>
+        His technical work spans guidance laws, navigation algorithms, control architectures,
+        state estimation, tracking concepts, and system-level integration for complex flight systems
+        operating in demanding environments.
+      </p>
+
+      <p>
+        Previously, Benneth served as an
+        <span class="highlight">Avionics Hardware Systems Engineer at The Boeing Company</span>,
+        where he built a strong foundation in wire harness design, avionics integration, installation
+        engineering, and test for advanced aerospace and defense platforms.
+      </p>
+
+      <p>
+        His background connects hands-on aerospace hardware integration with modern GN&amp;C,
+        estimation, software-informed analysis, and autonomous systems engineering.
+      </p>
+    </div>
+
+    <div class="stats-card">
+      <div class="stat">
+        <div class="stat-label">Current Focus</div>
+        <div class="stat-value">GN&amp;C Engineering</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Core Domain</div>
+        <div class="stat-value">Aerospace Defense</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Technical Bridge</div>
+        <div class="stat-value">Avionics + Autonomy</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Academic Path</div>
+        <div class="stat-value">M.S. Aerospace Engineering</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-title">Technical Pillars</div>
+
+  <section class="cards">
+    <div class="card">
+      <div class="icon">🛰️</div>
+      <h3>GN&amp;C Systems</h3>
+      <p>
+        Guidance, navigation, and control concepts for aerospace systems, including flight dynamics,
+        control architectures, navigation algorithms, and mission-driven autonomy.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📡</div>
+      <h3>Estimation &amp; Fusion</h3>
+      <p>
+        State estimation, Kalman filtering concepts, sensor fusion, measurement modeling,
+        covariance reasoning, tracking logic, and multi-sensor aerospace applications.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🛩️</div>
+      <h3>Avionics Integration</h3>
+      <p>
+        Avionics hardware systems, wire harness design, installation engineering, signal interfaces,
+        data compatibility, test planning, and mission-system integration.
+      </p>
+    </div>
+  </section>
+
+  <div class="section-title">Experience Timeline</div>
+
+  <section class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">Current</div>
+      <div class="timeline-content">
+        <h3>Guidance, Navigation, and Controls Engineer · Raytheon</h3>
+        <p>
+          Works on advanced aerospace and defense systems involving estimation, control,
+          guidance concepts, navigation algorithms, and mission-critical autonomy for complex flight systems.
+        </p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Previous</div>
+      <div class="timeline-content">
+        <h3>Avionics Hardware Systems Engineer · Boeing</h3>
+        <p>
+          Supported advanced aerospace and defense platforms through avionics integration,
+          wire harness design and installation engineering, core processing architecture awareness,
+          interface compatibility, precision timing, and system-level test activities.
+        </p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Education</div>
+      <div class="timeline-content">
+        <h3>M.S. Aerospace Engineering · University of Central Florida</h3>
+        <p>
+          Pursuing graduate study focused on Guidance, Controls, and Dynamics, with academic work
+          aligned to modern GN&amp;C, estimation, control systems, and autonomous aerospace systems.
+        </p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Foundation</div>
+      <div class="timeline-content">
+        <h3>B.S. Mechanical Engineering · University of Texas at San Antonio</h3>
+        <p>
+          Built the engineering foundation for aerospace, mechanical systems, dynamics,
+          systems thinking, and multidisciplinary technical problem solving.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-title">Leadership &amp; Community Impact</div>
+
+  <section class="leadership-grid">
+    <div class="card">
+      <div class="icon">🌐</div>
+      <h3>Boeing Familia Enterprise</h3>
+      <p>
+        Previously served as Head of Operations, supporting enterprise-level initiatives that strengthened
+        engineering culture, cross-site collaboration, engagement strategy, and professional development
+        for a large technical community.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🎓</div>
+      <h3>SHPE Leadership</h3>
+      <p>
+        Former Vice President of the SHPE St. Louis Gateway Chapter, leading scholarship programs,
+        early-career mentorship, STEM outreach, and community-focused engineering development.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🤖</div>
+      <h3>FIRST Robotics Mentorship</h3>
+      <p>
+        Supported student robotics teams, including all-girls teams, helping young engineers build
+        confidence through design, problem solving, teamwork, and hands-on technical learning.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🏆</div>
+      <h3>Recognition</h3>
+      <p>
+        Recognized with multiple honors, including a Technology Leader award, reflecting contributions
+        across aerospace engineering, leadership, mentorship, and long-term professional growth.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Benneth Perez · Technical Biography · Aerospace &amp; Defense Engineering
+</footer>
+
+</body>
+</html>
