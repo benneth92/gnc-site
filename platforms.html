@@ -6,7 +6,6 @@
   <title>Platforms & Systems</title>
 
   <style>
-
     *{
       margin:0;
       padding:0;
@@ -14,9 +13,9 @@
     }
 
     body{
-      font-family: "Segoe UI", sans-serif;
+      font-family:"Segoe UI",sans-serif;
       background:
-        radial-gradient(circle at top, rgba(255,0,0,0.15), transparent 35%),
+        radial-gradient(circle at top,rgba(255,0,0,0.15),transparent 35%),
         linear-gradient(135deg,#050505,#0b0b12,#120000);
       color:white;
       overflow-x:hidden;
@@ -26,16 +25,12 @@
       position:sticky;
       top:0;
       z-index:1000;
-
       display:flex;
       justify-content:space-between;
       align-items:center;
-
       padding:18px 6%;
-
       background:rgba(5,5,8,0.94);
       backdrop-filter:blur(10px);
-
       border-bottom:1px solid rgba(255,0,0,0.2);
     }
 
@@ -46,10 +41,20 @@
       text-decoration:none;
     }
 
-    .logo img{
+    .logo-box{
       width:54px;
       height:54px;
-      object-fit:contain;
+      border:1.5px solid #ff3030;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#ff3030;
+      font-size:2rem;
+      font-weight:800;
+      letter-spacing:1px;
+      background:#05070a;
+      box-shadow:0 0 18px rgba(255,0,0,0.25);
     }
 
     .logo span{
@@ -84,20 +89,13 @@
 
     .status{
       display:inline-block;
-
       padding:8px 16px;
-
       border-radius:999px;
-
       border:1px solid rgba(255,0,0,0.45);
-
       background:rgba(255,0,0,0.08);
-
       color:#ff5555;
-
       font-size:0.8rem;
       letter-spacing:2px;
-
       margin-bottom:24px;
     }
 
@@ -105,16 +103,8 @@
       font-size:clamp(2.8rem,6vw,5rem);
       line-height:1;
       margin-bottom:24px;
-
       text-transform:uppercase;
-
-      background:linear-gradient(
-        90deg,
-        #ffffff,
-        #ff3c3c,
-        #7c0000
-      );
-
+      background:linear-gradient(90deg,#ffffff,#ff3c3c,#7c0000);
       -webkit-background-clip:text;
       color:transparent;
     }
@@ -122,9 +112,7 @@
     .hero p{
       max-width:850px;
       margin:auto;
-
       color:#c9c9c9;
-
       font-size:1.15rem;
       line-height:1.7;
     }
@@ -156,45 +144,23 @@
 
     .card{
       position:relative;
-
       padding:28px;
-
       min-height:300px;
-
       border-radius:24px;
-
       background:
-        linear-gradient(
-          145deg,
-          rgba(255,255,255,0.05),
-          rgba(255,255,255,0.015)
-        ),
+        linear-gradient(145deg,rgba(255,255,255,0.05),rgba(255,255,255,0.015)),
         rgba(8,8,12,0.95);
-
       border:1px solid rgba(255,0,0,0.18);
-
       overflow:hidden;
-
       transition:0.35s ease;
-
-      box-shadow:
-        0 0 25px rgba(255,0,0,0.08);
+      box-shadow:0 0 25px rgba(255,0,0,0.08);
     }
 
     .card::before{
       content:"";
-
       position:absolute;
       inset:0;
-
-      background:
-        linear-gradient(
-          120deg,
-          transparent,
-          rgba(255,0,0,0.14),
-          transparent
-        );
-
+      background:linear-gradient(120deg,transparent,rgba(255,0,0,0.14),transparent);
       transform:translateX(-100%);
       transition:0.7s;
     }
@@ -205,20 +171,15 @@
 
     .card:hover{
       transform:translateY(-8px);
-
       border-color:rgba(255,60,60,0.55);
-
-      box-shadow:
-        0 0 40px rgba(255,0,0,0.22);
+      box-shadow:0 0 40px rgba(255,0,0,0.22);
     }
 
     .card-top{
       display:flex;
       justify-content:space-between;
       align-items:center;
-
       margin-bottom:22px;
-
       position:relative;
       z-index:2;
     }
@@ -230,45 +191,33 @@
 
     .tag{
       font-size:0.72rem;
-
       padding:6px 10px;
-
       border-radius:999px;
-
       border:1px solid rgba(255,0,0,0.35);
-
       background:rgba(255,0,0,0.08);
-
       color:#ff4b4b;
-
       letter-spacing:1px;
     }
 
     .card h3{
       font-size:1.35rem;
       margin-bottom:14px;
-
       position:relative;
       z-index:2;
     }
 
     .card p{
       color:#c0c0c0;
-
       line-height:1.6;
-
       margin-bottom:18px;
-
       position:relative;
       z-index:2;
     }
 
     .systems{
       list-style:none;
-
       display:grid;
       gap:8px;
-
       position:relative;
       z-index:2;
     }
@@ -276,9 +225,7 @@
     .systems li{
       color:#ececec;
       font-size:0.92rem;
-
       padding-left:18px;
-
       position:relative;
     }
 
@@ -291,19 +238,14 @@
 
     .architecture{
       margin-top:80px;
-
       padding:40px;
-
       border-radius:28px;
-
       background:rgba(255,255,255,0.03);
-
       border:1px solid rgba(255,0,0,0.2);
     }
 
     .flow{
       margin-top:30px;
-
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
       gap:18px;
@@ -311,21 +253,15 @@
 
     .flow-step{
       text-align:center;
-
       padding:22px 18px;
-
       border-radius:18px;
-
       background:rgba(10,10,14,0.92);
-
       border:1px solid rgba(255,0,0,0.22);
-
       transition:0.3s;
     }
 
     .flow-step:hover{
       transform:scale(1.04);
-
       background:rgba(255,0,0,0.1);
     }
 
@@ -348,16 +284,12 @@
     footer{
       padding:30px 8%;
       text-align:center;
-
       color:#888;
-
       border-top:1px solid rgba(255,0,0,0.15);
-
       background:rgba(0,0,0,0.35);
     }
 
     @media(max-width:768px){
-
       nav{
         flex-direction:column;
         align-items:flex-start;
@@ -368,26 +300,24 @@
         font-size:1.5rem;
       }
 
-      .logo img{
+      .logo-box{
         width:48px;
         height:48px;
+        font-size:1.6rem;
       }
 
       .hero{
         padding-top:80px;
       }
-
     }
-
   </style>
 </head>
 
 <body>
 
   <nav>
-
     <a class="logo" href="index.html">
-      <img src="images/logo-red.png" alt="BP Logo">
+      <div class="logo-box">BP</div>
       <span>BennethPerez</span>
     </a>
 
@@ -399,14 +329,10 @@
       <a class="active" href="platforms.html">Platform</a>
       <a href="community.html">Community</a>
     </div>
-
   </nav>
 
   <section class="hero">
-
-    <div class="status">
-      MISSION SYSTEMS PLATFORM
-    </div>
+    <div class="status">MISSION SYSTEMS PLATFORM</div>
 
     <h1>Platforms & Systems</h1>
 
@@ -414,7 +340,6 @@
       A futuristic showcase of advanced aerospace and defense systems integrating
       guidance, navigation, control, tracking, avionics, autonomy, and sensor fusion.
     </p>
-
   </section>
 
   <main class="dashboard">
@@ -431,7 +356,6 @@
     <section class="grid">
 
       <div class="card">
-
         <div class="card-top">
           <div class="icon">🚀</div>
           <div class="tag">INTERCEPT</div>
@@ -450,11 +374,9 @@
           <li>Trajectory Shaping</li>
           <li>High-Speed Control</li>
         </ul>
-
       </div>
 
       <div class="card">
-
         <div class="card-top">
           <div class="icon">📡</div>
           <div class="tag">RADAR</div>
@@ -473,11 +395,9 @@
           <li>Track Correlation</li>
           <li>Covariance Estimation</li>
         </ul>
-
       </div>
 
       <div class="card">
-
         <div class="card-top">
           <div class="icon">🛩️</div>
           <div class="tag">AUTONOMY</div>
@@ -496,11 +416,9 @@
           <li>Mission Planning</li>
           <li>Distributed Sensing</li>
         </ul>
-
       </div>
 
       <div class="card">
-
         <div class="card-top">
           <div class="icon">🛰️</div>
           <div class="tag">SPACE</div>
@@ -519,11 +437,9 @@
           <li>Launch Monitoring</li>
           <li>Space Surveillance</li>
         </ul>
-
       </div>
 
       <div class="card">
-
         <div class="card-top">
           <div class="icon">🛡️</div>
           <div class="tag">DEFENSE</div>
@@ -542,11 +458,9 @@
           <li>Engagement Planning</li>
           <li>Integrated Fire Control</li>
         </ul>
-
       </div>
 
       <div class="card">
-
         <div class="card-top">
           <div class="icon">🧠</div>
           <div class="tag">FUSION</div>
@@ -565,7 +479,6 @@
           <li>State Estimation</li>
           <li>Covariance Tuning</li>
         </ul>
-
       </div>
 
     </section>
