@@ -4,1090 +4,540 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tracking / Estimation / Sensor Fusion Career Map</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
-  :root {
-    --bg-deep: #080c10;
-    --bg-panel: #0d1117;
-    --bg-card: #111820;
-    --bg-hover: #161f2a;
-    --border: #1e2d3d;
-    --border-bright: #2a3f55;
-    --text-primary: #cdd9e5;
-    --text-secondary: #8b99a8;
-    --text-dim: #556070;
-    --accent-cyan: #38bdf8;
-    --accent-cyan-dim: #1e6a8a;
 
-    --fit-best: #22c55e;
-    --fit-best-dim: #14532d;
-    --fit-best-glow: rgba(34,197,94,0.15);
-    --fit-strong: #3b82f6;
-    --fit-strong-dim: #1e3a5f;
-    --fit-strong-glow: rgba(59,130,246,0.15);
-    --fit-adj: #eab308;
-    --fit-adj-dim: #713f12;
-    --fit-adj-glow: rgba(234,179,8,0.12);
-    --fit-less: #64748b;
-    --fit-less-dim: #1e293b;
-    --fit-less-glow: rgba(100,116,139,0.10);
+:root {
+  --bg-deep: #080c10;
+  --bg-panel: #0d1117;
+  --bg-card: #111820;
+  --bg-hover: #161f2a;
+  --border: #1e2d3d;
+  --border-bright: #2a3f55;
+  --text-primary: #cdd9e5;
+  --text-secondary: #8b99a8;
+  --text-dim: #556070;
+  --accent-cyan: #38bdf8;
+  --accent-cyan-dim: #1e6a8a;
 
-    --branch1: #22c55e;
-    --branch2: #3b82f6;
-    --branch3: #a78bfa;
-    --branch4: #f59e0b;
-    --branch5: #38bdf8;
+  --fit-best: #22c55e;
+  --fit-best-dim: #14532d;
+  --fit-best-glow: rgba(34,197,94,0.15);
 
-    --radius: 6px;
-    --transition: 0.22s cubic-bezier(0.4,0,0.2,1);
+  --fit-strong: #3b82f6;
+  --fit-strong-dim: #1e3a5f;
+  --fit-strong-glow: rgba(59,130,246,0.15);
+
+  --fit-adj: #eab308;
+  --fit-adj-dim: #713f12;
+  --fit-adj-glow: rgba(234,179,8,0.12);
+
+  --fit-less: #64748b;
+  --fit-less-dim: #1e293b;
+  --fit-less-glow: rgba(100,116,139,0.10);
+
+  --branch1: #22c55e;
+  --branch2: #3b82f6;
+  --branch3: #a78bfa;
+  --branch4: #f59e0b;
+  --branch5: #38bdf8;
+
+  --radius: 6px;
+  --transition: 0.22s cubic-bezier(0.4,0,0.2,1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: 'Exo 2', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* GRID */
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* NAVBAR */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  background: rgba(8,12,16,0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #eef8ff;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.logo-mark {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--accent-cyan);
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: var(--accent-cyan);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 18px;
+  box-shadow: 0 0 18px rgba(56,189,248,0.28);
+  background: rgba(56,189,248,0.05);
+}
+
+.nav-links {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--accent-cyan);
+  background: rgba(56,189,248,0.08);
+}
+
+/* HEADER */
+
+header {
+  position: relative;
+  z-index: 2;
+  padding: 48px 24px 32px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(56,189,248,0.04) 0%, transparent 100%);
+}
+
+.header-eyebrow {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+header h1 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(22px, 5vw, 42px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #e8f4fd;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+header h1 span {
+  color: var(--accent-cyan);
+}
+
+.header-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  max-width: 620px;
+  margin: 0 auto 24px;
+  line-height: 1.6;
+}
+
+/* LEGEND */
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* SEARCH */
+
+.search-wrap {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+  margin: 28px auto 0;
+  padding: 0 16px;
+}
+
+.search-wrap input {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-bright);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 13px;
+  padding: 11px 40px 11px 16px;
+  outline: none;
+}
+
+.search-wrap input:focus {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 0 3px rgba(56,189,248,0.12);
+}
+
+.search-icon {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+/* MAIN */
+
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 32px 16px 64px;
+}
+
+/* BRANCH */
+
+.branch {
+  margin-bottom: 24px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.branch-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: var(--bg-panel);
+}
+
+.branch-accent {
+  width: 3px;
+  height: 28px;
+  border-radius: 2px;
+}
+
+.branch-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  flex: 1;
+}
+
+.branch-count {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.branch-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  padding: 14px 16px 16px;
+  background: var(--bg-deep);
+}
+
+/* JOB CARD */
+
+.job-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  position: relative;
+}
+
+.fit-best {
+  border-left: 3px solid var(--fit-best);
+  background: linear-gradient(135deg, var(--fit-best-glow), var(--bg-card));
+}
+
+.card-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.card-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 10px;
+}
+
+.tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px;
+  color: var(--text-dim);
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 2px 6px;
+}
+
+/* FOOTER */
+
+footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 18px 24px;
+  text-align: center;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 850px) {
+
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    gap: 12px;
+    padding: 16px;
   }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background: var(--bg-deep);
-    color: var(--text-primary);
-    font-family: 'Exo 2', sans-serif;
-    font-weight: 400;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* ── GRID BACKGROUND ── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(var(--border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 40px 40px;
-    opacity: 0.35;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  /* ── HEADER ── */
-  header {
-    position: relative;
-    z-index: 2;
-    padding: 48px 24px 32px;
-    text-align: center;
-    border-bottom: 1px solid var(--border);
-    background: linear-gradient(180deg, rgba(56,189,248,0.04) 0%, transparent 100%);
-  }
-
-  .header-eyebrow {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.25em;
-    color: var(--accent-cyan);
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    opacity: 0.8;
-  }
-
-  header h1 {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: clamp(22px, 5vw, 42px);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: #e8f4fd;
-    line-height: 1.1;
-    margin-bottom: 10px;
-  }
-
-  header h1 span {
-    color: var(--accent-cyan);
-  }
-
-  .header-sub {
-    font-size: 13px;
-    color: var(--text-secondary);
-    max-width: 620px;
-    margin: 0 auto 24px;
-    line-height: 1.6;
-  }
-
-  /* ── LEGEND ── */
-  .legend {
-    display: flex;
+  .nav-links {
     flex-wrap: wrap;
-    gap: 10px;
     justify-content: center;
-    margin-top: 18px;
   }
 
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    color: var(--text-secondary);
-    letter-spacing: 0.05em;
-  }
+}
 
-  .legend-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  /* ── SEARCH ── */
-  .search-wrap {
-    position: relative;
-    z-index: 2;
-    max-width: 560px;
-    margin: 28px auto 0;
-    padding: 0 16px;
-  }
-
-  .search-wrap input {
-    width: 100%;
-    background: var(--bg-card);
-    border: 1px solid var(--border-bright);
-    border-radius: var(--radius);
-    color: var(--text-primary);
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 13px;
-    padding: 11px 40px 11px 16px;
-    outline: none;
-    transition: border-color var(--transition), box-shadow var(--transition);
-  }
-
-  .search-wrap input::placeholder { color: var(--text-dim); }
-
-  .search-wrap input:focus {
-    border-color: var(--accent-cyan);
-    box-shadow: 0 0 0 3px rgba(56,189,248,0.12);
-  }
-
-  .search-icon {
-    position: absolute;
-    right: 28px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-dim);
-    font-size: 14px;
-    pointer-events: none;
-  }
-
-  .search-clear {
-    position: absolute;
-    right: 28px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    cursor: pointer;
-    font-size: 16px;
-    line-height: 1;
-    display: none;
-    padding: 2px 4px;
-  }
-
-  /* ── CONTROLS ── */
-  .controls {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    padding: 16px 16px 0;
-    flex-wrap: wrap;
-  }
-
-  .ctrl-btn {
-    background: var(--bg-card);
-    border: 1px solid var(--border-bright);
-    border-radius: var(--radius);
-    color: var(--text-secondary);
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    padding: 7px 14px;
-    cursor: pointer;
-    transition: all var(--transition);
-    text-transform: uppercase;
-  }
-
-  .ctrl-btn:hover {
-    border-color: var(--accent-cyan);
-    color: var(--accent-cyan);
-    background: rgba(56,189,248,0.06);
-  }
-
-  /* ── MAIN CONTENT ── */
-  main {
-    position: relative;
-    z-index: 1;
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 32px 16px 64px;
-  }
-
-  /* ── BRANCH ── */
-  .branch {
-    margin-bottom: 24px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    overflow: hidden;
-    transition: border-color var(--transition);
-  }
-
-  .branch.hidden { display: none; }
-
-  .branch-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 18px;
-    cursor: pointer;
-    user-select: none;
-    background: var(--bg-panel);
-    transition: background var(--transition);
-    position: relative;
-  }
-
-  .branch-header:hover { background: var(--bg-hover); }
-
-  .branch-accent {
-    width: 3px;
-    height: 28px;
-    border-radius: 2px;
-    flex-shrink: 0;
-  }
-
-  .branch-title {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    flex: 1;
-  }
-
-  .branch-count {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    color: var(--text-dim);
-    background: var(--bg-deep);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 2px 8px;
-  }
-
-  .branch-chevron {
-    font-size: 12px;
-    color: var(--text-dim);
-    transition: transform var(--transition);
-    flex-shrink: 0;
-  }
-
-  .branch.collapsed .branch-chevron { transform: rotate(-90deg); }
-
-  .branch-body {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 12px;
-    padding: 14px 16px 16px;
-    background: var(--bg-deep);
-    border-top: 1px solid var(--border);
-  }
-
-  .branch.collapsed .branch-body { display: none; }
-
-  /* ── JOB CARD ── */
-  .job-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px 16px;
-    cursor: default;
-    transition: all var(--transition);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .job-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    border-radius: 2px 2px 0 0;
-    opacity: 0;
-    transition: opacity var(--transition);
-  }
-
-  .job-card:hover {
-    border-color: var(--border-bright);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-  }
-
-  .job-card:hover::before { opacity: 1; }
-
-  .job-card.hidden { display: none; }
-
-  /* fit colors */
-  .fit-best  { border-left: 3px solid var(--fit-best);  background: linear-gradient(135deg, var(--fit-best-glow), var(--bg-card)); }
-  .fit-best::before  { background: var(--fit-best); }
-  .fit-strong{ border-left: 3px solid var(--fit-strong); background: linear-gradient(135deg, var(--fit-strong-glow), var(--bg-card)); }
-  .fit-strong::before{ background: var(--fit-strong); }
-  .fit-adj   { border-left: 3px solid var(--fit-adj);   background: linear-gradient(135deg, var(--fit-adj-glow), var(--bg-card)); }
-  .fit-adj::before   { background: var(--fit-adj); }
-  .fit-less  { border-left: 3px solid var(--fit-less);  background: linear-gradient(135deg, var(--fit-less-glow), var(--bg-card)); }
-  .fit-less::before  { background: var(--fit-less); }
-
-  .card-top {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-
-  .card-title {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    color: #dde8f0;
-    flex: 1;
-    line-height: 1.2;
-  }
-
-  .fit-badge {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 2px 7px;
-    border-radius: 3px;
-    flex-shrink: 0;
-    font-weight: 700;
-    margin-top: 1px;
-  }
-
-  .fit-best  .fit-badge { background: var(--fit-best-dim);  color: var(--fit-best);  border: 1px solid var(--fit-best); }
-  .fit-strong .fit-badge{ background: var(--fit-strong-dim);color: var(--fit-strong);border: 1px solid var(--fit-strong);}
-  .fit-adj   .fit-badge { background: var(--fit-adj-dim);   color: var(--fit-adj);   border: 1px solid var(--fit-adj);  }
-  .fit-less  .fit-badge { background: var(--fit-less-dim);  color: var(--fit-less);  border: 1px solid var(--fit-less); }
-
-  .card-desc {
-    font-size: 12px;
-    color: var(--text-secondary);
-    line-height: 1.55;
-  }
-
-  .card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin-top: 10px;
-  }
-
-  .tag {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 9.5px;
-    color: var(--text-dim);
-    background: var(--bg-deep);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 2px 6px;
-    letter-spacing: 0.04em;
-    transition: all var(--transition);
-  }
-
-  .tag.highlight {
-    color: var(--accent-cyan);
-    border-color: var(--accent-cyan-dim);
-    background: rgba(56,189,248,0.08);
-  }
-
-  /* ── KEYWORDS BRANCH ── */
-  .keywords-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 14px 16px 16px;
-    background: var(--bg-deep);
-    border-top: 1px solid var(--border);
-  }
-
-  .kw-pill {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    padding: 5px 12px;
-    border-radius: 4px;
-    border: 1px solid var(--border-bright);
-    color: var(--text-secondary);
-    background: var(--bg-card);
-    cursor: pointer;
-    transition: all var(--transition);
-    letter-spacing: 0.04em;
-  }
-
-  .kw-pill:hover, .kw-pill.active {
-    border-color: var(--accent-cyan);
-    color: var(--accent-cyan);
-    background: rgba(56,189,248,0.08);
-    box-shadow: 0 0 8px rgba(56,189,248,0.15);
-  }
-
-  /* ── SEARCH STRINGS ── */
-  .search-strings-section {
-    position: relative;
-    z-index: 1;
-    max-width: 1080px;
-    margin: 0 auto 64px;
-    padding: 0 16px;
-  }
-
-  .section-label {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent-cyan);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 16px;
-  }
-
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  .search-string-card {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 12px 16px;
-    margin-bottom: 8px;
-    transition: all var(--transition);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .search-string-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: var(--accent-cyan);
-    opacity: 0;
-    transition: opacity var(--transition);
-  }
-
-  .search-string-card:hover {
-    border-color: var(--border-bright);
-    background: var(--bg-hover);
-  }
-
-  .search-string-card:hover::before { opacity: 1; }
-
-  .ss-num {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    color: var(--text-dim);
-    min-width: 22px;
-  }
-
-  .ss-text {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 12.5px;
-    color: var(--text-primary);
-    flex: 1;
-    letter-spacing: 0.02em;
-  }
-
-  .ss-copy {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px;
-    color: var(--text-dim);
-    background: var(--bg-deep);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 3px 9px;
-    cursor: pointer;
-    transition: all var(--transition);
-    white-space: nowrap;
-  }
-
-  .ss-copy:hover {
-    color: var(--accent-cyan);
-    border-color: var(--accent-cyan-dim);
-  }
-
-  .ss-copy.copied {
-    color: var(--fit-best);
-    border-color: var(--fit-best);
-  }
-
-  /* ── NO RESULTS ── */
-  .no-results {
-    display: none;
-    text-align: center;
-    padding: 48px 16px;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 13px;
-    color: var(--text-dim);
-    letter-spacing: 0.05em;
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    position: relative;
-    z-index: 1;
-    border-top: 1px solid var(--border);
-    padding: 18px 24px;
-    text-align: center;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px;
-    color: var(--text-dim);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .branch { animation: fadeUp 0.4s ease both; }
-  .branch:nth-child(1) { animation-delay: 0.05s; }
-  .branch:nth-child(2) { animation-delay: 0.10s; }
-  .branch:nth-child(3) { animation-delay: 0.15s; }
-  .branch:nth-child(4) { animation-delay: 0.20s; }
-  .branch:nth-child(5) { animation-delay: 0.25s; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 600px) {
-    .branch-body { grid-template-columns: 1fr; }
-    .branch-title { font-size: 14px; }
-    header h1 { font-size: 20px; }
-  }
 </style>
 </head>
+
 <body>
 
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+  <a class="logo" href="index.html">
+    <div class="logo-mark">BP</div>
+    BennethPerez
+  </a>
+
+  <div class="nav-links">
+    <a href="index.html">Biography</a>
+    <a href="platforms.html">Platforms</a>
+    <a class="active" href="career_map.html">Career Map</a>
+    <a href="gnc.html">GN&C</a>
+    <a href="community.html">Community</a>
+  </div>
+
+</nav>
+
+<!-- HEADER -->
+
 <header>
-  <div class="header-eyebrow">Aerospace &amp; Defense ·  Career Intelligence Map</div>
-  <h1>Tracking / Estimation / <span>Sensor Fusion</span></h1>
+
+  <div class="header-eyebrow">
+    Aerospace &amp; Defense · Career Intelligence Map
+  </div>
+
+  <h1>
+    Tracking / Estimation / <span>Sensor Fusion</span>
+  </h1>
+
   <p class="header-sub">
     Role classification aligned to: GN&amp;C · Multi-Target Tracking · State Estimation · Sensor Fusion · Radar/EO-IR · M&amp;S · SIL/HWIL · MATLAB · Python · C++
   </p>
+
   <div class="legend">
-    <div class="legend-item"><div class="legend-dot" style="background:var(--fit-best)"></div>Best Fit</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--fit-strong)"></div>Strong Fit</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--fit-adj)"></div>Adjacent Fit</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--fit-less)"></div>Supporting Role</div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:var(--fit-best)"></div>
+      Best Fit
+    </div>
   </div>
+
 </header>
 
+<!-- SEARCH -->
+
 <div class="search-wrap">
-  <input type="text" id="searchInput" placeholder="Filter by keyword (e.g. Kalman, HWIL, radar...)" autocomplete="off">
-  <span class="search-icon" id="searchIcon">⌕</span>
-  <button class="search-clear" id="searchClear" title="Clear">✕</button>
+  <input type="text" placeholder="Filter by keyword (e.g. Kalman, HWIL, radar...)">
+  <span class="search-icon">⌕</span>
 </div>
 
-<div class="controls">
-  <button class="ctrl-btn" onclick="expandAll()">▼ Expand All</button>
-  <button class="ctrl-btn" onclick="collapseAll()">▶ Collapse All</button>
-  <button class="ctrl-btn" onclick="clearFilter()">✕ Clear Filter</button>
-</div>
+<!-- MAIN -->
 
-<main id="mainContent">
+<main>
 
-  <!-- BRANCH 1 -->
-  <div class="branch" id="branch1" data-branch="1">
-    <div class="branch-header" onclick="toggleBranch('branch1')">
+  <div class="branch">
+
+    <div class="branch-header">
       <div class="branch-accent" style="background:var(--branch1)"></div>
-      <div class="branch-title" style="color:var(--branch1)">01 · Best Fit Roles</div>
+      <div class="branch-title" style="color:var(--branch1)">
+        01 · Best Fit Roles
+      </div>
       <span class="branch-count">4 roles</span>
-      <span class="branch-chevron">▼</span>
     </div>
+
     <div class="branch-body">
 
-      <div class="job-card fit-best" data-keywords="multi-target tracking track initiation maintenance termination kalman data association c++ real-time">
-        <div class="card-top">
-          <div class="card-title">Tracking Software Engineer</div>
-          <div class="fit-badge">Best Fit</div>
+      <div class="job-card fit-best">
+
+        <div class="card-title">
+          Tracking Software Engineer
         </div>
-        <div class="card-desc">Design and implement multi-target tracking pipelines in C++. Covers track initiation, maintenance, and termination logic, Kalman-family filters, and data association algorithms deployed in real-time systems.</div>
+
+        <div class="card-desc">
+          Design and implement multi-target tracking pipelines in C++.
+          Covers Kalman-family filters, data association,
+          and real-time aerospace tracking systems.
+        </div>
+
         <div class="card-tags">
-          <span class="tag">Multi-Target Tracking</span>
           <span class="tag">Kalman</span>
+          <span class="tag">Tracking</span>
           <span class="tag">C++</span>
-          <span class="tag">Data Association</span>
           <span class="tag">Real-Time</span>
         </div>
+
       </div>
 
-      <div class="job-card fit-best" data-keywords="state estimation ekf ukf covariance tuning measurement models uncertainty propagation kalman filter">
-        <div class="card-top">
-          <div class="card-title">State Estimation Engineer</div>
-          <div class="fit-badge">Best Fit</div>
+      <div class="job-card fit-best">
+
+        <div class="card-title">
+          State Estimation Engineer
         </div>
-        <div class="card-desc">Develop and tune Kalman, EKF, and UKF estimators. Specialize in covariance tuning, measurement modeling, and propagating uncertainty through nonlinear dynamic systems.</div>
+
+        <div class="card-desc">
+          Develop EKF/UKF estimators, covariance tuning,
+          uncertainty propagation, and nonlinear estimation architectures.
+        </div>
+
         <div class="card-tags">
           <span class="tag">EKF</span>
           <span class="tag">UKF</span>
-          <span class="tag">KF</span>
           <span class="tag">Covariance</span>
-          <span class="tag">Uncertainty</span>
         </div>
+
       </div>
 
-      <div class="job-card fit-best" data-keywords="sensor fusion radar eoir imu gps multi-sensor coordinate transformations kalman">
-        <div class="card-top">
-          <div class="card-title">Sensor Fusion Engineer</div>
-          <div class="fit-badge">Best Fit</div>
+      <div class="job-card fit-best">
+
+        <div class="card-title">
+          Sensor Fusion Engineer
         </div>
-        <div class="card-desc">Fuse heterogeneous sensor streams — radar, EO/IR, IMU, GPS — into coherent state estimates. Handle coordinate frame transformations, sensor calibration, and temporal alignment.</div>
+
+        <div class="card-desc">
+          Fuse radar, EO/IR, IMU, and GPS sensor streams into coherent state estimates.
+        </div>
+
         <div class="card-tags">
           <span class="tag">Radar</span>
-          <span class="tag">EO/IR</span>
-          <span class="tag">IMU</span>
-          <span class="tag">GPS</span>
           <span class="tag">Fusion</span>
+          <span class="tag">GPS</span>
         </div>
+
       </div>
 
-      <div class="job-card fit-best" data-keywords="jpda mht nearest neighbor imm filters gating track-to-track fusion algorithm">
-        <div class="card-top">
-          <div class="card-title">Tracking Algorithm Engineer</div>
-          <div class="fit-badge">Best Fit</div>
+      <div class="job-card fit-best">
+
+        <div class="card-title">
+          Tracking Algorithm Engineer
         </div>
-        <div class="card-desc">Research and implement advanced algorithms — JPDA, MHT, IMM, nearest-neighbor — for data association and clutter rejection. Includes gating strategies and track-to-track fusion for networked sensors.</div>
+
+        <div class="card-desc">
+          Implement JPDA, MHT, IMM,
+          gating logic, and track-to-track fusion algorithms.
+        </div>
+
         <div class="card-tags">
           <span class="tag">JPDA</span>
           <span class="tag">MHT</span>
           <span class="tag">IMM</span>
-          <span class="tag">Gating</span>
-          <span class="tag">T2T Fusion</span>
         </div>
+
       </div>
 
     </div>
-  </div>
 
-  <!-- BRANCH 2 -->
-  <div class="branch" id="branch2" data-branch="2">
-    <div class="branch-header" onclick="toggleBranch('branch2')">
-      <div class="branch-accent" style="background:var(--branch2)"></div>
-      <div class="branch-title" style="color:var(--branch2)">02 · Strong Adjacent Roles</div>
-      <span class="branch-count">4 roles</span>
-      <span class="branch-chevron">▼</span>
-    </div>
-    <div class="branch-body">
-
-      <div class="job-card fit-strong" data-keywords="gnc guidance navigation control flight dynamics estimation simulation matlab python c++">
-        <div class="card-top">
-          <div class="card-title">GN&amp;C Engineer</div>
-          <div class="fit-badge">Strong Fit</div>
-        </div>
-        <div class="card-desc">Core discipline covering guidance laws, navigation algorithms, and flight control design. Combines estimation, simulation, and flight dynamics — directly maps to your background.</div>
-        <div class="card-tags">
-          <span class="tag">Guidance</span>
-          <span class="tag">Navigation</span>
-          <span class="tag">Control</span>
-          <span class="tag">Simulation</span>
-          <span class="tag">MATLAB</span>
-        </div>
-      </div>
-
-      <div class="job-card fit-strong" data-keywords="inertial navigation gps ins frame transformations ekf navigation kalman">
-        <div class="card-top">
-          <div class="card-title">Navigation Engineer</div>
-          <div class="fit-badge">Strong Fit</div>
-        </div>
-        <div class="card-desc">Focus on inertial navigation systems, GPS/INS integration, and coordinate frame transformations. EKF-based navigation algorithms are the primary tool.</div>
-        <div class="card-tags">
-          <span class="tag">INS</span>
-          <span class="tag">GPS/INS</span>
-          <span class="tag">EKF</span>
-          <span class="tag">Frames</span>
-          <span class="tag">IMU</span>
-        </div>
-      </div>
-
-      <div class="job-card fit-strong" data-keywords="autonomy perception planning tracking decision logic autonomous systems">
-        <div class="card-top">
-          <div class="card-title">Autonomy Engineer</div>
-          <div class="fit-badge">Strong Fit</div>
-        </div>
-        <div class="card-desc">Build perception, planning, and tracking pipelines for autonomous platforms. Sensor fusion and state estimation underpin the perception stack where your skills transfer strongly.</div>
-        <div class="card-tags">
-          <span class="tag">Perception</span>
-          <span class="tag">Planning</span>
-          <span class="tag">Tracking</span>
-          <span class="tag">Decision Logic</span>
-        </div>
-      </div>
-
-      <div class="job-card fit-strong" data-keywords="algorithms mathematical modeling optimization estimation simulation software implementation matlab python c++">
-        <div class="card-top">
-          <div class="card-title">Algorithms Engineer</div>
-          <div class="fit-badge">Strong Fit</div>
-        </div>
-        <div class="card-desc">Broad role combining mathematical modeling, optimization, and estimation with software implementation. Often found at defense primes and aerospace startups bridging theory and production code.</div>
-        <div class="card-tags">
-          <span class="tag">Estimation</span>
-          <span class="tag">Optimization</span>
-          <span class="tag">MATLAB</span>
-          <span class="tag">Python</span>
-          <span class="tag">C++</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- BRANCH 3 -->
-  <div class="branch" id="branch3" data-branch="3">
-    <div class="branch-header" onclick="toggleBranch('branch3')">
-      <div class="branch-accent" style="background:var(--branch3)"></div>
-      <div class="branch-title" style="color:var(--branch3)">03 · Software-Heavy Variants</div>
-      <span class="branch-count">4 roles</span>
-      <span class="branch-chevron">▼</span>
-    </div>
-    <div class="branch-body">
-
-      <div class="job-card fit-strong" data-keywords="guidance navigation software gnc c++ python production algorithms translation">
-        <div class="card-top">
-          <div class="card-title">Guidance / Navigation Software Engineer</div>
-          <div class="fit-badge">Strong Fit</div>
-        </div>
-        <div class="card-desc">Translate GN&amp;C algorithms into production-grade C++ or Python code. Emphasis is on software craftsmanship, real-time constraints, and integration into flight software stacks.</div>
-        <div class="card-tags">
-          <span class="tag">C++</span>
-          <span class="tag">Python</span>
-          <span class="tag">GN&C Algorithms</span>
-          <span class="tag">Real-Time</span>
-        </div>
-      </div>
-
-      <div class="job-card fit-adj" data-keywords="perception object detection sensor processing tracking autonomy radar eoir">
-        <div class="card-top">
-          <div class="card-title">Perception Engineer</div>
-          <div class="fit-badge">Adjacent Fit</div>
-        </div>
-        <div class="card-desc">Common title at autonomy companies for engineers building object detection, sensor processing, and tracking pipelines. Skills overlap significantly with radar/EO-IR fusion experience.</div>
-        <div class="card-tags">
-          <span class="tag">Object Detection</span>
-          <span class="tag">Sensor Processing</span>
-          <span class="tag">Tracking</span>
-          <span class="tag">EO/IR</span>
-        </div>
-      </div>
-
-      <div class="job-card fit-best" data-keywords="c++ tracking real-time algorithm implementation optimization embedded">
-        <div class="card-top">
-          <div class="card-title">C++ Tracking Engineer</div>
-          <div class="fit-badge">Best Fit</div>
-        </div>
-        <div class="card-desc">Specialized role implementing and optimizing tracking algorithms in real-time C++ environments. Performance-critical code, latency budgets, and memory management are key focus areas.</div>
-        <div class="card-tags">
-          <span class="tag">C++</span>
-          <span class="tag">Real-Time</span>
-          <span class="tag">Optimization</span>
-          <span class="tag">Embedded</span>
-        </div>
-      </div>
-
-      <div class="job-card fit-adj" data-keywords="embedded autonomy real-time edge compute embedded deployment rtos">
-        <div class="card-top">
-          <div class="card-title">Embedded Autonomy Engineer</div>
-          <div class="fit-badge">Adjacent Fit</div>
-        </div>
-        <div class="card-desc">Deploy autonomy algorithms to resource-constrained edge compute hardware. Requires real-time OS knowledge and embedded systems expertise alongside algorithm design.</div>
-        <div class="card-tags">
-          <span class="tag">RTOS</span>
-          <span class="tag">Edge Compute</span>
-          <span class="tag">Embedded</span>
-          <span class="tag">Real-Time</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- BRANCH 4 -->
-  <div class="branch" id="branch4" data-branch="4">
-    <div class="branch-header" onclick="toggleBranch('branch4')">
-      <div class="branch-accent" style="background:var(--branch4)"></div>
-      <div class="branch-title" style="color:var(--branch4)">04 · Systems &amp; Verification</div>
-      <span class="branch-count">4 roles</span>
-      <span class="branch-chevron">▼</span>
-    </div>
-    <div class="branch-body">
-
-      <div class="job-card fit-best" data-keywords="modeling simulation monte carlo sensor playback physics-based models scenario simulation matlab python">
-        <div class="card-top">
-          <div class="card-title">Modeling &amp; Simulation Engineer</div>
-          <div class="fit-badge">Best Fit</div>
-        </div>
-        <div class="card-desc">Build simulation environments for algorithm development and test. Covers Monte Carlo campaigns, physics-based sensor models, scenario generation, and playback frameworks using MATLAB and Python.</div>
-        <div class="card-tags">
-          <span class="tag">Monte Carlo</span>
-          <span class="tag">Sensor Models</span>
-          <span class="tag">MATLAB</span>
-          <span class="tag">Python</span>
-          <span class="tag">Scenario Gen</span>
-        </div>
-      </div>
-
-      <div class="job-card fit-adj" data-keywords="systems engineer tracking requirements architecture v&v system integration">
-        <div class="card-top">
-          <div class="card-title">Systems Engineer — Tracking Systems</div>
-          <div class="fit-badge">Adjacent Fit</div>
-        </div>
-        <div class="card-desc">Drive requirements definition, system architecture, and V&amp;V planning for tracking-intensive systems. Strong technical background enables credible stakeholder engagement across algorithm and hardware teams.</div>
-        <div class="card-tags">
-          <span class="tag">Requirements</span>
-          <span class="tag">Architecture</span>
-          <span class="tag">V&V</span>
-          <span class="tag">Integration</span>
-        </div>
-      </div>
-
-      <div class="job-card fit-best" data-keywords="hwil sil test engineer simulation pipelines automated test verification jenkins ci hardware integration">
-        <div class="card-top">
-          <div class="card-title">HWIL/SIL Test Engineer</div>
-          <div class="fit-badge">Best Fit</div>
-        </div>
-        <div class="card-desc">Build and operate hardware-in-the-loop and software-in-the-loop test benches. Automate regression campaigns using Jenkins/CI, verify algorithm behavior across scenario libraries, and integrate real hardware interfaces.</div>
-        <div class="card-tags">
-          <span class="tag">HWIL</span>
-          <span class="tag">SIL</span>
-          <span class="tag">CI/CD</span>
-          <span class="tag">Verification</span>
-          <span class="tag">Automation</span>
-        </div>
-      </div>
-
-      <div class="job-card fit-less" data-keywords="mission systems avionics sensors data links integration requirements architecture">
-        <div class="card-top">
-          <div class="card-title">Mission Systems / Avionics Engineer</div>
-          <div class="fit-badge">Supporting</div>
-        </div>
-        <div class="card-desc">Broad role integrating sensors, data links, and mission payloads into aircraft or weapon systems. Tracking background is valuable for understanding sensor chains, though the role spans wider system concerns.</div>
-        <div class="card-tags">
-          <span class="tag">Avionics</span>
-          <span class="tag">Data Links</span>
-          <span class="tag">Sensors</span>
-          <span class="tag">Integration</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- BRANCH 5 — KEYWORDS -->
-  <div class="branch" id="branch5" data-branch="5">
-    <div class="branch-header" onclick="toggleBranch('branch5')">
-      <div class="branch-accent" style="background:var(--branch5)"></div>
-      <div class="branch-title" style="color:var(--branch5)">05 · Search Keywords</div>
-      <span class="branch-count">Click to filter</span>
-      <span class="branch-chevron">▼</span>
-    </div>
-    <div class="keywords-grid" id="keywordsGrid">
-    </div>
-  </div>
-
-  <div class="no-results" id="noResults">
-    ⚠ No matching roles found — try a different keyword
   </div>
 
 </main>
 
-<!-- SEARCH STRINGS -->
-<div class="search-strings-section">
-  <div class="section-label">Recommended Job Search Strings</div>
-
-  <div class="search-string-card">
-    <span class="ss-num">01</span>
-    <span class="ss-text">"tracking software engineer" Kalman C++ defense</span>
-    <button class="ss-copy" onclick="copyString(this, 'tracking software engineer Kalman C++ defense')">COPY</button>
-  </div>
-
-  <div class="search-string-card">
-    <span class="ss-num">02</span>
-    <span class="ss-text">"state estimation engineer" EKF "sensor fusion" aerospace</span>
-    <button class="ss-copy" onclick="copyString(this, 'state estimation engineer EKF sensor fusion aerospace')">COPY</button>
-  </div>
-
-  <div class="search-string-card">
-    <span class="ss-num">03</span>
-    <span class="ss-text">"sensor fusion engineer" radar tracking defense</span>
-    <button class="ss-copy" onclick="copyString(this, 'sensor fusion engineer radar tracking defense')">COPY</button>
-  </div>
-
-  <div class="search-string-card">
-    <span class="ss-num">04</span>
-    <span class="ss-text">"multi target tracking" engineer JPDA MHT</span>
-    <button class="ss-copy" onclick="copyString(this, 'multi target tracking engineer JPDA MHT')">COPY</button>
-  </div>
-
-  <div class="search-string-card">
-    <span class="ss-num">05</span>
-    <span class="ss-text">"GN&C software engineer" C++ estimation</span>
-    <button class="ss-copy" onclick="copyString(this, 'GNC software engineer C++ estimation')">COPY</button>
-  </div>
-
-  <div class="search-string-card">
-    <span class="ss-num">06</span>
-    <span class="ss-text">"autonomy engineer" tracking "sensor fusion" aerospace</span>
-    <button class="ss-copy" onclick="copyString(this, 'autonomy engineer tracking sensor fusion aerospace')">COPY</button>
-  </div>
-
-  <div class="search-string-card">
-    <span class="ss-num">07</span>
-    <span class="ss-text">"modeling simulation engineer" tracking "Monte Carlo" HWIL</span>
-    <button class="ss-copy" onclick="copyString(this, 'modeling simulation engineer tracking Monte Carlo HWIL')">COPY</button>
-  </div>
-
-</div>
-
 <footer>
-  Tracking / Estimation / Sensor Fusion Career Map · Aerospace &amp; Defense · Generated 2026
+  Tracking / Estimation / Sensor Fusion Career Map · Aerospace &amp; Defense
 </footer>
 
-<script>
-  // ── KEYWORDS ──
-  const KEYWORDS = [
-    'Kalman filter','EKF','UKF','IMM','JPDA','MHT',
-    'multi-target tracking','data association','sensor fusion',
-    'radar tracking','EO/IR','track initiation','track maintenance',
-    'covariance','Monte Carlo','MATLAB','Python','C++',
-    'real-time','HWIL','SIL','GN&C','INS','GPS','autonomy',
-    'perception','estimation','RTOS','embedded'
-  ];
-
-  const grid = document.getElementById('keywordsGrid');
-  KEYWORDS.forEach(kw => {
-    const pill = document.createElement('div');
-    pill.className = 'kw-pill';
-    pill.textContent = kw;
-    pill.addEventListener('click', () => {
-      const isActive = pill.classList.contains('active');
-      document.querySelectorAll('.kw-pill').forEach(p => p.classList.remove('active'));
-      if (!isActive) {
-        pill.classList.add('active');
-        applyFilter(kw);
-      } else {
-        clearFilter();
-      }
-    });
-    grid.appendChild(pill);
-  });
-
-  // ── TOGGLE ──
-  function toggleBranch(id) {
-    document.getElementById(id).classList.toggle('collapsed');
-  }
-
-  function expandAll() {
-    document.querySelectorAll('.branch').forEach(b => b.classList.remove('collapsed'));
-  }
-
-  function collapseAll() {
-    document.querySelectorAll('.branch').forEach(b => b.classList.add('collapsed'));
-  }
-
-  // ── SEARCH ──
-  const searchInput = document.getElementById('searchInput');
-  const searchClear = document.getElementById('searchClear');
-  const searchIcon  = document.getElementById('searchIcon');
-
-  searchInput.addEventListener('input', () => {
-    const val = searchInput.value.trim();
-    searchClear.style.display = val ? 'block' : 'none';
-    searchIcon.style.display  = val ? 'none'  : 'block';
-    document.querySelectorAll('.kw-pill').forEach(p => p.classList.remove('active'));
-    applyFilter(val);
-  });
-
-  searchClear.addEventListener('click', () => {
-    searchInput.value = '';
-    searchClear.style.display = 'none';
-    searchIcon.style.display  = 'block';
-    clearFilter();
-  });
-
-  function applyFilter(query) {
-    if (!query) { clearFilter(); return; }
-    const q = query.toLowerCase();
-    let anyVisible = false;
-
-    document.querySelectorAll('.job-card').forEach(card => {
-      const kw = (card.dataset.keywords || '').toLowerCase();
-      const title = card.querySelector('.card-title').textContent.toLowerCase();
-      const desc  = card.querySelector('.card-desc').textContent.toLowerCase();
-      const match = kw.includes(q) || title.includes(q) || desc.includes(q);
-      card.classList.toggle('hidden', !match);
-      if (match) anyVisible = true;
-
-      // highlight tags
-      card.querySelectorAll('.tag').forEach(tag => {
-        tag.classList.toggle('highlight', tag.textContent.toLowerCase().includes(q));
-      });
-    });
-
-    // open branches that have visible cards, collapse empty ones
-    document.querySelectorAll('.branch:not(#branch5)').forEach(branch => {
-      const visible = [...branch.querySelectorAll('.job-card')].some(c => !c.classList.contains('hidden'));
-      if (visible) {
-        branch.classList.remove('collapsed', 'hidden');
-      } else {
-        branch.classList.add('collapsed');
-      }
-    });
-
-    document.getElementById('noResults').style.display = anyVisible ? 'none' : 'block';
-  }
-
-  function clearFilter() {
-    searchInput.value = '';
-    searchClear.style.display = 'none';
-    searchIcon.style.display  = 'block';
-    document.querySelectorAll('.job-card').forEach(card => {
-      card.classList.remove('hidden');
-      card.querySelectorAll('.tag').forEach(tag => tag.classList.remove('highlight'));
-    });
-    document.querySelectorAll('.branch').forEach(b => {
-      b.classList.remove('collapsed', 'hidden');
-    });
-    document.querySelectorAll('.kw-pill').forEach(p => p.classList.remove('active'));
-    document.getElementById('noResults').style.display = 'none';
-  }
-
-  // ── COPY ──
-  function copyString(btn, text) {
-    navigator.clipboard.writeText(text).then(() => {
-      btn.textContent = '✓ COPIED';
-      btn.classList.add('copied');
-      setTimeout(() => {
-        btn.textContent = 'COPY';
-        btn.classList.remove('copied');
-      }, 1800);
-    });
-  }
-</script>
 </body>
 </html>
