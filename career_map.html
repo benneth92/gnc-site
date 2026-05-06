@@ -67,6 +67,72 @@
     z-index: 0;
   }
 
+  /* ── NAVBAR ── */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    background: rgba(8,12,16,0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #eef8ff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .logo-mark {
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--accent-cyan);
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    color: var(--accent-cyan);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 18px;
+    box-shadow: 0 0 18px rgba(56,189,248,0.28);
+    background: rgba(56,189,248,0.05);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all var(--transition);
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--accent-cyan);
+    background: rgba(56,189,248,0.08);
+  }
+
+
   /* ── HEADER ── */
   header {
     position: relative;
@@ -580,10 +646,39 @@
     .branch-body { grid-template-columns: 1fr; }
     .branch-title { font-size: 14px; }
     header h1 { font-size: 20px; }
+
+    .navbar {
+      flex-direction: column;
+      height: auto;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .nav-links {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
   }
 </style>
 </head>
 <body>
+
+<nav class="navbar">
+
+  <a class="logo" href="index.html">
+    <div class="logo-mark">BP</div>
+    BennethPerez
+  </a>
+
+  <div class="nav-links">
+    <a href="index.html">Biography</a>
+    <a href="platforms.html">Platforms</a>
+    <a class="active" href="career_map.html">Career Map</a>
+    <a href="gnc.html">GN&amp;C</a>
+    <a href="community.html">Community</a>
+  </div>
+
+</nav>
 
 <header>
   <div class="header-eyebrow">Aerospace &amp; Defense ·  Career Intelligence Map</div>
