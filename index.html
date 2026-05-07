@@ -410,75 +410,55 @@
       font-weight:500;
     }
 
-    /* CTA buttons */
-    .cta-row {
-      display:flex;
-      gap:16px;
-      flex-wrap:wrap;
-    }
+/* CTA buttons */
+.cta-row {
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+}
 
-    .btn-primary {
-      padding:14px 28px;
-      border-radius:8px;
-      background:var(--red);
-      color:#fff;
-      font-family:'Orbitron',monospace;
-      font-size:.7rem;
-      font-weight:700;
-      letter-spacing:2px;
-      text-decoration:none;
-      text-transform:uppercase;
-      border:none;
-      cursor:pointer;
-      transition:box-shadow .3s, transform .2s;
-      box-shadow:0 0 20px rgba(255,32,32,0.35);
-    }
-
-    .btn-primary:hover {
-      transform:translateY(-2px);
-      box-shadow:0 0 36px rgba(255,32,32,0.6);
-    }
+/* Shared button style */
+.btn-primary,
+.btn-outline,
 .btn-linkedin {
   padding:14px 28px;
   border-radius:8px;
-  background:#0a66c2;
-  color:#fff;
+  background:transparent;
+  color:#ddd;
   font-family:'Orbitron',monospace;
   font-size:.7rem;
   font-weight:700;
   letter-spacing:2px;
   text-decoration:none;
   text-transform:uppercase;
-  border:none;
+  border:1px solid rgba(255,255,255,0.2);
   cursor:pointer;
-  transition:box-shadow .3s, transform .2s;
-  box-shadow:0 0 20px rgba(10,102,194,0.35);
+  transition:
+    border-color .3s,
+    color .3s,
+    box-shadow .3s,
+    transform .2s,
+    background .3s;
 }
 
+/* Standard red hover */
+.btn-primary:hover,
+.btn-outline:hover {
+  transform:translateY(-2px);
+  border-color:var(--red);
+  color:var(--red);
+  background:rgba(255,32,32,0.05);
+  box-shadow:0 0 28px rgba(255,32,32,0.35);
+}
+
+/* LinkedIn special blue hover */
 .btn-linkedin:hover {
   transform:translateY(-2px);
-  box-shadow:0 0 36px rgba(10,102,194,0.6);
+  border-color:#0a66c2;
+  color:#4ea1ff;
+  background:rgba(10,102,194,0.08);
+  box-shadow:0 0 28px rgba(10,102,194,0.45);
 }
-    .btn-outline {
-      padding:14px 28px;
-      border-radius:8px;
-      background:transparent;
-      color:#ddd;
-      font-family:'Orbitron',monospace;
-      font-size:.7rem;
-      font-weight:600;
-      letter-spacing:2px;
-      text-decoration:none;
-      text-transform:uppercase;
-      border:1px solid rgba(255,255,255,0.2);
-      cursor:pointer;
-      transition:border-color .3s, color .3s;
-    }
-
-    .btn-outline:hover {
-      border-color:var(--red);
-      color:var(--red);
-    }
 
     /* ── SCROLL-DOWN INDICATOR ── */
     .scroll-cue {
@@ -776,22 +756,27 @@
           </div>
         </div>
 
-        <div class="cta-row">
-          <div class="cta-row">
+<div class="cta-row">
 
   <a class="btn-linkedin"
      href="https://www.linkedin.com/in/benneth-perez/"
      target="_blank">
-     LINKEDIN
+     LinkedIn
   </a>
-          <a class="btn-primary" href="GNC.html">GN&amp;C Work</a>
-          <a class="btn-outline" href="career_map.html">Career Map</a>
-    </div>
-          <a class="btn-primary" href="GNC.html">Build GN&amp;C Experience</a>
-          <a class="btn-outline" href="career_map.html">Career Map</a>
-        </div>
-      </div>
-    </div>
+
+  <a class="btn-primary" href="GNC.html">
+    GN&amp;C Work
+  </a>
+
+  <a class="btn-primary" href="career_map.html">
+    Build GN&amp;C Experience
+  </a>
+
+  <a class="btn-outline" href="career_map.html">
+    Career Map
+  </a>
+
+</div>
 
     <div class="scroll-cue">
       <span>SCROLL</span>
