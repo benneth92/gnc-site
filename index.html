@@ -28,21 +28,28 @@
       overflow-x: hidden;
     }
 
-    /* Scanline */
     body::before {
       content:'';
-      position:fixed; inset:0;
-      background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.06) 2px,rgba(0,0,0,0.06) 4px);
+      position:fixed;
+      inset:0;
+      background:repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.06) 2px,
+        rgba(0,0,0,0.06) 4px
+      );
       pointer-events:none;
       z-index:9999;
     }
 
-    /* Ambient glow */
     .ambient {
       position:fixed;
-      top:-200px; left:50%;
+      top:-200px;
+      left:50%;
       transform:translateX(-50%);
-      width:1000px; height:700px;
+      width:1000px;
+      height:700px;
       background:radial-gradient(ellipse,rgba(255,20,20,0.1) 0%,transparent 70%);
       pointer-events:none;
       z-index:0;
@@ -54,10 +61,13 @@
       50%{opacity:1;transform:translateX(-50%) scale(1.1);}
     }
 
-    /* ── NAV ── */
     nav {
-      position:sticky; top:0; z-index:1000;
-      display:flex; justify-content:space-between; align-items:center;
+      position:sticky;
+      top:0;
+      z-index:1000;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
       padding:16px 6%;
       background:rgba(6,6,8,0.92);
       backdrop-filter:blur(16px);
@@ -65,16 +75,22 @@
     }
 
     .logo {
-      display:flex; align-items:center; gap:14px;
+      display:flex;
+      align-items:center;
+      gap:14px;
       text-decoration:none;
     }
 
     .logo-mark {
       position:relative;
-      width:52px; height:52px;
+      width:52px;
+      height:52px;
     }
 
-    .logo-mark svg { width:52px; height:52px; }
+    .logo-mark svg {
+      width:52px;
+      height:52px;
+    }
 
     .logo-hex {
       fill:none;
@@ -84,73 +100,108 @@
       transform-origin:26px 26px;
     }
 
-    @keyframes hex-rotate { to{transform:rotate(360deg);} }
+    @keyframes hex-rotate {
+      to { transform:rotate(360deg); }
+    }
 
-    .logo-inner { fill:rgba(255,32,32,0.08); }
+    .logo-inner {
+      fill:rgba(255,32,32,0.08);
+    }
 
     .logo-text-mark {
-      position:absolute; inset:0;
-      display:flex; align-items:center; justify-content:center;
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       font-family:'Orbitron',monospace;
-      font-weight:900; font-size:1rem;
+      font-weight:900;
+      font-size:1rem;
       color:var(--red);
       text-shadow:0 0 12px var(--red-glow);
       letter-spacing:1px;
     }
 
-    .logo-name { display:flex; flex-direction:column; gap:1px; }
+    .logo-name {
+      display:flex;
+      flex-direction:column;
+      gap:1px;
+    }
 
     .logo-name-top {
       font-family:'Orbitron',monospace;
-      font-weight:700; font-size:1.05rem;
-      color:#fff; letter-spacing:2px; line-height:1;
+      font-weight:700;
+      font-size:1.05rem;
+      color:#fff;
+      letter-spacing:2px;
+      line-height:1;
     }
 
     .logo-name-sub {
-      font-size:.65rem; color:var(--red);
-      letter-spacing:4px; text-transform:uppercase;
+      font-size:.65rem;
+      color:var(--red);
+      letter-spacing:4px;
+      text-transform:uppercase;
     }
 
     .nav-links {
-      display:flex; gap:28px; align-items:center;
+      display:flex;
+      gap:28px;
+      align-items:center;
     }
 
     .nav-links a {
       font-family:'Orbitron',monospace;
-      font-size:.65rem; font-weight:600;
-      letter-spacing:2px; color:var(--muted);
-      text-decoration:none; text-transform:uppercase;
+      font-size:.65rem;
+      font-weight:600;
+      letter-spacing:2px;
+      color:var(--muted);
+      text-decoration:none;
+      text-transform:uppercase;
       transition:color .3s;
       position:relative;
     }
 
     .nav-links a::after {
-      content:''; position:absolute;
-      bottom:-4px; left:0;
-      width:0; height:1px;
+      content:'';
+      position:absolute;
+      bottom:-4px;
+      left:0;
+      width:0;
+      height:1px;
       background:var(--red);
       transition:width .3s;
     }
 
-    .nav-links a:hover { color:#fff; }
-    .nav-links a:hover::after { width:100%; }
-    .nav-links a.active { color:var(--red); }
-    .nav-links a.active::after { width:100%; }
+    .nav-links a:hover {
+      color:#fff;
+    }
 
-    /* ── HERO SECTION ── */
+    .nav-links a:hover::after {
+      width:100%;
+    }
+
+    .nav-links a.active {
+      color:var(--red);
+    }
+
+    .nav-links a.active::after {
+      width:100%;
+    }
+
     .hero {
       position:relative;
       min-height:100vh;
       display:flex;
       align-items:center;
-      padding:120px 8% 80px;
+      padding:120px 8% 100px;
       z-index:1;
       overflow:hidden;
     }
 
-    /* Moving grid bg */
     .hero-grid {
-      position:absolute; inset:0;
+      position:absolute;
+      inset:0;
       background-image:
         linear-gradient(rgba(255,32,32,0.05) 1px,transparent 1px),
         linear-gradient(90deg,rgba(255,32,32,0.05) 1px,transparent 1px);
@@ -164,17 +215,16 @@
       100%{background-position:60px 60px;}
     }
 
-    /* Decorative red vertical line */
     .hero-line {
       position:absolute;
       left:8%;
-      top:0; bottom:0;
+      top:0;
+      bottom:0;
       width:1px;
       background:linear-gradient(to bottom,transparent,var(--red),transparent);
       opacity:.3;
     }
 
-    /* ── HERO INNER LAYOUT (photo left | bio right) ── */
     .hero-inner {
       display:grid;
       grid-template-columns:1fr 1.4fr;
@@ -187,7 +237,6 @@
       z-index:2;
     }
 
-    /* ── PHOTO COLUMN ── */
     .photo-col {
       display:flex;
       flex-direction:column;
@@ -198,16 +247,16 @@
       animation:slide-in-left .9s ease forwards .2s;
     }
 
-    @keyframes slide-in-left { to{opacity:1;transform:translateX(0);} }
+    @keyframes slide-in-left {
+      to { opacity:1; transform:translateX(0); }
+    }
 
-    /* Photo frame */
     .photo-frame {
       position:relative;
       width:100%;
       max-width:340px;
     }
 
-    /* Spinning hex ring around photo */
     .photo-frame svg.hex-ring {
       position:absolute;
       inset:-20px;
@@ -217,7 +266,9 @@
       z-index:0;
     }
 
-    @keyframes hex-spin { to{transform:rotate(360deg);} }
+    @keyframes hex-spin {
+      to { transform:rotate(360deg); }
+    }
 
     .photo-wrapper {
       position:relative;
@@ -229,57 +280,36 @@
         0 0 40px rgba(255,32,32,0.2),
         0 0 80px rgba(255,32,32,0.08),
         inset 0 0 20px rgba(255,32,32,0.05);
-      aspect-ratio: 3/4;
+      aspect-ratio:3/4;
       background:linear-gradient(145deg,rgba(20,8,8,0.9),rgba(8,8,16,0.95));
     }
 
-    /* Corner brackets on photo */
-    .photo-wrapper::before,.photo-wrapper::after {
-      content:''; position:absolute;
-      width:28px; height:28px;
+    .photo-wrapper::before,
+    .photo-wrapper::after {
+      content:'';
+      position:absolute;
+      width:28px;
+      height:28px;
       z-index:3;
     }
 
     .photo-wrapper::before {
-      top:10px; left:10px;
+      top:10px;
+      left:10px;
       border-top:2px solid var(--red);
       border-left:2px solid var(--red);
     }
 
     .photo-wrapper::after {
-      bottom:10px; right:10px;
+      bottom:10px;
+      right:10px;
       border-bottom:2px solid var(--red);
       border-right:2px solid var(--red);
     }
 
-    /* Placeholder — swap for <img> */
-    .photo-placeholder {
-      width:100%; height:100%;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      gap:16px;
-      color:rgba(255,32,32,0.5);
-      font-family:'Orbitron',monospace;
-      font-size:.65rem;
-      letter-spacing:3px;
-      text-align:center;
-      padding:24px;
-    }
-
-    .photo-placeholder svg {
-      width:64px; height:64px;
-      opacity:.4;
-    }
-
-    /* Replace .photo-placeholder with an <img> tag like:
-       <img src="yourphoto.jpg" alt="Benneth Perez" style="width:100%;height:100%;object-fit:cover;display:block;">
-    */
-
-    /* Scan effect overlay on photo */
     .photo-scan {
-      position:absolute; inset:0;
+      position:absolute;
+      inset:0;
       background:linear-gradient(to bottom,transparent 40%,rgba(255,32,32,0.03) 50%,transparent 60%);
       animation:scan-move 3s linear infinite;
       pointer-events:none;
@@ -308,14 +338,15 @@
       margin-bottom:4px;
     }
 
-    /* ── BIO COLUMN ── */
     .bio-col {
       opacity:0;
       transform:translateX(40px);
       animation:slide-in-right .9s ease forwards .4s;
     }
 
-    @keyframes slide-in-right { to{opacity:1;transform:translateX(0);} }
+    @keyframes slide-in-right {
+      to { opacity:1; transform:translateX(0); }
+    }
 
     .status-pill {
       display:inline-flex;
@@ -333,7 +364,8 @@
     }
 
     .status-dot {
-      width:6px; height:6px;
+      width:6px;
+      height:6px;
       border-radius:50%;
       background:var(--red);
       box-shadow:0 0 8px var(--red);
@@ -375,7 +407,6 @@
       padding-left:20px;
     }
 
-    /* Spec grid under bio */
     .spec-grid {
       display:grid;
       grid-template-columns:1fr 1fr;
@@ -410,69 +441,64 @@
       font-weight:500;
     }
 
-/* CTA buttons */
-.cta-row {
-  display:flex;
-  gap:16px;
-  flex-wrap:wrap;
-}
+    .cta-row {
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+    }
 
-/* Shared button style */
-.btn-primary,
-.btn-outline,
-.btn-linkedin {
-  padding:14px 28px;
-  border-radius:8px;
-  background:transparent;
-  color:#ddd;
-  font-family:'Orbitron',monospace;
-  font-size:.7rem;
-  font-weight:700;
-  letter-spacing:2px;
-  text-decoration:none;
-  text-transform:uppercase;
-  border:1px solid rgba(255,255,255,0.2);
-  cursor:pointer;
-  transition:
-    border-color .3s,
-    color .3s,
-    box-shadow .3s,
-    transform .2s,
-    background .3s;
-}
+    .btn-primary,
+    .btn-outline,
+    .btn-linkedin {
+      padding:14px 28px;
+      border-radius:8px;
+      background:transparent;
+      color:#ddd;
+      font-family:'Orbitron',monospace;
+      font-size:.7rem;
+      font-weight:700;
+      letter-spacing:2px;
+      text-decoration:none;
+      text-transform:uppercase;
+      border:1px solid rgba(255,255,255,0.2);
+      cursor:pointer;
+      transition:
+        border-color .3s,
+        color .3s,
+        box-shadow .3s,
+        transform .2s,
+        background .3s;
+    }
 
-/* Standard red hover */
-.btn-primary:hover,    
-.btn-outline:hover {
-  transform:translateY(-2px);
-  border-color:var(--red);
-  color:var(--red);
-  background:rgba(255,32,32,0.05);
-  box-shadow:0 0 28px rgba(255,32,32,0.35);
-}
+    .btn-primary:hover,
+    .btn-outline:hover {
+      transform:translateY(-2px);
+      border-color:var(--red);
+      color:var(--red);
+      background:rgba(255,32,32,0.05);
+      box-shadow:0 0 28px rgba(255,32,32,0.35);
+    }
 
-/* LinkedIn special blue hover */
-.btn-linkedin:hover {
-  transform:translateY(-2px);
-  border-color:#0a66c2;
-  color:#4ea1ff;
-  background:rgba(10,102,194,0.08);
-  box-shadow:0 0 28px rgba(10,102,194,0.45);
-}
+    .btn-linkedin:hover {
+      transform:translateY(-2px);
+      border-color:#0a66c2;
+      color:#4ea1ff;
+      background:rgba(10,102,194,0.08);
+      box-shadow:0 0 28px rgba(10,102,194,0.45);
+    }
 
-    /* ── SCROLL-DOWN INDICATOR ── */
-.scroll-cue {
-  position:absolute;
-  bottom:-150px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:8px;
-  z-index:2;
-  opacity:.5;
-}
+    .scroll-cue {
+      position:absolute;
+      bottom:35px;
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:8px;
+      z-index:2;
+      opacity:.5;
+    }
 
     .scroll-cue span {
       font-family:'Orbitron',monospace;
@@ -482,7 +508,8 @@
     }
 
     .scroll-arrow {
-      width:1px; height:40px;
+      width:1px;
+      height:40px;
       background:linear-gradient(to bottom,var(--red),transparent);
       animation:arrow-drop 1.6s ease-in-out infinite;
     }
@@ -494,7 +521,6 @@
       100%{transform:scaleY(0);transform-origin:bottom;}
     }
 
-    /* ── SKILLS / EXPERTISE SECTION ── */
     .expertise {
       padding:80px 8% 100px;
       position:relative;
@@ -547,7 +573,9 @@
       animation:card-reveal .65s ease forwards;
     }
 
-    @keyframes card-reveal { to{opacity:1;transform:translateY(0);} }
+    @keyframes card-reveal {
+      to { opacity:1; transform:translateY(0); }
+    }
 
     .skill-card:hover {
       transform:translateY(-8px);
@@ -557,14 +585,19 @@
 
     .skill-card::before {
       content:'';
-      position:absolute; top:0; left:0; right:0;
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
       height:2px;
       background:linear-gradient(90deg,transparent,var(--red),transparent);
       transform:scaleX(0);
       transition:transform .4s;
     }
 
-    .skill-card:hover::before { transform:scaleX(1); }
+    .skill-card:hover::before {
+      transform:scaleX(1);
+    }
 
     .skill-icon {
       font-size:1.8rem;
@@ -588,7 +621,6 @@
       margin-bottom:16px;
     }
 
-    /* Skill bar */
     .skill-bar-wrap {
       height:3px;
       background:rgba(255,255,255,0.06);
@@ -609,7 +641,6 @@
       width:var(--pct);
     }
 
-    /* ── FOOTER ── */
     footer {
       padding:30px 8%;
       text-align:center;
@@ -620,32 +651,60 @@
       letter-spacing:3px;
     }
 
-    /* ── RESPONSIVE ── */
     @media(max-width:900px) {
       .hero-inner {
         grid-template-columns:1fr;
         gap:48px;
       }
 
-      .photo-col { max-width:320px; margin:auto; }
+      .photo-col {
+        max-width:320px;
+        margin:auto;
+      }
 
       .bio-col {
         animation:fade-up .9s ease forwards .4s;
       }
 
-      @keyframes fade-up { to{opacity:1;transform:translateY(0);} }
-
-      .expertise-header {
-        flex-direction:column; align-items:flex-start;
+      @keyframes fade-up {
+        to { opacity:1; transform:translateY(0); }
       }
 
-      .expertise-header p { text-align:left; max-width:100%; margin-top:8px; }
+      .expertise-header {
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .expertise-header p {
+        text-align:left;
+        max-width:100%;
+        margin-top:8px;
+      }
     }
 
     @media(max-width:768px) {
-      nav { flex-direction:column; align-items:flex-start; gap:16px; }
-      .spec-grid { grid-template-columns:1fr; }
-      .hero { padding:100px 6% 80px; }
+      nav {
+        flex-direction:column;
+        align-items:flex-start;
+        gap:16px;
+      }
+
+      .nav-links {
+        flex-wrap:wrap;
+        gap:16px;
+      }
+
+      .spec-grid {
+        grid-template-columns:1fr;
+      }
+
+      .hero {
+        padding:100px 6% 100px;
+      }
+
+      .scroll-cue {
+        bottom:20px;
+      }
     }
   </style>
 </head>
@@ -653,7 +712,6 @@
 <body>
   <div class="ambient"></div>
 
-  <!-- ── NAV ── -->
   <nav>
     <a class="logo" href="index.html">
       <div class="logo-mark">
@@ -665,6 +723,7 @@
         </svg>
         <div class="logo-text-mark">BP</div>
       </div>
+
       <div class="logo-name">
         <span class="logo-name-top">BENNETH</span>
         <span class="logo-name-sub">PEREZ</span>
@@ -681,44 +740,38 @@
     </div>
   </nav>
 
-  <!-- ── HERO ── -->
   <section class="hero">
     <div class="hero-grid"></div>
     <div class="hero-line"></div>
 
     <div class="hero-inner">
 
-      <!-- LEFT — Photo -->
       <div class="photo-col">
         <div class="photo-frame">
-          <!-- Spinning hex ring -->
+
           <svg class="hex-ring" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
             <polygon stroke="rgba(255,32,32,0.2)" stroke-width="1"
               points="200,10 380,110 380,390 200,490 20,390 20,110"/>
           </svg>
 
-    <div class="photo-wrapper">
+          <div class="photo-wrapper">
+            <img
+              src="Images/profile.jpg"
+              alt="Benneth Perez"
+              style="width:100%; height:100%; object-fit:cover; display:block;"
+            >
 
-      <img
-        src="Images/profile.jpg"
-        alt="Benneth Perez"
-        style="width:100%; height:100%; object-fit:cover; display:block;"
-      >
+            <div class="photo-scan"></div>
+          </div>
 
-      <div class="photo-scan"></div>
+        </div>
 
-    </div>
+        <div class="photo-label">
+          <span>GN&amp;C Engineer</span>
+          Raytheon
+        </div>
+      </div>
 
-  </div>
-
-  <div class="photo-label">
-    <span>GN&C Engineer</span>
-    Raytheon
-  </div>
-
-</div>
-
-      <!-- RIGHT — Bio -->
       <div class="bio-col">
         <div class="status-pill">
           <span class="status-dot"></span>
@@ -726,53 +779,60 @@
         </div>
 
         <h1>Benneth<br>Perez</h1>
-        <div class="bio-title">GUIDANCE · NAVIGATION · CONTROL</div>
+
+        <div class="bio-title">
+          GUIDANCE · NAVIGATION · CONTROL
+        </div>
 
         <p class="bio-text">
-           Aerospace engineer with multidisciplinary experience spanning mission systems,
-  avionics integration, electrical and wire harness design, Guidance Navigation &amp;
-  Control (GN&amp;C), radar tracking, and aerospace system verification for defense
-  applications. Background includes cross-functional engineering support across
-  system integration, hardware/software coordination, interface compatibility,
-  verification &amp; validation, and tracking and estimation technologies.
+          Aerospace engineer with multidisciplinary experience spanning mission systems,
+          avionics integration, electrical and wire harness design, Guidance Navigation &amp;
+          Control (GN&amp;C), radar tracking, and aerospace system verification for defense
+          applications. Background includes cross-functional engineering support across
+          system integration, hardware/software coordination, interface compatibility,
+          verification &amp; validation, and tracking and estimation technologies.
         </p>
 
         <div class="spec-grid">
           <div class="spec-item">
             <div class="spec-label">DOMAIN</div>
-            <div class="spec-val">Aerospace & Defense</div>
+            <div class="spec-val">Aerospace &amp; Defense</div>
           </div>
+
           <div class="spec-item">
             <div class="spec-label">SPECIALIZATION</div>
             <div class="spec-val">GN&amp;C Systems</div>
           </div>
+
           <div class="spec-item">
             <div class="spec-label">FOCUS AREA</div>
             <div class="spec-val">Missile Defense</div>
           </div>
+
           <div class="spec-item">
             <div class="spec-label">PLATFORMS</div>
             <div class="spec-val">Experimental · Air Dominance · Autonomous Systems</div>
           </div>
         </div>
 
-<div class="cta-row">
+        <div class="cta-row">
+          <a class="btn-linkedin"
+             href="https://www.linkedin.com/in/benneth-perez/"
+             target="_blank">
+            LinkedIn
+          </a>
 
-  <a class="btn-linkedin"
-     href="https://www.linkedin.com/in/benneth-perez/"
-     target="_blank">
-     LinkedIn
-  </a>
+          <a class="btn-primary" href="career_map.html">
+            Build Experience
+          </a>
 
-  <a class="btn-primary" href="career_map.html">
-    Build Experience
-  </a>
+          <a class="btn-outline" href="career_map.html">
+            Career Map
+          </a>
+        </div>
+      </div>
 
-  <a class="btn-outline" href="career_map.html">
-    Career Map
-  </a>
-
-</div>
+    </div>
 
     <div class="scroll-cue">
       <span>SCROLL</span>
@@ -780,18 +840,18 @@
     </div>
   </section>
 
-  <!-- ── EXPERTISE ── -->
   <section class="expertise">
     <div class="expertise-header">
       <h2>CORE EXPERTISE</h2>
-      <p>Technical disciplines spanning the full GN&amp;C and mission systems stack.</p>
+      <p>Technical disciplines spanning GN&amp;C, mission systems, avionics, tracking, and integration.</p>
     </div>
 
     <div class="skills-grid">
+
       <div class="skill-card" data-reveal data-delay="0">
         <span class="skill-icon">📡</span>
-        <h3>Radar Tracking & Estimation</h3>
-        <p>Kalman filtering, covariance analysis, radar measurements, coordinate transformations, gating, and tracking.</p>
+        <h3>Radar Tracking &amp; Estimation</h3>
+        <p>Kalman filtering, covariance analysis, radar measurements, coordinate transformations, gating, and tracking applications.</p>
         <div class="skill-bar-wrap">
           <div class="skill-bar" style="--pct:92%"></div>
         </div>
@@ -799,8 +859,8 @@
 
       <div class="skill-card" data-reveal data-delay="100">
         <span class="skill-icon">🧭</span>
-        <h3>Navigation & Estimation</h3>
-        <p>Extended and unscented Kalman filters, INS/GPS integration, sensor fusion, and covariance analysis for real-time state estimation.</p>
+        <h3>Navigation &amp; Estimation</h3>
+        <p>State estimation, sensor fusion concepts, INS/GPS integration, covariance behavior, and real-time navigation analysis.</p>
         <div class="skill-bar-wrap">
           <div class="skill-bar" style="--pct:88%"></div>
         </div>
@@ -811,36 +871,37 @@
         <h3>Avionics Integration</h3>
         <p>Integration of avionics hardware, communication interfaces, requirements verification, test planning, and aircraft system compatibility.</p>
         <div class="skill-bar-wrap">
-          <div class="skill-bar" style="--pct:85%"></div>
+          <div class="skill-bar" style="--pct:90%"></div>
         </div>
       </div>
 
       <div class="skill-card" data-reveal data-delay="0">
         <span class="skill-icon">🔌</span>
-        <h3>Wire Harness & Electrical Design</h3>
-        <p>Electrical interconnect design, wire routing, connector selection, signal compatibility, and aircraft-level integration support</p>
+        <h3>Wire Harness &amp; Electrical Design</h3>
+        <p>Electrical interconnect design, wire routing, connector selection, signal compatibility, and aircraft-level integration support.</p>
         <div class="skill-bar-wrap">
-          <div class="skill-bar" style="--pct:90%"></div>
+          <div class="skill-bar" style="--pct:88%"></div>
         </div>
       </div>
 
       <div class="skill-card" data-reveal data-delay="100">
-        <span class="skill-icon">💻</span>
-        <h3>Flight Software</h3>
-        <p>Embedded real-time software development, model-based design with MATLAB/Simulink, C/C++ for flight-critical systems.</p>
+        <span class="skill-icon">🤖</span>
+        <h3>AI &amp; Autonomy</h3>
+        <p>Machine learning, graph neural networks, autonomous systems, model evaluation, and AI-assisted engineering development.</p>
         <div class="skill-bar-wrap">
-          <div class="skill-bar" style="--pct:82%"></div>
+          <div class="skill-bar" style="--pct:80%"></div>
         </div>
       </div>
 
       <div class="skill-card" data-reveal data-delay="200">
         <span class="skill-icon">🛰️</span>
         <h3>Mission Systems</h3>
-        <p>End-to-end engagement architecture, fire control systems, threat assessment, and sensor-to-shooter chain integration.</p>
+        <p>Mission system integration, sensor and data interface compatibility, hardware/software coordination, and system-level verification.</p>
         <div class="skill-bar-wrap">
-          <div class="skill-bar" style="--pct:87%"></div>
+          <div class="skill-bar" style="--pct:90%"></div>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -849,8 +910,8 @@
   </footer>
 
   <script>
-    // Scroll reveal
     const reveals = document.querySelectorAll('[data-reveal]');
+
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -863,7 +924,6 @@
 
     reveals.forEach(el => obs.observe(el));
 
-    // Parallax ambient
     window.addEventListener('scroll', () => {
       const s = window.scrollY;
       document.querySelector('.ambient').style.transform =
