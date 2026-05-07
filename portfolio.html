@@ -1,647 +1,1090 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Benneth Perez | Technical Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TECHNICAL PORTFOLIO | Benneth Perez</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 
-<style>
-:root {
-  --bg-deep: #080c10;
-  --bg-panel: #0d1117;
-  --bg-card: #111820;
-  --bg-hover: #161f2a;
-  --border: #1e2d3d;
-  --border-bright: #2a3f55;
-  --text-primary: #dce8f3;
-  --text-secondary: #9aa8b8;
-  --text-dim: #647284;
-  --accent-cyan: #38bdf8;
-  --accent-blue: #3b82f6;
-  --accent-green: #22c55e;
-  --accent-gold: #eab308;
-  --radius: 10px;
-  --transition: 0.25s ease;
-}
+  <style>
+    :root {
+      --bg: #020204;
+      --bg2: #08090c;
+      --panel: rgba(255, 255, 255, 0.055);
+      --panel2: rgba(255, 255, 255, 0.085);
+      --white: #ffffff;
+      --silver: #d9d9d9;
+      --muted: #9a9a9a;
+      --line: rgba(255, 255, 255, 0.22);
+      --line2: rgba(255, 255, 255, 0.38);
+      --glow: 0 0 24px rgba(255,255,255,0.22), 0 0 72px rgba(255,255,255,0.08);
+      --glow-strong: 0 0 18px rgba(255,255,255,0.55), 0 0 64px rgba(255,255,255,0.18);
+      --radius: 24px;
+    }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-body {
-  background: var(--bg-deep);
-  color: var(--text-primary);
-  font-family: 'Exo 2', sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(var(--border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 42px 42px;
-  opacity: 0.28;
-  pointer-events: none;
-  z-index: 0;
-}
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
 
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  height: 62px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 28px;
-  background: rgba(8, 12, 16, 0.88);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border);
-}
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -5;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(255,255,255,0.10), transparent 28%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.065), transparent 30%),
+        radial-gradient(circle at 50% 90%, rgba(255,255,255,0.075), transparent 35%),
+        linear-gradient(180deg, #000 0%, #050506 45%, #020204 100%);
+    }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: #eef8ff;
-  text-decoration: none;
-}
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.035) 0px,
+        rgba(255,255,255,0.035) 1px,
+        transparent 2px,
+        transparent 5px
+      );
+      opacity: 0.18;
+      mix-blend-mode: screen;
+      animation: scanShift 8s linear infinite;
+    }
 
-.logo-mark {
-  width: 34px;
-  height: 34px;
-  border: 1px solid var(--accent-cyan);
-  border-radius: 8px;
-  display: grid;
-  place-items: center;
-  color: var(--accent-cyan);
-  font-family: 'Share Tech Mono', monospace;
-  box-shadow: 0 0 16px rgba(56,189,248,0.25);
-}
+    @keyframes scanShift {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(40px); }
+    }
 
-.nav-links {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.08;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+    }
 
-.nav-links a {
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  padding: 8px 12px;
-  border-radius: 6px;
-  transition: var(--transition);
-}
+    .grid-bg {
+      position: fixed;
+      inset: -200px;
+      z-index: -4;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 80px 80px;
+      transform: perspective(850px) rotateX(62deg) translateY(-160px);
+      transform-origin: center top;
+      animation: gridMove 18s linear infinite;
+      opacity: 0.33;
+    }
 
-.nav-links a:hover,
-.nav-links a.active {
-  color: var(--accent-cyan);
-  background: rgba(56,189,248,0.08);
-}
+    @keyframes gridMove {
+      0% { background-position: 0 0, 0 0; }
+      100% { background-position: 0 320px, 320px 0; }
+    }
 
-.hero {
-  position: relative;
-  z-index: 1;
-  padding: 82px 24px 52px;
-  text-align: center;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(56,189,248,0.17), transparent 42%),
-    linear-gradient(180deg, rgba(56,189,248,0.04), transparent);
-  border-bottom: 1px solid var(--border);
-}
+    .particles {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      overflow: hidden;
+    }
 
-.eyebrow {
-  font-family: 'Share Tech Mono', monospace;
-  color: var(--accent-cyan);
-  font-size: 12px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  margin-bottom: 14px;
-}
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.8);
+      box-shadow: 0 0 12px rgba(255,255,255,0.8);
+      animation: floatParticle linear infinite;
+    }
 
-.hero h1 {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: clamp(38px, 7vw, 82px);
-  line-height: 0.95;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: #eef8ff;
-  margin-bottom: 20px;
-}
+    @keyframes floatParticle {
+      from { transform: translateY(110vh) translateX(0); opacity: 0; }
+      15% { opacity: 0.85; }
+      85% { opacity: 0.65; }
+      to { transform: translateY(-15vh) translateX(60px); opacity: 0; }
+    }
 
-.hero h1 span {
-  color: var(--accent-cyan);
-  text-shadow: 0 0 24px rgba(56,189,248,0.45);
-}
+    .telemetry-lines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -3;
+      overflow: hidden;
+    }
 
-.hero-subtitle {
-  max-width: 860px;
-  margin: 0 auto;
-  color: var(--text-secondary);
-  font-size: 17px;
-  line-height: 1.7;
-}
+    .telemetry-lines span {
+      position: absolute;
+      height: 1px;
+      width: 35vw;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.65), transparent);
+      opacity: 0.32;
+      animation: telemetry 8s linear infinite;
+    }
 
-.hero-tags {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 28px;
-}
+    @keyframes telemetry {
+      0% { transform: translateX(-45vw); opacity: 0; }
+      20% { opacity: 0.35; }
+      100% { transform: translateX(145vw); opacity: 0; }
+    }
 
-.tag {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 11px;
-  color: var(--accent-cyan);
-  border: 1px solid rgba(56,189,248,0.35);
-  background: rgba(56,189,248,0.07);
-  padding: 6px 11px;
-  border-radius: 999px;
-}
+    .container {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+    }
 
-main {
-  position: relative;
-  z-index: 1;
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 46px 20px 72px;
-}
+    .section {
+      padding: 110px 0;
+      position: relative;
+    }
 
-.section-title {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 24px;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--accent-cyan);
-  margin-bottom: 22px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
+    .section-kicker {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.28em;
+      color: var(--silver);
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin-bottom: 14px;
+    }
 
-.section-title::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 4vw, 4.8rem);
+      letter-spacing: 0.06em;
+      line-height: 1.02;
+      text-transform: uppercase;
+      text-shadow: var(--glow);
+      margin-bottom: 18px;
+    }
 
-.bio-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 22px;
-  margin-bottom: 44px;
-}
+    .section-subtitle {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
 
-.panel {
-  background: linear-gradient(135deg, rgba(56,189,248,0.08), var(--bg-card));
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 26px;
-  box-shadow: 0 12px 32px rgba(0,0,0,0.28);
-}
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
 
-.panel h2 {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 28px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-bottom: 14px;
-  color: #f0f8ff;
-}
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: min(78vw, 920px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background:
+        radial-gradient(circle, transparent 0 30%, rgba(255,255,255,0.07) 30.3% 30.8%, transparent 31%),
+        radial-gradient(circle, transparent 0 48%, rgba(255,255,255,0.06) 48.3% 48.9%, transparent 49.2%),
+        radial-gradient(circle, transparent 0 64%, rgba(255,255,255,0.04) 64.3% 64.8%, transparent 65.2%),
+        conic-gradient(from 0deg, transparent 0deg, rgba(255,255,255,0.42) 18deg, transparent 38deg, transparent 360deg);
+      filter: blur(0.2px);
+      opacity: 0.36;
+      animation: radarSpin 6.5s linear infinite;
+    }
 
-.panel p {
-  color: var(--text-secondary);
-  line-height: 1.78;
-  font-size: 15.5px;
-  margin-bottom: 16px;
-}
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 900px;
+      height: 900px;
+      right: -360px;
+      top: -220px;
+      background: radial-gradient(circle, rgba(255,255,255,0.11), transparent 64%);
+      opacity: 0.75;
+    }
 
-.highlight {
-  color: #ffffff;
-  font-weight: 700;
-}
+    @keyframes radarSpin {
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
 
-.stats-card {
-  display: grid;
-  gap: 14px;
-}
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding-top: 40px;
+    }
 
-.stat {
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 18px;
-  transition: var(--transition);
-}
+    .hud-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: fit-content;
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.055);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--glow);
+      margin-bottom: 26px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      color: var(--silver);
+    }
 
-.stat:hover {
-  transform: translateY(-3px);
-  border-color: var(--border-bright);
-  background: var(--bg-hover);
-}
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 0 18px rgba(255,255,255,0.95);
+      animation: pulseDot 1.8s ease-in-out infinite;
+    }
 
-.stat-label {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 11px;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  margin-bottom: 6px;
-}
+    @keyframes pulseDot {
+      0%, 100% { opacity: 0.45; transform: scale(0.85); }
+      50% { opacity: 1; transform: scale(1.16); }
+    }
 
-.stat-value {
-  font-family: 'Rajdhani', sans-serif;
-  color: var(--accent-cyan);
-  font-size: 23px;
-  font-weight: 700;
-}
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(3.25rem, 10vw, 9rem);
+      line-height: 0.92;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      max-width: 1120px;
+      text-shadow: 0 0 18px rgba(255,255,255,0.5), 0 0 90px rgba(255,255,255,0.14);
+      background: linear-gradient(180deg, #fff 0%, #d8d8d8 42%, #777 100%);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
 
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  margin-bottom: 48px;
-}
+    .hero-subtitle {
+      margin-top: 28px;
+      font-size: clamp(1rem, 2.1vw, 1.45rem);
+      color: var(--silver);
+      letter-spacing: 0.11em;
+      max-width: 980px;
+      line-height: 1.8;
+    }
 
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 22px;
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
-}
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
 
-.card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: var(--accent-cyan);
-  opacity: 0;
-  transition: var(--transition);
-}
+    .meta-pill {
+      padding: 12px 16px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.05);
+      border-radius: 999px;
+      color: rgba(255,255,255,0.72);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      box-shadow: inset 0 0 20px rgba(255,255,255,0.025);
+    }
 
-.card:hover {
-  transform: translateY(-4px);
-  border-color: var(--border-bright);
-  background: var(--bg-hover);
-  box-shadow: 0 14px 34px rgba(0,0,0,0.32);
-}
+    .hud-corner {
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      border-color: rgba(255,255,255,0.35);
+      opacity: 0.55;
+      z-index: 3;
+    }
 
-.card:hover::before {
-  opacity: 1;
-}
+    .hud-corner.tl { left: 26px; top: 26px; border-left: 1px solid; border-top: 1px solid; }
+    .hud-corner.tr { right: 26px; top: 26px; border-right: 1px solid; border-top: 1px solid; }
+    .hud-corner.bl { left: 26px; bottom: 26px; border-left: 1px solid; border-bottom: 1px solid; }
+    .hud-corner.br { right: 26px; bottom: 26px; border-right: 1px solid; border-bottom: 1px solid; }
 
-.icon {
-  font-size: 28px;
-  margin-bottom: 12px;
-}
+    .scroll-indicator {
+      position: absolute;
+      left: 50%;
+      bottom: 28px;
+      transform: translateX(-50%);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.66rem;
+      letter-spacing: 0.25em;
+      color: rgba(255,255,255,0.55);
+      display: grid;
+      gap: 10px;
+      justify-items: center;
+      z-index: 4;
+    }
 
-.card h3 {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 21px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #eef8ff;
-  margin-bottom: 10px;
-}
+    .scroll-indicator span {
+      width: 1px;
+      height: 42px;
+      background: linear-gradient(to bottom, transparent, white, transparent);
+      animation: scrollPulse 1.8s ease-in-out infinite;
+    }
 
-.card p {
-  color: var(--text-secondary);
-  line-height: 1.65;
-  font-size: 14.5px;
-}
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.25; transform: scaleY(0.7); }
+      50% { opacity: 1; transform: scaleY(1.2); }
+    }
 
-.timeline {
-  display: grid;
-  gap: 16px;
-  margin-bottom: 48px;
-}
+    .project-grid {
+      display: grid;
+      gap: 26px;
+      margin-top: 44px;
+    }
 
-.timeline-item {
-  display: grid;
-  grid-template-columns: 170px 1fr;
-  gap: 22px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-  transition: var(--transition);
-}
+    .project-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      min-height: 330px;
+      padding: 24px;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.105), rgba(255,255,255,0.032)),
+        rgba(0,0,0,0.55);
+      backdrop-filter: blur(18px);
+      overflow: hidden;
+      box-shadow: 0 18px 70px rgba(0,0,0,0.55), inset 0 0 40px rgba(255,255,255,0.018);
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
 
-.timeline-item:hover {
-  border-color: var(--border-bright);
-  background: var(--bg-hover);
-}
+    .project-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.65), transparent);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      padding: 1px;
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
 
-.timeline-date {
-  font-family: 'Share Tech Mono', monospace;
-  color: var(--accent-cyan);
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
+    .project-card:hover {
+      transform: translateY(-8px) scale(1.006);
+      border-color: rgba(255,255,255,0.42);
+      box-shadow: 0 24px 92px rgba(0,0,0,0.7), var(--glow-strong);
+    }
 
-.timeline-content h3 {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 22px;
-  color: #eef8ff;
-  margin-bottom: 8px;
-}
+    .project-card:hover::before {
+      opacity: 0.75;
+    }
 
-.timeline-content p {
-  color: var(--text-secondary);
-  line-height: 1.68;
-  font-size: 14.5px;
-}
+    .project-info {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 22px;
+    }
 
-.leadership-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
-}
+    .project-number {
+      font-family: 'Orbitron', sans-serif;
+      color: rgba(255,255,255,0.38);
+      letter-spacing: 0.24em;
+      font-size: 0.78rem;
+    }
 
-footer {
-  position: relative;
-  z-index: 1;
-  border-top: 1px solid var(--border);
-  text-align: center;
-  padding: 20px;
-  color: var(--text-dim);
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
+    .project-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.55rem, 3vw, 3rem);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      line-height: 1.08;
+      margin-top: 8px;
+      text-shadow: var(--glow);
+    }
 
-@media (max-width: 860px) {
-  .navbar {
-    height: auto;
-    flex-direction: column;
-    gap: 12px;
-    padding: 16px;
-  }
+    .project-card p {
+      color: rgba(255,255,255,0.68);
+      line-height: 1.78;
+      max-width: 650px;
+      margin-top: 14px;
+    }
 
-  .nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
 
-  .bio-grid,
-  .cards,
-  .leadership-grid {
-    grid-template-columns: 1fr;
-  }
+    .tag {
+      padding: 8px 11px;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 999px;
+      color: rgba(255,255,255,0.72);
+      background: rgba(255,255,255,0.045);
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      transition: 0.28s ease;
+    }
 
-  .timeline-item {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-}
-</style>
+    .tag:hover {
+      color: white;
+      border-color: rgba(255,255,255,0.6);
+      box-shadow: 0 0 18px rgba(255,255,255,0.18);
+    }
+
+    .media-placeholder {
+      position: relative;
+      z-index: 2;
+      min-height: 280px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px),
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,0.12), transparent 45%),
+        rgba(0,0,0,0.55);
+      background-size: 24px 24px, 24px 24px, cover, cover;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 28px;
+      box-shadow: inset 0 0 52px rgba(255,255,255,0.035);
+    }
+
+    .media-placeholder::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.07) 0px,
+        rgba(255,255,255,0.07) 1px,
+        transparent 3px,
+        transparent 7px
+      );
+      opacity: 0.18;
+      animation: scanShift 7s linear infinite;
+    }
+
+    .media-placeholder::after {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 50%;
+      box-shadow: 0 0 28px rgba(255,255,255,0.15), inset 0 0 28px rgba(255,255,255,0.08);
+      animation: placeholderSpin 12s linear infinite;
+    }
+
+    @keyframes placeholderSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    .placeholder-label {
+      position: relative;
+      z-index: 2;
+      font-family: 'Orbitron', sans-serif;
+      color: rgba(255,255,255,0.78);
+      font-size: 0.86rem;
+      letter-spacing: 0.18em;
+      line-height: 1.65;
+      text-transform: uppercase;
+      text-shadow: var(--glow);
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 42px;
+    }
+
+    .tech-item {
+      position: relative;
+      padding: 22px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.045);
+      color: rgba(255,255,255,0.76);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-align: center;
+      overflow: hidden;
+      transition: 0.3s ease;
+    }
+
+    .tech-item::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent, rgba(255,255,255,0.14), transparent);
+      transform: translateX(-110%);
+      transition: 0.55s ease;
+    }
+
+    .tech-item:hover {
+      color: white;
+      border-color: rgba(255,255,255,0.55);
+      transform: translateY(-6px);
+      box-shadow: var(--glow);
+    }
+
+    .tech-item:hover::before {
+      transform: translateX(110%);
+    }
+
+    .data-wall {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 44px;
+    }
+
+    .data-panel {
+      min-height: 190px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px),
+        rgba(255,255,255,0.04);
+      background-size: 22px 22px;
+      position: relative;
+      overflow: hidden;
+      padding: 16px;
+      display: flex;
+      align-items: end;
+      box-shadow: inset 0 0 40px rgba(255,255,255,0.025);
+      transition: 0.35s ease;
+    }
+
+    .data-panel:nth-child(2n) { min-height: 230px; }
+    .data-panel:nth-child(3n) { min-height: 260px; }
+
+    .data-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(255,255,255,0.12), transparent 34%),
+        repeating-linear-gradient(to bottom, rgba(255,255,255,0.08) 0 1px, transparent 2px 6px);
+      opacity: 0.22;
+      animation: scanShift 9s linear infinite;
+    }
+
+    .data-panel::after {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    .data-panel:hover {
+      transform: translateY(-8px) scale(1.015);
+      border-color: rgba(255,255,255,0.48);
+      box-shadow: var(--glow);
+    }
+
+    .data-label {
+      position: relative;
+      z-index: 2;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.76rem;
+      letter-spacing: 0.16em;
+      color: rgba(255,255,255,0.8);
+      text-transform: uppercase;
+      line-height: 1.5;
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 44px;
+    }
+
+    .research-card {
+      min-height: 170px;
+      padding: 22px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: linear-gradient(145deg, rgba(255,255,255,0.075), rgba(255,255,255,0.025));
+      backdrop-filter: blur(18px);
+      position: relative;
+      overflow: hidden;
+      transition: 0.35s ease;
+    }
+
+    .research-card::before {
+      content: "";
+      position: absolute;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.18);
+      right: -38px;
+      top: -38px;
+      box-shadow: inset 0 0 22px rgba(255,255,255,0.05);
+    }
+
+    .research-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255,255,255,0.48);
+      box-shadow: var(--glow);
+    }
+
+    .research-card h3 {
+      position: relative;
+      z-index: 2;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.11em;
+      line-height: 1.45;
+      text-transform: uppercase;
+    }
+
+    .research-card p {
+      position: relative;
+      z-index: 2;
+      margin-top: 14px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 34px 0;
+      text-align: center;
+      color: rgba(255,255,255,0.58);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      background: rgba(0,0,0,0.38);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .project-card {
+        grid-template-columns: 1fr;
+      }
+
+      .tech-grid,
+      .research-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .data-wall {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 620px) {
+      .container {
+        width: min(100% - 26px, 1180px);
+      }
+
+      .section {
+        padding: 78px 0;
+      }
+
+      .hud-corner {
+        width: 80px;
+        height: 80px;
+      }
+
+      .hero-subtitle {
+        letter-spacing: 0.05em;
+      }
+
+      .tech-grid,
+      .research-grid,
+      .data-wall {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card {
+        padding: 18px;
+      }
+
+      .media-placeholder {
+        min-height: 230px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="noise"></div>
+  <div class="grid-bg"></div>
+  <div class="particles" id="particles"></div>
+  <div class="telemetry-lines" id="telemetryLines"></div>
 
-<nav class="navbar">
-  <a class="logo" href="index.html">
-    <div class="logo-mark">BP</div>
-    BennethPerez
-  </a>
+  <!-- HERO SECTION -->
+  <section class="hero" id="top">
+    <div class="hud-corner tl"></div>
+    <div class="hud-corner tr"></div>
+    <div class="hud-corner bl"></div>
+    <div class="hud-corner br"></div>
 
-  <div class="nav-links">
-    <a class="active" href="https://www.linkedin.com/in/benneth-perez/" target="_blank">
-        LinkedIn
-    </a>
-    <a href="GNC.html">GN&amp;C</a>
-    <a href="career_map.html">Career Map</a>
-    <a href="day-to-day.html">Day to Day</a>
-    <a href="platforms.html">Platforms</a>
-  </div>
-</nav>
+    <div class="container hero-content">
+      <div class="hud-bar">
+        <span class="status-dot"></span>
+        SYSTEMS ACTIVE
+      </div>
 
-<section class="hero">
-  <div class="eyebrow">Aerospace · Defense · Autonomy · Engineering Leadership</div>
-  <h1>Technical <span>Biography</span></h1>
-  <p class="hero-subtitle">
-    Guidance, Navigation, and Controls engineer focused on aerospace and defense systems,
-    estimation, control, avionics integration, mission-critical autonomy, and technical leadership.
-  </p>
+      <h1>TECHNICAL PORTFOLIO</h1>
 
-  <div class="hero-tags">
-    <span class="tag">GN&amp;C</span>
-    <span class="tag">State Estimation</span>
-    <span class="tag">Sensor Fusion</span>
-    <span class="tag">Avionics Systems</span>
-    <span class="tag">Aerospace Defense</span>
-    <span class="tag">Engineering Leadership</span>
-  </div>
-</section>
-
-<main>
-
-  <div class="section-title">Professional Profile</div>
-
-  <section class="bio-grid">
-    <div class="panel">
-      <h2>Benneth Perez</h2>
-
-      <p>
-        <span class="highlight">Benneth Perez</span> is a
-        <span class="highlight">Guidance, Navigation, and Controls engineer</span>
-        working on advanced aerospace and defense systems that require high-performance estimation,
-        control, and mission-critical autonomy.
+      <p class="hero-subtitle">
+        Tracking · Estimation · Sensor Fusion · Autonomous Aerospace Systems
       </p>
 
-      <p>
-        His technical work spans guidance laws, navigation algorithms, control architectures,
-        state estimation, tracking concepts, and system-level integration for complex flight systems
-        operating in demanding environments.
-      </p>
-
-      <p>
-        Previously, Benneth served as an
-        <span class="highlight">Avionics Hardware Systems Engineer at The Boeing Company</span>,
-        where he built a strong foundation in wire harness design, avionics integration, installation
-        engineering, and test for advanced aerospace and defense platforms.
-      </p>
-
-      <p>
-        His background connects hands-on aerospace hardware integration with modern GN&amp;C,
-        estimation, software-informed analysis, and autonomous systems engineering.
-      </p>
+      <div class="hero-meta">
+        <div class="meta-pill">GN&amp;C</div>
+        <div class="meta-pill">MISSION SYSTEMS</div>
+        <div class="meta-pill">RADAR TRACKING</div>
+        <div class="meta-pill">STATE ESTIMATION</div>
+      </div>
     </div>
 
-    <div class="stats-card">
-      <div class="stat">
-        <div class="stat-label">Current Focus</div>
-        <div class="stat-value">GN&amp;C Engineering</div>
+    <div class="scroll-indicator">
+      SCROLL
+      <span></span>
+    </div>
+  </section>
+
+  <!-- FEATURED SYSTEMS SECTION -->
+  <section class="section" id="featured">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-kicker">Featured Systems</div>
+        <h2 class="section-title">Engineering Workstreams</h2>
+        <p class="section-subtitle">
+          Technical project areas focused on tracking, estimation, aerospace simulation, avionics integration, and intelligent defense-system concepts.
+        </p>
       </div>
 
-      <div class="stat">
-        <div class="stat-label">Core Domain</div>
-        <div class="stat-value">Aerospace Defense</div>
-      </div>
+      <div class="project-grid">
+        <article class="project-card reveal">
+          <div class="project-info">
+            <div>
+              <div class="project-number">SYSTEM 01</div>
+              <h3>Radar Tracking &amp; Estimation</h3>
+              <p>
+                Kalman filtering, covariance analysis, radar measurements, target tracking, coordinate transformations, gating logic, and multi-target tracking concepts.
+              </p>
+            </div>
+            <div class="tags">
+              <span class="tag">Kalman Filter</span>
+              <span class="tag">Radar</span>
+              <span class="tag">Gating</span>
+              <span class="tag">Covariance</span>
+              <span class="tag">Tracking</span>
+            </div>
+          </div>
+          <div class="media-placeholder">
+            <div class="placeholder-label">INSERT TRACKING ANIMATION / RADAR GIF</div>
+          </div>
+        </article>
 
-      <div class="stat">
-        <div class="stat-label">Technical Bridge</div>
-        <div class="stat-value">Avionics + Autonomy</div>
-      </div>
+        <article class="project-card reveal">
+          <div class="project-info">
+            <div>
+              <div class="project-number">SYSTEM 02</div>
+              <h3>GN&amp;C Simulation</h3>
+              <p>
+                Guidance, navigation, and control simulations involving trajectory analysis, missile guidance concepts, proportional navigation, and flight dynamics.
+              </p>
+            </div>
+            <div class="tags">
+              <span class="tag">Trajectory</span>
+              <span class="tag">PN Guidance</span>
+              <span class="tag">Flight Dynamics</span>
+              <span class="tag">Simulation</span>
+            </div>
+          </div>
+          <div class="media-placeholder">
+            <div class="placeholder-label">INSERT TRAJECTORY SIMULATION GIF</div>
+          </div>
+        </article>
 
-      <div class="stat">
-        <div class="stat-label">Academic Path</div>
-        <div class="stat-value">M.S. Aerospace Engineering</div>
+        <article class="project-card reveal">
+          <div class="project-info">
+            <div>
+              <div class="project-number">SYSTEM 03</div>
+              <h3>Sensor Fusion &amp; Navigation</h3>
+              <p>
+                Sensor fusion concepts using IMU, GPS, estimation filters, and real-time state estimation architectures.
+              </p>
+            </div>
+            <div class="tags">
+              <span class="tag">IMU</span>
+              <span class="tag">GPS</span>
+              <span class="tag">EKF</span>
+              <span class="tag">Navigation</span>
+            </div>
+          </div>
+          <div class="media-placeholder">
+            <div class="placeholder-label">INSERT SENSOR FUSION VISUALIZATION</div>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-info">
+            <div>
+              <div class="project-number">SYSTEM 04</div>
+              <h3>Mission Systems &amp; Avionics</h3>
+              <p>
+                Mission systems integration, avionics communication architectures, interface compatibility, and defense system coordination.
+              </p>
+            </div>
+            <div class="tags">
+              <span class="tag">Avionics</span>
+              <span class="tag">Interfaces</span>
+              <span class="tag">Mission Systems</span>
+              <span class="tag">Integration</span>
+            </div>
+          </div>
+          <div class="media-placeholder">
+            <div class="placeholder-label">INSERT AVIONICS / SYSTEM ARCHITECTURE IMAGE</div>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-info">
+            <div>
+              <div class="project-number">SYSTEM 05</div>
+              <h3>AI &amp; Autonomous Systems</h3>
+              <p>
+                Machine learning, graph neural networks, autonomous systems, and AI-assisted aerospace analysis.
+              </p>
+            </div>
+            <div class="tags">
+              <span class="tag">PyTorch</span>
+              <span class="tag">GNN</span>
+              <span class="tag">Autonomy</span>
+              <span class="tag">AI</span>
+            </div>
+          </div>
+          <div class="media-placeholder">
+            <div class="placeholder-label">INSERT AI / GNN VISUALIZATION</div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <div class="section-title">Technical Pillars</div>
-
-  <section class="cards">
-    <div class="card">
-      <div class="icon">🛰️</div>
-      <h3>GN&amp;C Systems</h3>
-      <p>
-        Guidance, navigation, and control concepts for aerospace systems, including flight dynamics,
-        control architectures, navigation algorithms, and mission-driven autonomy.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="icon">📡</div>
-      <h3>Estimation &amp; Fusion</h3>
-      <p>
-        State estimation, Kalman filtering concepts, sensor fusion, measurement modeling,
-        covariance reasoning, tracking logic, and multi-sensor aerospace applications.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🛩️</div>
-      <h3>Avionics Integration</h3>
-      <p>
-        Avionics hardware systems, wire harness design, installation engineering, signal interfaces,
-        data compatibility, test planning, and mission-system integration.
-      </p>
-    </div>
-  </section>
-
-  <div class="section-title">Experience Timeline</div>
-
-  <section class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-date">Current</div>
-      <div class="timeline-content">
-        <h3>Guidance, Navigation, and Controls Engineer · Raytheon</h3>
-        <p>
-          Works on advanced aerospace and defense systems involving estimation, control,
-          guidance concepts, navigation algorithms, and mission-critical autonomy for complex flight systems.
+  <!-- INTERACTIVE TECH GRID -->
+  <section class="section" id="tech-grid">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-kicker">Technical Stack</div>
+        <h2 class="section-title">Interactive Tech Grid</h2>
+        <p class="section-subtitle">
+          Tools, languages, and engineering domains aligned with tracking, estimation, GN&amp;C, mission systems, and autonomous aerospace development.
         </p>
       </div>
-    </div>
 
-    <div class="timeline-item">
-      <div class="timeline-date">Previous</div>
-      <div class="timeline-content">
-        <h3>Avionics Hardware Systems Engineer · Boeing</h3>
-        <p>
-          Supported advanced aerospace and defense platforms through avionics integration,
-          wire harness design and installation engineering, core processing architecture awareness,
-          interface compatibility, precision timing, and system-level test activities.
-        </p>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-date">Education</div>
-      <div class="timeline-content">
-        <h3>M.S. Aerospace Engineering · University of Central Florida</h3>
-        <p>
-          Pursuing graduate study focused on Guidance, Controls, and Dynamics, with academic work
-          aligned to modern GN&amp;C, estimation, control systems, and autonomous aerospace systems.
-        </p>
-      </div>
-    </div>
-
-    <div class="timeline-item">
-      <div class="timeline-date">Foundation</div>
-      <div class="timeline-content">
-        <h3>B.S. Mechanical Engineering · University of Texas at San Antonio</h3>
-        <p>
-          Built the engineering foundation for aerospace, mechanical systems, dynamics,
-          systems thinking, and multidisciplinary technical problem solving.
-        </p>
+      <div class="tech-grid reveal">
+        <div class="tech-item">MATLAB</div>
+        <div class="tech-item">Simulink</div>
+        <div class="tech-item">Python</div>
+        <div class="tech-item">C++</div>
+        <div class="tech-item">Kalman Filtering</div>
+        <div class="tech-item">Sensor Fusion</div>
+        <div class="tech-item">Radar Tracking</div>
+        <div class="tech-item">GN&amp;C</div>
+        <div class="tech-item">Mission Systems</div>
+        <div class="tech-item">Avionics</div>
+        <div class="tech-item">Linux</div>
+        <div class="tech-item">Git</div>
+        <div class="tech-item">PyTorch</div>
+        <div class="tech-item">State Estimation</div>
+        <div class="tech-item">Autonomy</div>
+        <div class="tech-item">Aerospace Systems</div>
       </div>
     </div>
   </section>
 
-  <div class="section-title">Leadership &amp; Community Impact</div>
+  <!-- VISUAL DATA WALL -->
+  <section class="section" id="data-wall">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-kicker">Mission Display</div>
+        <h2 class="section-title">Visual Data Wall</h2>
+        <p class="section-subtitle">
+          Placeholder panels for engineering outputs, simulation screenshots, tracking visuals, and technical analysis artifacts.
+        </p>
+      </div>
 
-  <section class="leadership-grid">
-    <div class="card">
-      <div class="icon">🌐</div>
-      <h3>Boeing Familia Enterprise</h3>
-      <p>
-        Previously served as Head of Operations, supporting enterprise-level initiatives that strengthened
-        engineering culture, cross-site collaboration, engagement strategy, and professional development
-        for a large technical community.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🎓</div>
-      <h3>SHPE Leadership</h3>
-      <p>
-        Former Vice President of the SHPE St. Louis Gateway Chapter, leading scholarship programs,
-        early-career mentorship, STEM outreach, and community-focused engineering development.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🤖</div>
-      <h3>FIRST Robotics Mentorship</h3>
-      <p>
-        Supported student robotics teams, including all-girls teams, helping young engineers build
-        confidence through design, problem solving, teamwork, and hands-on technical learning.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🏆</div>
-      <h3>Recognition</h3>
-      <p>
-        Recognized with multiple honors, including a Technology Leader award, reflecting contributions
-        across aerospace engineering, leadership, mentorship, and long-term professional growth.
-      </p>
+      <div class="data-wall reveal">
+        <div class="data-panel"><div class="data-label">INSERT TRACKING PLOTS</div></div>
+        <div class="data-panel"><div class="data-label">INSERT COVARIANCE ELLIPSES</div></div>
+        <div class="data-panel"><div class="data-label">INSERT MATLAB GRAPHS</div></div>
+        <div class="data-panel"><div class="data-label">INSERT t-SNE PLOTS</div></div>
+        <div class="data-panel"><div class="data-label">INSERT CONFUSION MATRICES</div></div>
+        <div class="data-panel"><div class="data-label">INSERT SIMULINK SCREENSHOTS</div></div>
+        <div class="data-panel"><div class="data-label">INSERT ROCKET TRAJECTORIES</div></div>
+        <div class="data-panel"><div class="data-label">INSERT TELEMETRY GRAPHS</div></div>
+      </div>
     </div>
   </section>
 
-</main>
+  <!-- CURRENT RESEARCH / INTERESTS -->
+  <section class="section" id="research">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-kicker">Current Focus</div>
+        <h2 class="section-title">Research &amp; Interests</h2>
+        <p class="section-subtitle">
+          High-value aerospace and defense technology areas that connect estimation, autonomy, mission architectures, and real-world engineering systems.
+        </p>
+      </div>
 
-<footer>
-  Benneth Perez · Technical Biography · Aerospace &amp; Defense Engineering
-</footer>
+      <div class="research-grid reveal">
+        <div class="research-card">
+          <h3>Multi-Target Tracking</h3>
+          <p>Track initiation, maintenance, gating, data association, and target-state estimation concepts.</p>
+        </div>
+        <div class="research-card">
+          <h3>Sensor Fusion</h3>
+          <p>Combining IMU, GPS, radar, and other sensor measurements into coherent state estimates.</p>
+        </div>
+        <div class="research-card">
+          <h3>State Estimation</h3>
+          <p>Kalman filters, covariance tuning, residual analysis, NEES/NIS, and estimator performance.</p>
+        </div>
+        <div class="research-card">
+          <h3>Autonomous Aerospace Systems</h3>
+          <p>Architectures for intelligent platforms operating in complex aerospace environments.</p>
+        </div>
+        <div class="research-card">
+          <h3>Missile Defense Architectures</h3>
+          <p>System-level thinking across sensors, tracks, interceptors, guidance, and mission coordination.</p>
+        </div>
+        <div class="research-card">
+          <h3>Radar Systems</h3>
+          <p>Measurement models, tracking observables, range-rate concepts, and radar-driven estimation.</p>
+        </div>
+        <div class="research-card">
+          <h3>AI-Assisted Engineering</h3>
+          <p>Machine learning and AI tools applied to simulation, classification, analysis, and automation.</p>
+        </div>
+        <div class="research-card">
+          <h3>Space-Domain Awareness</h3>
+          <p>Tracking, surveillance, estimation, and architecture concepts for space-based systems.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <footer>
+    BENNETH PEREZ | AEROSPACE · GN&amp;C · TRACKING · DEFENSE SYSTEMS
+  </footer>
+
+  <script>
+    // Floating particles
+    const particles = document.getElementById('particles');
+    const particleCount = 90;
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('span');
+      particle.className = 'particle';
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.animationDuration = `${7 + Math.random() * 12}s`;
+      particle.style.animationDelay = `${Math.random() * 10}s`;
+      particle.style.opacity = `${0.25 + Math.random() * 0.75}`;
+      particle.style.width = `${1 + Math.random() * 2}px`;
+      particle.style.height = particle.style.width;
+      particles.appendChild(particle);
+    }
+
+    // Moving telemetry lines
+    const telemetryLines = document.getElementById('telemetryLines');
+    const lineCount = 16;
+
+    for (let i = 0; i < lineCount; i++) {
+      const line = document.createElement('span');
+      line.style.top = `${Math.random() * 100}%`;
+      line.style.animationDuration = `${5 + Math.random() * 9}s`;
+      line.style.animationDelay = `${Math.random() * 8}s`;
+      line.style.width = `${18 + Math.random() * 34}vw`;
+      telemetryLines.appendChild(line);
+    }
+
+    // Smooth reveal animations on scroll
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, {
+      threshold: 0.12
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Subtle mouse-driven parallax on hero
+    const hero = document.querySelector('.hero');
+    const heroContent = document.querySelector('.hero-content');
+
+    hero.addEventListener('mousemove', (e) => {
+      const rect = hero.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      heroContent.style.transform = `translate(${x * 10}px, ${y * 10}px)`;
+    });
+
+    hero.addEventListener('mouseleave', () => {
+      heroContent.style.transform = 'translate(0, 0)';
+    });
+  </script>
 </body>
 </html>
