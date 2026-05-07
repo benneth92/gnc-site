@@ -3,322 +3,676 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Platforms & Systems</title>
+  <title>Platforms & Systems — BennethPerez</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
+    :root {
+      --red: #ff2020;
+      --red-dim: rgba(255,32,32,0.18);
+      --red-glow: rgba(255,32,32,0.45);
+      --bg: #060608;
+      --surface: rgba(12,12,18,0.96);
+      --border: rgba(255,32,32,0.2);
+      --text: #e8e8e8;
+      --muted: #888;
     }
 
-    body{
-      font-family:"Segoe UI",sans-serif;
-      background:
-        radial-gradient(circle at top,rgba(255,0,0,0.15),transparent 35%),
-        linear-gradient(135deg,#050505,#0b0b12,#120000);
-      color:white;
-      overflow-x:hidden;
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
     }
 
-    nav{
-      position:sticky;
-      top:0;
-      z-index:1000;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:18px 6%;
-      background:rgba(5,5,8,0.94);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid rgba(255,0,0,0.2);
+    /* ── Scanline overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.06) 2px,
+        rgba(0,0,0,0.06) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
     }
 
-    .logo{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      text-decoration:none;
+    /* ── Ambient red orb ── */
+    .ambient {
+      position: fixed;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 600px;
+      background: radial-gradient(ellipse, rgba(255,20,20,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      animation: pulse-orb 6s ease-in-out infinite;
     }
 
-    .logo-box{
-      width:54px;
-      height:54px;
-      border:1.5px solid #ff3030;
-      border-radius:14px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#ff3030;
-      font-size:2rem;
-      font-weight:800;
-      letter-spacing:1px;
-      background:#05070a;
-      box-shadow:0 0 18px rgba(255,0,0,0.25);
+    @keyframes pulse-orb {
+      0%,100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.08); }
     }
 
-    .logo span{
-      font-size:2rem;
-      font-weight:700;
-      color:#f3f3f3;
-      letter-spacing:0.5px;
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 6%;
+      background: rgba(6,6,8,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
 
-    .nav-links{
-      display:flex;
-      gap:22px;
-      flex-wrap:wrap;
+    /* Logo — matches index.html style but red */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
     }
 
-    .nav-links a{
-      color:#d4d4d4;
-      text-decoration:none;
-      font-size:0.95rem;
-      transition:0.3s;
+    .logo-mark {
+      position: relative;
+      width: 52px;
+      height: 52px;
     }
 
-    .nav-links a:hover,
-    .nav-links .active{
-      color:#ff2f2f;
+    .logo-mark svg {
+      width: 52px;
+      height: 52px;
     }
 
-    .hero{
-      padding:100px 8% 70px;
-      text-align:center;
+    .logo-hex {
+      fill: none;
+      stroke: var(--red);
+      stroke-width: 1.5;
+      animation: hex-rotate 12s linear infinite;
+      transform-origin: 26px 26px;
     }
 
-    .status{
-      display:inline-block;
-      padding:8px 16px;
-      border-radius:999px;
-      border:1px solid rgba(255,0,0,0.45);
-      background:rgba(255,0,0,0.08);
-      color:#ff5555;
-      font-size:0.8rem;
-      letter-spacing:2px;
-      margin-bottom:24px;
+    @keyframes hex-rotate {
+      to { transform: rotate(360deg); }
     }
 
-    .hero h1{
-      font-size:clamp(2.8rem,6vw,5rem);
-      line-height:1;
-      margin-bottom:24px;
-      text-transform:uppercase;
-      background:linear-gradient(90deg,#ffffff,#ff3c3c,#7c0000);
-      -webkit-background-clip:text;
-      color:transparent;
+    .logo-inner {
+      fill: rgba(255,32,32,0.08);
     }
 
-    .hero p{
-      max-width:850px;
-      margin:auto;
-      color:#c9c9c9;
-      font-size:1.15rem;
-      line-height:1.7;
+    .logo-text-mark {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Orbitron', monospace;
+      font-weight: 900;
+      font-size: 1rem;
+      color: var(--red);
+      text-shadow: 0 0 12px var(--red-glow);
+      letter-spacing: 1px;
     }
 
-    .dashboard{
-      padding:40px 8% 100px;
+    .logo-name {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
     }
 
-    .section-title{
-      margin-bottom:30px;
+    .logo-name-top {
+      font-family: 'Orbitron', monospace;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #fff;
+      letter-spacing: 2px;
+      line-height: 1;
     }
 
-    .section-title h2{
-      font-size:2rem;
-      margin-bottom:10px;
+    .logo-name-sub {
+      font-size: 0.65rem;
+      color: var(--red);
+      letter-spacing: 4px;
+      text-transform: uppercase;
     }
 
-    .section-title p{
-      color:#b9b9b9;
-      max-width:760px;
-      line-height:1.6;
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
     }
 
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:24px;
+    .nav-links a {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative;
     }
 
-    .card{
-      position:relative;
-      padding:28px;
-      min-height:300px;
-      border-radius:24px;
-      background:
-        linear-gradient(145deg,rgba(255,255,255,0.05),rgba(255,255,255,0.015)),
-        rgba(8,8,12,0.95);
-      border:1px solid rgba(255,0,0,0.18);
-      overflow:hidden;
-      transition:0.35s ease;
-      box-shadow:0 0 25px rgba(255,0,0,0.08);
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--red);
+      transition: width 0.3s;
     }
 
-    .card::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(120deg,transparent,rgba(255,0,0,0.14),transparent);
-      transform:translateX(-100%);
-      transition:0.7s;
+    .nav-links a:hover { color: #fff; }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--red); }
+    .nav-links a.active::after { width: 100%; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 55vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 8% 70px;
+      text-align: center;
+      z-index: 1;
+      overflow: hidden;
     }
 
-    .card:hover::before{
-      transform:translateX(100%);
+    /* Grid background */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,32,32,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,32,32,0.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+      animation: grid-drift 20s linear infinite;
     }
 
-    .card:hover{
-      transform:translateY(-8px);
-      border-color:rgba(255,60,60,0.55);
-      box-shadow:0 0 40px rgba(255,0,0,0.22);
+    @keyframes grid-drift {
+      0% { background-position: 0 0; }
+      100% { background-position: 60px 60px; }
     }
 
-    .card-top{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:22px;
-      position:relative;
-      z-index:2;
+    /* Radar sweep */
+    .radar-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255,32,32,0.2);
+      animation: radar-expand 4s ease-out infinite;
     }
 
-    .icon{
-      font-size:2.3rem;
-      filter:drop-shadow(0 0 10px rgba(255,0,0,0.5));
+    .radar-ring:nth-child(2) { animation-delay: 1.3s; }
+    .radar-ring:nth-child(3) { animation-delay: 2.6s; }
+
+    @keyframes radar-expand {
+      0% { width: 0; height: 0; opacity: 0.8; }
+      100% { width: 600px; height: 600px; margin: -300px; opacity: 0; }
     }
 
-    .tag{
-      font-size:0.72rem;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,0,0,0.35);
-      background:rgba(255,0,0,0.08);
-      color:#ff4b4b;
-      letter-spacing:1px;
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,32,32,0.4);
+      background: rgba(255,32,32,0.07);
+      color: var(--red);
+      font-family: 'Orbitron', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      margin-bottom: 32px;
+      position: relative;
+      z-index: 2;
     }
 
-    .card h3{
-      font-size:1.35rem;
-      margin-bottom:14px;
-      position:relative;
-      z-index:2;
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 8px var(--red);
+      animation: blink 1.4s ease-in-out infinite;
     }
 
-    .card p{
-      color:#c0c0c0;
-      line-height:1.6;
-      margin-bottom:18px;
-      position:relative;
-      z-index:2;
+    @keyframes blink {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0.2; }
     }
 
-    .systems{
-      list-style:none;
-      display:grid;
-      gap:8px;
-      position:relative;
-      z-index:2;
+    .hero h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 28px;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #fff 0%, #ff4040 50%, #7a0000 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fade-up 0.9s ease forwards 0.2s;
     }
 
-    .systems li{
-      color:#ececec;
-      font-size:0.92rem;
-      padding-left:18px;
-      position:relative;
+    .hero p {
+      max-width: 720px;
+      color: #aaa;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fade-up 0.9s ease forwards 0.45s;
     }
 
-    .systems li::before{
-      content:"▸";
-      position:absolute;
-      left:0;
-      color:#ff3030;
+    @keyframes fade-up {
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .architecture{
-      margin-top:80px;
-      padding:40px;
-      border-radius:28px;
-      background:rgba(255,255,255,0.03);
-      border:1px solid rgba(255,0,0,0.2);
+    /* ── MAIN CONTENT ── */
+    .dashboard {
+      padding: 40px 8% 100px;
+      position: relative;
+      z-index: 1;
     }
 
-    .flow{
-      margin-top:30px;
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-      gap:18px;
+    .section-header {
+      margin-bottom: 48px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
     }
 
-    .flow-step{
-      text-align:center;
-      padding:22px 18px;
-      border-radius:18px;
-      background:rgba(10,10,14,0.92);
-      border:1px solid rgba(255,0,0,0.22);
-      transition:0.3s;
+    .section-header h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 2px;
     }
 
-    .flow-step:hover{
-      transform:scale(1.04);
-      background:rgba(255,0,0,0.1);
+    .section-header p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      max-width: 400px;
+      text-align: right;
+      line-height: 1.6;
     }
 
-    .flow-step span{
-      display:block;
-      font-size:2rem;
-      margin-bottom:12px;
+    /* ── CARDS ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 24px;
     }
 
-    .flow-step h4{
-      margin-bottom:10px;
+    .card {
+      position: relative;
+      padding: 30px;
+      min-height: 320px;
+      border-radius: 20px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(0,0,0,0.5));
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+
+      /* Scroll reveal */
+      opacity: 0;
+      transform: translateY(40px);
     }
 
-    .flow-step p{
-      color:#b8b8b8;
-      font-size:0.88rem;
-      line-height:1.5;
+    .card.visible {
+      animation: card-reveal 0.65s ease forwards;
     }
 
-    footer{
-      padding:30px 8%;
-      text-align:center;
-      color:#888;
-      border-top:1px solid rgba(255,0,0,0.15);
-      background:rgba(0,0,0,0.35);
+    @keyframes card-reveal {
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    @media(max-width:768px){
-      nav{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:16px;
-      }
+    /* Corner brackets */
+    .card::before, .card::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      transition: width 0.4s, height 0.4s, opacity 0.4s;
+      opacity: 0;
+    }
 
-      .logo span{
-        font-size:1.5rem;
-      }
+    .card::before {
+      top: 10px; left: 10px;
+      border-top: 2px solid var(--red);
+      border-left: 2px solid var(--red);
+    }
 
-      .logo-box{
-        width:48px;
-        height:48px;
-        font-size:1.6rem;
-      }
+    .card::after {
+      bottom: 10px; right: 10px;
+      border-bottom: 2px solid var(--red);
+      border-right: 2px solid var(--red);
+    }
 
-      .hero{
-        padding-top:80px;
-      }
+    .card:hover::before, .card:hover::after {
+      width: 24px; height: 24px; opacity: 1;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(255,50,50,0.5);
+      box-shadow: 0 20px 60px rgba(255,0,0,0.18), 0 0 30px rgba(255,0,0,0.1);
+    }
+
+    /* Shimmer sweep */
+    .card-shine {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,60,60,0.08) 50%, transparent 60%);
+      transform: translateX(-100%);
+      transition: transform 0.8s ease;
+    }
+
+    .card:hover .card-shine { transform: translateX(100%); }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .icon-wrap {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(255,32,32,0.08);
+      border: 1px solid rgba(255,32,32,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      transition: box-shadow 0.4s;
+    }
+
+    .card:hover .icon-wrap {
+      box-shadow: 0 0 20px rgba(255,32,32,0.4);
+    }
+
+    .tag {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.6rem;
+      padding: 5px 10px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,32,32,0.35);
+      background: rgba(255,32,32,0.07);
+      color: var(--red);
+      letter-spacing: 2px;
+    }
+
+    .card h3 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 2;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    .card > p {
+      color: #999;
+      line-height: 1.65;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .systems {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .systems li {
+      color: #ccc;
+      font-size: 0.85rem;
+      padding: 7px 12px 7px 28px;
+      position: relative;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.02);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .card:hover .systems li {
+      background: rgba(255,32,32,0.04);
+    }
+
+    .systems li::before {
+      content: '▸';
+      position: absolute;
+      left: 10px;
+      color: var(--red);
+      font-size: 0.75rem;
+    }
+
+    /* ── ARCHITECTURE FLOW ── */
+    .architecture {
+      margin-top: 80px;
+      padding: 44px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .architecture.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .architecture::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--red), transparent);
+    }
+
+    .architecture h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .architecture > p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 36px;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      align-items: start;
+    }
+
+    .flow-step {
+      text-align: center;
+      padding: 24px 18px;
+      border-radius: 16px;
+      background: rgba(10,10,14,0.9);
+      border: 1px solid rgba(255,32,32,0.18);
+      transition: transform 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+      position: relative;
+      cursor: default;
+    }
+
+    .flow-step:hover {
+      transform: scale(1.06) translateY(-4px);
+      background: rgba(255,20,20,0.09);
+      box-shadow: 0 0 28px rgba(255,0,0,0.2);
+    }
+
+    /* connector arrow between steps */
+    .flow-step:not(:last-child)::after {
+      display: none; /* handled in grid, skip */
+    }
+
+    .flow-num {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.6rem;
+      color: var(--red);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      opacity: 0.7;
+    }
+
+    .flow-icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .flow-step h4 {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      color: #eee;
+    }
+
+    .flow-step p {
+      color: #888;
+      font-size: 0.8rem;
+      line-height: 1.55;
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 60px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .stats-bar.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stat {
+      background: rgba(10,10,14,0.98);
+      padding: 28px 20px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Orbitron', monospace;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--red);
+      text-shadow: 0 0 20px rgba(255,32,32,0.5);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 30px 8%;
+      text-align: center;
+      color: #555;
+      border-top: 1px solid var(--border);
+      font-family: 'Orbitron', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .section-header { flex-direction: column; align-items: flex-start; }
+      .section-header p { text-align: left; max-width: 100%; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 
 <body>
+  <div class="ambient"></div>
 
+  <!-- ── NAV ── -->
   <nav>
     <a class="logo" href="index.html">
-      <div class="logo-box">BP</div>
-      <span>BennethPerez</span>
+      <div class="logo-mark">
+        <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer hex -->
+          <polygon class="logo-hex" points="26,3 47,14.5 47,37.5 26,49 5,37.5 5,14.5"/>
+          <!-- Inner fill -->
+          <polygon class="logo-inner" points="26,9 43,19 43,33 26,43 9,33 9,19"/>
+          <!-- Inner ring -->
+          <polygon fill="none" stroke="rgba(255,32,32,0.35)" stroke-width="0.8"
+            points="26,14 39,21.5 39,30.5 26,38 13,30.5 13,21.5"/>
+        </svg>
+        <div class="logo-text-mark">BP</div>
+      </div>
+      <div class="logo-name">
+        <span class="logo-name-top">BENNETH</span>
+        <span class="logo-name-sub">PEREZ</span>
+      </div>
     </a>
 
     <div class="nav-links">
@@ -331,10 +685,19 @@
     </div>
   </nav>
 
+  <!-- ── HERO ── -->
   <section class="hero">
-    <div class="status">MISSION SYSTEMS PLATFORM</div>
+    <div class="hero-grid"></div>
+    <div class="radar-ring"></div>
+    <div class="radar-ring"></div>
+    <div class="radar-ring"></div>
 
-    <h1>Platforms & Systems</h1>
+    <div class="status-pill">
+      <span class="status-dot"></span>
+      MISSION SYSTEMS PLATFORM
+    </div>
+
+    <h1>Platforms &amp; Systems</h1>
 
     <p>
       A futuristic showcase of advanced aerospace and defense systems integrating
@@ -342,32 +705,46 @@
     </p>
   </section>
 
+  <!-- ── DASHBOARD ── -->
   <main class="dashboard">
 
-    <div class="section-title">
-      <h2>Interactive Defense-Tech Showcase</h2>
-
-      <p>
-        Aerospace platforms where real-time sensing, estimation, tracking,
-        mission systems, and guidance technologies operate together.
-      </p>
+    <!-- Stats -->
+    <div class="stats-bar" data-reveal>
+      <div class="stat">
+        <span class="stat-num" data-count="6">0</span>
+        <span class="stat-label">Platform Systems</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-count="24">0</span>
+        <span class="stat-label">Subsystems</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-count="5">0</span>
+        <span class="stat-label">Mission Domains</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-count="360">0</span>
+        <span class="stat-label">Coverage °</span>
+      </div>
     </div>
 
+    <!-- Section header -->
+    <div class="section-header">
+      <h2>DEFENSE-TECH SHOWCASE</h2>
+      <p>Aerospace platforms where real-time sensing, estimation, tracking, mission systems, and guidance technologies converge.</p>
+    </div>
+
+    <!-- Cards grid -->
     <section class="grid">
 
-      <div class="card">
+      <div class="card" data-reveal data-delay="0">
+        <div class="card-shine"></div>
         <div class="card-top">
-          <div class="icon">🚀</div>
+          <div class="icon-wrap">🚀</div>
           <div class="tag">INTERCEPT</div>
         </div>
-
         <h3>Hypersonic Interceptor</h3>
-
-        <p>
-          High-speed intercept systems using advanced tracking,
-          terminal guidance, and rapid control response.
-        </p>
-
+        <p>High-speed intercept systems using advanced tracking, terminal guidance, and rapid control response.</p>
         <ul class="systems">
           <li>Terminal Guidance</li>
           <li>Seeker Tracking</li>
@@ -376,19 +753,14 @@
         </ul>
       </div>
 
-      <div class="card">
+      <div class="card" data-reveal data-delay="100">
+        <div class="card-shine"></div>
         <div class="card-top">
-          <div class="icon">📡</div>
+          <div class="icon-wrap">📡</div>
           <div class="tag">RADAR</div>
         </div>
-
         <h3>AESA Radar Tracking</h3>
-
-        <p>
-          Modern phased-array radar systems supporting
-          detection, estimation, and multi-target tracking.
-        </p>
-
+        <p>Modern phased-array radar systems supporting detection, estimation, and multi-target tracking.</p>
         <ul class="systems">
           <li>Range-Doppler Processing</li>
           <li>Measurement Gating</li>
@@ -397,19 +769,14 @@
         </ul>
       </div>
 
-      <div class="card">
+      <div class="card" data-reveal data-delay="200">
+        <div class="card-shine"></div>
         <div class="card-top">
-          <div class="icon">🛩️</div>
+          <div class="icon-wrap">🛩️</div>
           <div class="tag">AUTONOMY</div>
         </div>
-
         <h3>Autonomous UAV Swarm</h3>
-
-        <p>
-          Coordinated unmanned systems using distributed autonomy,
-          navigation, communication, and sensor fusion.
-        </p>
-
+        <p>Coordinated unmanned systems using distributed autonomy, navigation, communication, and sensor fusion.</p>
         <ul class="systems">
           <li>Swarm Coordination</li>
           <li>Autonomous Navigation</li>
@@ -418,19 +785,14 @@
         </ul>
       </div>
 
-      <div class="card">
+      <div class="card" data-reveal data-delay="0">
+        <div class="card-shine"></div>
         <div class="card-top">
-          <div class="icon">🛰️</div>
+          <div class="icon-wrap">🛰️</div>
           <div class="tag">SPACE</div>
         </div>
-
         <h3>Satellite Early Warning</h3>
-
-        <p>
-          Space-based sensing systems used for launch detection,
-          tracking, and strategic warning operations.
-        </p>
-
+        <p>Space-based sensing systems used for launch detection, tracking, and strategic warning operations.</p>
         <ul class="systems">
           <li>Infrared Detection</li>
           <li>Orbital Tracking</li>
@@ -439,19 +801,14 @@
         </ul>
       </div>
 
-      <div class="card">
+      <div class="card" data-reveal data-delay="100">
+        <div class="card-shine"></div>
         <div class="card-top">
-          <div class="icon">🛡️</div>
+          <div class="icon-wrap">🛡️</div>
           <div class="tag">DEFENSE</div>
         </div>
-
         <h3>Missile Defense Architecture</h3>
-
-        <p>
-          Integrated sensor and interceptor networks supporting
-          layered missile defense operations.
-        </p>
-
+        <p>Integrated sensor and interceptor networks supporting layered missile defense operations.</p>
         <ul class="systems">
           <li>Sensor-to-Shooter Chain</li>
           <li>Track Management</li>
@@ -460,19 +817,14 @@
         </ul>
       </div>
 
-      <div class="card">
+      <div class="card" data-reveal data-delay="200">
+        <div class="card-shine"></div>
         <div class="card-top">
-          <div class="icon">🧠</div>
+          <div class="icon-wrap">🧠</div>
           <div class="tag">FUSION</div>
         </div>
-
         <h3>Sensor Fusion Engine</h3>
-
-        <p>
-          Combining radar, IMU, GPS, EO/IR, and other measurements
-          into a unified state estimate.
-        </p>
-
+        <p>Combining radar, IMU, GPS, EO/IR, and other measurements into a unified state estimate.</p>
         <ul class="systems">
           <li>Kalman Filtering</li>
           <li>Coordinate Transforms</li>
@@ -483,11 +835,97 @@
 
     </section>
 
+    <!-- Architecture flow -->
+    <div class="architecture" data-reveal>
+      <h2>SYSTEM ARCHITECTURE FLOW</h2>
+      <p>End-to-end data pipeline from sensing to interceptor engagement</p>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-num">01</div>
+          <span class="flow-icon">📡</span>
+          <h4>Sensor Input</h4>
+          <p>Radar, EO/IR, GPS, IMU data acquisition</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">02</div>
+          <span class="flow-icon">🔗</span>
+          <h4>Data Fusion</h4>
+          <p>Kalman filter-based state estimation</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">03</div>
+          <span class="flow-icon">🧮</span>
+          <h4>Track Mgmt</h4>
+          <p>Multi-target correlation and gating</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">04</div>
+          <span class="flow-icon">🎯</span>
+          <h4>Engagement</h4>
+          <p>Threat prioritization and weapon assignment</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">05</div>
+          <span class="flow-icon">🚀</span>
+          <h4>Intercept</h4>
+          <p>Terminal guidance and kinetic kill</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">06</div>
+          <span class="flow-icon">📊</span>
+          <h4>BDA</h4>
+          <p>Battle damage assessment and reporting</p>
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <footer>
-    Platforms & Systems | Aerospace • Defense • GN&amp;C • Tracking • Sensor Fusion
+    Platforms &amp; Systems &nbsp;|&nbsp; Aerospace · Defense · GN&amp;C · Tracking · Sensor Fusion
   </footer>
 
+  <script>
+    // ── Scroll reveal ──
+    const reveals = document.querySelectorAll('[data-reveal]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const delay = e.target.dataset.delay || 0;
+          setTimeout(() => {
+            e.target.classList.add('visible');
+            // Counter animation for stats
+            const counters = e.target.querySelectorAll('[data-count]');
+            counters.forEach(el => animateCount(el, parseInt(el.dataset.count)));
+          }, parseInt(delay));
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // ── Count-up animation ──
+    function animateCount(el, target) {
+      const dur = 1600;
+      const start = performance.now();
+      function step(now) {
+        const p = Math.min((now - start) / dur, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.floor(ease * target);
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+      }
+      requestAnimationFrame(step);
+    }
+
+    // ── Parallax orb on scroll ──
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      document.querySelector('.ambient').style.transform =
+        `translateX(-50%) translateY(${scrolled * 0.15}px)`;
+    });
+  </script>
 </body>
 </html>
