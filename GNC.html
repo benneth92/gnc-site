@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>How to Build GN&C Experience</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
 :root {
   --navy-900: #040b18;
@@ -38,7 +38,7 @@
   --radius: 8px;
   --radius-lg: 14px;
   --transition: 0.24s cubic-bezier(0.4,0,0.2,1);
-  --nav-h: 62px;
+  --nav-h: 72px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -83,41 +83,108 @@ body::after {
   z-index: 0;
 }
 
+/* ── UNIFIED NAV ── */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   height: var(--nav-h);
-  background: rgba(4,11,24,0.88);
+  background: rgba(4,11,24,0.92);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   padding: 0 clamp(16px, 4vw, 48px);
+  gap: 12px;
   z-index: 100;
 }
 
-.nav-logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 20px;
-  letter-spacing: 0.12em;
-  color: var(--cyan);
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
   text-decoration: none;
-  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.logo-mark {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+.logo-mark svg {
+  width: 48px;
+  height: 48px;
+}
+
+.logo-hex {
+  fill: none;
+  stroke: var(--cyan);
+  stroke-width: 1.5;
+  animation: hex-rotate 12s linear infinite;
+  transform-origin: 24px 24px;
+}
+
+@keyframes hex-rotate {
+  to { transform: rotate(360deg); }
+}
+
+.logo-inner {
+  fill: rgba(0,212,255,0.08);
+}
+
+.logo-text-mark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  font-size: 0.9rem;
+  color: var(--cyan);
+  text-shadow: 0 0 12px var(--cyan-glow);
+  letter-spacing: 1px;
+}
+
+.logo-name {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.logo-name-top {
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.logo-name-sub {
+  font-size: 0.6rem;
+  color: var(--cyan);
+  letter-spacing: 4px;
+  text-transform: uppercase;
 }
 
 .nav-links {
   display: flex;
-  gap: 6px;
-  list-style: none;
   flex-wrap: wrap;
+  gap: 4px 6px;
+  list-style: none;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .nav-links a {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10.5px;
-  letter-spacing: 0.08em;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 2px;
   color: var(--text-secondary);
   text-decoration: none;
   padding: 6px 12px;
@@ -125,6 +192,19 @@ nav {
   border: 1px solid transparent;
   transition: all var(--transition);
   white-space: nowrap;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 12px;
+  width: 0;
+  height: 1px;
+  background: var(--cyan);
+  transition: width 0.3s;
 }
 
 .nav-links a:hover {
@@ -132,6 +212,10 @@ nav {
   border-color: var(--border-bright);
   background: var(--cyan-dim);
 }
+
+.nav-links a:hover::after { width: calc(100% - 24px); }
+.nav-links a.active { color: var(--cyan); border-color: var(--border-bright); }
+.nav-links a.active::after { width: calc(100% - 24px); }
 
 section { position: relative; z-index: 1; }
 .container { max-width: 1080px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px); }
@@ -523,23 +607,56 @@ footer {
 @keyframes fadeDown { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 
 @media (max-width: 760px) {
-  .nav-links { display: none; }
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    padding: 14px clamp(16px,4vw,48px);
+    gap: 10px;
+  }
+  .nav-links {
+    gap: 4px 8px;
+    width: 100%;
+  }
+  .nav-links a {
+    font-size: 0.55rem;
+    padding: 5px 8px;
+    letter-spacing: 1.5px;
+  }
   .cards-grid, .tasks-grid, .career-grid { grid-template-columns: 1fr; }
   .hero-stats { gap: 20px; }
   .hero-panel { min-height: 210px; }
+  #hero { padding-top: 0; }
 }
 </style>
 </head>
 <body>
 
+<!-- ── UNIFIED NAV ── -->
 <nav>
-  <a href="#hero" class="nav-logo">GN&C · EXPERIENCE</a>
+  <a class="logo" href="index.html">
+    <div class="logo-mark">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+        <polygon class="logo-hex" points="24,2 44,13 44,35 24,46 4,35 4,13"/>
+        <polygon class="logo-inner" points="24,8 40,17 40,31 24,40 8,31 8,17"/>
+        <polygon fill="none" stroke="rgba(0,212,255,0.3)" stroke-width="0.8"
+          points="24,13 37,20 37,28 24,35 11,28 11,20"/>
+      </svg>
+      <div class="logo-text-mark">BP</div>
+    </div>
+    <div class="logo-name">
+      <span class="logo-name-top">BENNETH</span>
+      <span class="logo-name-sub">PEREZ</span>
+    </div>
+  </a>
+
   <ul class="nav-links">
-    <li><a href="#overview">GN&C</a></li>
-    <li><a href="#languages">Code</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#organizations">Clubs</a></li>
+    <li><a href="index.html">Biography</a></li>
+    <li><a href="GNC.html" class="active">GN&amp;C</a></li>
+    <li><a href="career_map.html">Career Map</a></li>
+    <li><a href="day-to-day.html">Day to Day</a></li>
+    <li><a href="platforms.html">Platforms</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
   </ul>
 </nav>
 
