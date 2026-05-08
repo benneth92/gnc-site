@@ -31,14 +31,18 @@
       padding: 0;
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
 
     body {
-      min-height: 100vh;
+      min-height: 100svh;
       background: var(--bg);
       color: var(--white);
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
+      overscroll-behavior-y: none;
     }
 
     body::before {
@@ -190,7 +194,7 @@
     }
 
     .hero {
-      min-height: 100vh;
+      min-height: 100svh;
       display: flex;
       align-items: center;
       position: relative;
@@ -478,20 +482,29 @@
       box-shadow: inset 0 0 52px rgba(255,255,255,0.035);
     }
 
-    .project-media {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 14px;
-  display: block;
-  position: relative;
-  z-index: 3;
-}
+    .media-placeholder:has(.project-media) {
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.media-placeholder:has(.project-media)::before,
-.media-placeholder:has(.project-media)::after {
-  display: none;
-}
+    .project-media {
+      width: 100%;
+      height: 280px;
+      object-fit: contain;
+      object-position: center;
+      border-radius: 18px;
+      display: block;
+      background: #000;
+      position: relative;
+      z-index: 3;
+    }
+
+    .media-placeholder:has(.project-media)::before,
+    .media-placeholder:has(.project-media)::after {
+      display: none;
+    }
 
     .media-placeholder::before {
       content: "";
@@ -732,9 +745,11 @@
       .tech-grid, .research-grid, .data-wall { grid-template-columns: 1fr; }
       .project-card { padding: 18px; }
       .media-placeholder { min-height: 230px; }
+      .project-media { height: 230px; }
     }
   </style>
 </head>
+
 <body>
   <div class="noise"></div>
   <div class="grid-bg"></div>
@@ -786,6 +801,8 @@
       </div>
 
       <div class="project-grid">
+
+        <!-- SYSTEM 01 -->
         <article class="project-card reveal">
           <div class="project-info">
             <div>
@@ -793,6 +810,7 @@
               <h3>Radar Tracking &amp; Estimation</h3>
               <p>Kalman filtering, covariance analysis, radar measurements, target tracking, coordinate transformations, gating logic, and multi-target tracking concepts.</p>
             </div>
+
             <div class="tags">
               <span class="tag">Kalman Filter</span>
               <span class="tag">Radar</span>
@@ -801,13 +819,17 @@
               <span class="tag">Tracking</span>
             </div>
           </div>
-    <img 
-        src="Images/radartracking_EKF.png" 
-        alt="Sensor fusion guidance simulation animation"
-        class="project-media"
-    >
+
+          <div class="media-placeholder">
+            <img 
+              src="Images/radartracking_EKF.png" 
+              alt="Radar tracking EKF visualization"
+              class="project-media"
+            >
+          </div>
         </article>
 
+        <!-- SYSTEM 02 -->
         <article class="project-card reveal">
           <div class="project-info">
             <div>
@@ -815,6 +837,7 @@
               <h3>GN&amp;C Simulation</h3>
               <p>Guidance, navigation, and control simulations involving trajectory analysis, missile guidance concepts, proportional navigation, and flight dynamics.</p>
             </div>
+
             <div class="tags">
               <span class="tag">Trajectory</span>
               <span class="tag">PN Guidance</span>
@@ -822,15 +845,17 @@
               <span class="tag">Simulation</span>
             </div>
           </div>
-<div class="media-placeholder">
-    <img 
-        src="Images/guidance_animation.gif" 
-        alt="Sensor fusion guidance simulation animation"
-        class="project-media"
-    >
-</div>
+
+          <div class="media-placeholder">
+            <img 
+              src="Images/guidance_animation.gif" 
+              alt="Guidance navigation and control simulation animation"
+              class="project-media"
+            >
+          </div>
         </article>
 
+        <!-- SYSTEM 03 -->
         <article class="project-card reveal">
           <div class="project-info">
             <div>
@@ -838,6 +863,7 @@
               <h3>Sensor Fusion &amp; Navigation</h3>
               <p>Sensor fusion concepts using IMU, GPS, estimation filters, and real-time state estimation architectures.</p>
             </div>
+
             <div class="tags">
               <span class="tag">IMU</span>
               <span class="tag">GPS</span>
@@ -845,15 +871,13 @@
               <span class="tag">Navigation</span>
             </div>
           </div>
-<div class="media-placeholder">
-    <img 
-        src="Images/AI_RL.png" 
-        alt="Sensor fusion guidance simulation animation"
-        class="project-media"
-    >
-</div>
+
+          <div class="media-placeholder">
+            <div class="placeholder-label">INSERT SENSOR FUSION / NAVIGATION VISUALIZATION</div>
+          </div>
         </article>
 
+        <!-- SYSTEM 04 -->
         <article class="project-card reveal">
           <div class="project-info">
             <div>
@@ -861,6 +885,7 @@
               <h3>Mission Systems &amp; Avionics</h3>
               <p>Mission systems integration, avionics communication architectures, interface compatibility, and defense system coordination.</p>
             </div>
+
             <div class="tags">
               <span class="tag">Avionics</span>
               <span class="tag">Interfaces</span>
@@ -868,11 +893,13 @@
               <span class="tag">Integration</span>
             </div>
           </div>
+
           <div class="media-placeholder">
             <div class="placeholder-label">INSERT AVIONICS / SYSTEM ARCHITECTURE IMAGE</div>
           </div>
         </article>
 
+        <!-- SYSTEM 05 -->
         <article class="project-card reveal">
           <div class="project-info">
             <div>
@@ -880,6 +907,7 @@
               <h3>AI &amp; Autonomous Systems</h3>
               <p>Machine learning, graph neural networks, autonomous systems, and AI-assisted aerospace analysis.</p>
             </div>
+
             <div class="tags">
               <span class="tag">PyTorch</span>
               <span class="tag">GNN</span>
@@ -887,12 +915,16 @@
               <span class="tag">AI</span>
             </div>
           </div>
-    <img 
-        src="Images/AI_RL.png" 
-        alt="Sensor fusion guidance simulation animation"
-        class="project-media"
-    >
+
+          <div class="media-placeholder">
+            <img 
+              src="Images/AI_RL.png" 
+              alt="AI reinforcement learning visualization"
+              class="project-media"
+            >
+          </div>
         </article>
+
       </div>
     </div>
   </section>
@@ -969,30 +1001,37 @@
           <h3>Multi-Target Tracking</h3>
           <p>Track initiation, maintenance, gating, data association, and target-state estimation concepts.</p>
         </div>
+
         <div class="research-card">
           <h3>Sensor Fusion</h3>
           <p>Combining IMU, GPS, radar, and other sensor measurements into coherent state estimates.</p>
         </div>
+
         <div class="research-card">
           <h3>State Estimation</h3>
           <p>Kalman filters, covariance tuning, residual analysis, NEES/NIS, and estimator performance.</p>
         </div>
+
         <div class="research-card">
           <h3>Autonomous Aerospace Systems</h3>
           <p>Architectures for intelligent platforms operating in complex aerospace environments.</p>
         </div>
+
         <div class="research-card">
           <h3>Missile Defense Architectures</h3>
           <p>System-level thinking across sensors, tracks, interceptors, guidance, and mission coordination.</p>
         </div>
+
         <div class="research-card">
           <h3>Radar Systems</h3>
           <p>Measurement models, tracking observables, range-rate concepts, and radar-driven estimation.</p>
         </div>
+
         <div class="research-card">
           <h3>AI-Assisted Engineering</h3>
           <p>Machine learning and AI tools applied to simulation, classification, analysis, and automation.</p>
         </div>
+
         <div class="research-card">
           <h3>Space-Domain Awareness</h3>
           <p>Tracking, surveillance, estimation, and architecture concepts for space-based systems.</p>
@@ -1007,6 +1046,7 @@
 
   <script>
     const particles = document.getElementById('particles');
+
     for (let i = 0; i < 90; i++) {
       const p = document.createElement('span');
       p.className = 'particle';
@@ -1020,6 +1060,7 @@
     }
 
     const telemetryLines = document.getElementById('telemetryLines');
+
     for (let i = 0; i < 16; i++) {
       const line = document.createElement('span');
       line.style.top = `${Math.random() * 100}%`;
