@@ -37,13 +37,13 @@
     }
 
     body {
-      min-height: 100svh;
-      background: var(--bg);
-      color: var(--white);
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-      overscroll-behavior-y: none;
-    }
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+}
 
     body::before {
       content: "";
@@ -194,11 +194,11 @@
     }
 
     .hero {
-      min-height: 100svh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       position: relative;
-      overflow: hidden;
+      overflow: clip;
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
