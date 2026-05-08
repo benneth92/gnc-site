@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TECHNICAL PORTFOLIO | Benneth Perez</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -32,9 +31,7 @@
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       min-height: 100vh;
@@ -240,13 +237,13 @@
       z-index: 2;
       width: 100%;
       padding-top: 40px;
+      text-align: center;
     }
 
     .hud-bar {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 12px;
-      width: fit-content;
       padding: 10px 14px;
       border: 1px solid rgba(255,255,255,0.22);
       border-radius: 999px;
@@ -280,7 +277,7 @@
       line-height: 0.92;
       letter-spacing: 0.07em;
       text-transform: uppercase;
-      max-width: 1120px;
+      text-align: center;
       text-shadow: 0 0 18px rgba(255,255,255,0.5), 0 0 90px rgba(255,255,255,0.14);
       background: linear-gradient(180deg, #fff 0%, #d8d8d8 42%, #777 100%);
       -webkit-background-clip: text;
@@ -292,8 +289,8 @@
       font-size: clamp(1rem, 2.1vw, 1.45rem);
       color: var(--silver);
       letter-spacing: 0.11em;
-      max-width: 980px;
       line-height: 1.8;
+      text-align: center;
     }
 
     .hero-meta {
@@ -301,6 +298,7 @@
       flex-wrap: wrap;
       gap: 12px;
       margin-top: 34px;
+      justify-content: center;
     }
 
     .meta-pill {
@@ -402,9 +400,7 @@
       box-shadow: 0 24px 92px rgba(0,0,0,0.7), var(--glow-strong);
     }
 
-    .project-card:hover::before {
-      opacity: 0.75;
-    }
+    .project-card:hover::before { opacity: 0.75; }
 
     .project-info {
       position: relative;
@@ -562,9 +558,7 @@
       box-shadow: var(--glow);
     }
 
-    .tech-item:hover::before {
-      transform: translateX(110%);
-    }
+    .tech-item:hover::before { transform: translateX(110%); }
 
     .data-wall {
       display: grid;
@@ -710,51 +704,19 @@
     }
 
     @media (max-width: 980px) {
-      .project-card {
-        grid-template-columns: 1fr;
-      }
-
-      .tech-grid,
-      .research-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .data-wall {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .project-card { grid-template-columns: 1fr; }
+      .tech-grid, .research-grid { grid-template-columns: repeat(2, 1fr); }
+      .data-wall { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 620px) {
-      .container {
-        width: min(100% - 26px, 1180px);
-      }
-
-      .section {
-        padding: 78px 0;
-      }
-
-      .hud-corner {
-        width: 80px;
-        height: 80px;
-      }
-
-      .hero-subtitle {
-        letter-spacing: 0.05em;
-      }
-
-      .tech-grid,
-      .research-grid,
-      .data-wall {
-        grid-template-columns: 1fr;
-      }
-
-      .project-card {
-        padding: 18px;
-      }
-
-      .media-placeholder {
-        min-height: 230px;
-      }
+      .container { width: min(100% - 26px, 1180px); }
+      .section { padding: 78px 0; }
+      .hud-corner { width: 80px; height: 80px; }
+      .hero-subtitle { letter-spacing: 0.05em; }
+      .tech-grid, .research-grid, .data-wall { grid-template-columns: 1fr; }
+      .project-card { padding: 18px; }
+      .media-placeholder { min-height: 230px; }
     }
   </style>
 </head>
@@ -814,9 +776,7 @@
             <div>
               <div class="project-number">SYSTEM 01</div>
               <h3>Radar Tracking &amp; Estimation</h3>
-              <p>
-                Kalman filtering, covariance analysis, radar measurements, target tracking, coordinate transformations, gating logic, and multi-target tracking concepts.
-              </p>
+              <p>Kalman filtering, covariance analysis, radar measurements, target tracking, coordinate transformations, gating logic, and multi-target tracking concepts.</p>
             </div>
             <div class="tags">
               <span class="tag">Kalman Filter</span>
@@ -836,9 +796,7 @@
             <div>
               <div class="project-number">SYSTEM 02</div>
               <h3>GN&amp;C Simulation</h3>
-              <p>
-                Guidance, navigation, and control simulations involving trajectory analysis, missile guidance concepts, proportional navigation, and flight dynamics.
-              </p>
+              <p>Guidance, navigation, and control simulations involving trajectory analysis, missile guidance concepts, proportional navigation, and flight dynamics.</p>
             </div>
             <div class="tags">
               <span class="tag">Trajectory</span>
@@ -857,9 +815,7 @@
             <div>
               <div class="project-number">SYSTEM 03</div>
               <h3>Sensor Fusion &amp; Navigation</h3>
-              <p>
-                Sensor fusion concepts using IMU, GPS, estimation filters, and real-time state estimation architectures.
-              </p>
+              <p>Sensor fusion concepts using IMU, GPS, estimation filters, and real-time state estimation architectures.</p>
             </div>
             <div class="tags">
               <span class="tag">IMU</span>
@@ -878,9 +834,7 @@
             <div>
               <div class="project-number">SYSTEM 04</div>
               <h3>Mission Systems &amp; Avionics</h3>
-              <p>
-                Mission systems integration, avionics communication architectures, interface compatibility, and defense system coordination.
-              </p>
+              <p>Mission systems integration, avionics communication architectures, interface compatibility, and defense system coordination.</p>
             </div>
             <div class="tags">
               <span class="tag">Avionics</span>
@@ -899,9 +853,7 @@
             <div>
               <div class="project-number">SYSTEM 05</div>
               <h3>AI &amp; Autonomous Systems</h3>
-              <p>
-                Machine learning, graph neural networks, autonomous systems, and AI-assisted aerospace analysis.
-              </p>
+              <p>Machine learning, graph neural networks, autonomous systems, and AI-assisted aerospace analysis.</p>
             </div>
             <div class="tags">
               <span class="tag">PyTorch</span>
@@ -1027,27 +979,21 @@
   </footer>
 
   <script>
-    // Floating particles
     const particles = document.getElementById('particles');
-    const particleCount = 90;
-
-    for (let i = 0; i < particleCount; i++) {
-      const particle = document.createElement('span');
-      particle.className = 'particle';
-      particle.style.left = `${Math.random() * 100}%`;
-      particle.style.animationDuration = `${7 + Math.random() * 12}s`;
-      particle.style.animationDelay = `${Math.random() * 10}s`;
-      particle.style.opacity = `${0.25 + Math.random() * 0.75}`;
-      particle.style.width = `${1 + Math.random() * 2}px`;
-      particle.style.height = particle.style.width;
-      particles.appendChild(particle);
+    for (let i = 0; i < 90; i++) {
+      const p = document.createElement('span');
+      p.className = 'particle';
+      p.style.left = `${Math.random() * 100}%`;
+      p.style.animationDuration = `${7 + Math.random() * 12}s`;
+      p.style.animationDelay = `${Math.random() * 10}s`;
+      p.style.opacity = `${0.25 + Math.random() * 0.75}`;
+      p.style.width = `${1 + Math.random() * 2}px`;
+      p.style.height = p.style.width;
+      particles.appendChild(p);
     }
 
-    // Moving telemetry lines
     const telemetryLines = document.getElementById('telemetryLines');
-    const lineCount = 16;
-
-    for (let i = 0; i < lineCount; i++) {
+    for (let i = 0; i < 16; i++) {
       const line = document.createElement('span');
       line.style.top = `${Math.random() * 100}%`;
       line.style.animationDuration = `${5 + Math.random() * 9}s`;
@@ -1056,22 +1002,14 @@
       telemetryLines.appendChild(line);
     }
 
-    // Smooth reveal animations on scroll
-    const revealElements = document.querySelectorAll('.reveal');
-
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('active');
       });
-    }, {
-      threshold: 0.12
-    });
+    }, { threshold: 0.12 });
 
-    revealElements.forEach(el => revealObserver.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-    // Subtle mouse-driven parallax on hero
     const hero = document.querySelector('.hero');
     const heroContent = document.querySelector('.hero-content');
 
