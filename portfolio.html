@@ -478,6 +478,21 @@
       box-shadow: inset 0 0 52px rgba(255,255,255,0.035);
     }
 
+    .project-gif {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+  position: relative;
+  z-index: 3;
+}
+
+.media-placeholder:has(.project-gif)::before,
+.media-placeholder:has(.project-gif)::after {
+  display: none;
+}
+
     .media-placeholder::before {
       content: "";
       position: absolute;
