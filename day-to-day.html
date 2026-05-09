@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Day-to-Day Technical Tasks · Aerospace Electrical Systems</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
 :root {
   --navy-900: #040b18;
@@ -39,13 +39,12 @@
   --radius-lg: 14px;
   --transition: 0.24s cubic-bezier(0.4,0,0.2,1);
 
-  --nav-h: 62px;
+  --nav-h: 68px;
+  --total-header: 68px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
-
 body {
   background: var(--navy-900);
   color: var(--text-primary);
@@ -74,7 +73,6 @@ body::before {
   z-index: 0;
 }
 
-/* diagonal grid overlay */
 body::after {
   content: '';
   position: fixed;
@@ -87,52 +85,201 @@ body::after {
   z-index: 0;
 }
 
-/* ── NAV ── */
-nav {
+/* ══════════════════════════════
+   UNIFIED SINGLE NAVBAR
+══════════════════════════════ */
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+
+/* Rotating hex logo — matches reference exactly */
+@keyframes hex-rotate {
+  to { transform: rotate(360deg); }
+}
+
+nav#main-nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   height: var(--nav-h);
-  background: rgba(4,11,24,0.88);
-  backdrop-filter: blur(16px);
+  background: rgba(4,11,24,0.94);
+  backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 clamp(16px, 4vw, 48px);
-  z-index: 100;
+  gap: 0;
+  padding: 0 clamp(16px, 3vw, 40px);
+  z-index: 200;
+  animation: slideDown 0.6s ease both;
 }
 
-.nav-logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 20px;
-  letter-spacing: 0.12em;
-  color: var(--cyan);
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.nav-links {
+/* ── Logo / Brand ── */
+.nav-brand {
   display: flex;
-  gap: 6px;
-  list-style: none;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-right: 20px;
 }
 
-.nav-links a {
+.nav-hex-wrap {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+.nav-hex-wrap svg.hex-outer {
+  position: absolute;
+  inset: 0;
+  width: 44px;
+  height: 44px;
+  animation: hex-rotate 12s linear infinite;
+  transform-origin: 22px 22px;
+}
+
+.nav-hex-wrap svg.hex-static {
+  position: absolute;
+  inset: 0;
+  width: 44px;
+  height: 44px;
+}
+
+.nav-hex-bp {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10.5px;
-  letter-spacing: 0.08em;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--cyan);
+  text-shadow: 0 0 12px var(--cyan-glow);
+}
+
+.nav-name-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: 1;
+}
+
+.nav-name-top {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.14em;
+  color: var(--text-primary);
+}
+
+.nav-name-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7.5px;
+  letter-spacing: 0.28em;
+  color: var(--cyan);
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+/* ── Divider ── */
+.nav-divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border);
+  flex-shrink: 0;
+  margin: 0 18px;
+}
+
+/* ── Section label (replaces old nav-logo text) ── */
+.nav-section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Spacer pushes both link groups right ── */
+.nav-spacer { flex: 1; }
+
+/* ── Site-wide portfolio links ── */
+.nav-portfolio-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+  margin-right: 12px;
+}
+
+.nav-portfolio-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: all var(--transition);
+  position: relative;
+}
+
+.nav-portfolio-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 3px; left: 10px; right: 10px;
+  height: 1px;
+  background: var(--cyan);
+  transform: scaleX(0);
+  transition: transform var(--transition);
+}
+
+.nav-portfolio-links a:hover { color: var(--text-primary); }
+.nav-portfolio-links a:hover::after { transform: scaleX(1); }
+
+.nav-portfolio-links a.active {
+  color: var(--cyan);
+  border-color: rgba(0,212,255,0.35);
+  background: var(--cyan-dim);
+}
+
+/* ── Small pipe separator between the two link groups ── */
+.nav-pipe {
+  width: 1px;
+  height: 16px;
+  background: var(--border);
+  margin: 0 10px;
+  flex-shrink: 0;
+}
+
+/* ── Page scroll links ── */
+.nav-scroll-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+}
+
+.nav-scroll-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.09em;
   color: var(--text-secondary);
   text-decoration: none;
-  padding: 6px 12px;
+  padding: 5px 11px;
   border-radius: 4px;
   border: 1px solid transparent;
-  transition: all var(--transition);
   white-space: nowrap;
+  transition: all var(--transition);
 }
 
-.nav-links a:hover {
+.nav-scroll-links a:hover {
   color: var(--cyan);
   border-color: var(--border-bright);
   background: var(--cyan-dim);
@@ -156,7 +303,7 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: var(--nav-h);
+  padding-top: var(--total-header);
   position: relative;
   overflow: hidden;
 }
@@ -169,6 +316,12 @@ section {
   top: 50%; left: 50%;
   transform: translate(-60%, -50%);
   pointer-events: none;
+  animation: pulse-glow 6s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.7; transform: translate(-60%, -50%) scale(1); }
+  50%       { opacity: 1;   transform: translate(-60%, -50%) scale(1.08); }
 }
 
 .hero-inner {
@@ -188,7 +341,7 @@ section {
   display: flex;
   align-items: center;
   gap: 12px;
-  animation: fadeUp 0.7s ease both;
+  animation: fadeUp 0.7s 0.2s ease both;
 }
 
 .hero-eyebrow::before {
@@ -205,7 +358,7 @@ section {
   letter-spacing: 0.02em;
   color: var(--text-primary);
   margin-bottom: 24px;
-  animation: fadeUp 0.7s 0.1s ease both;
+  animation: fadeUp 0.7s 0.3s ease both;
 }
 
 .hero-title span { color: var(--cyan); }
@@ -217,82 +370,203 @@ section {
   line-height: 1.65;
   margin-bottom: 40px;
   font-weight: 300;
-  animation: fadeUp 0.7s 0.2s ease both;
+  animation: fadeUp 0.7s 0.4s ease both;
 }
 
-/* ── IMAGE PLACEHOLDER ── */
-.image-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  border: 2px dashed var(--border-bright);
-  border-radius: var(--radius-lg);
-  background: var(--cyan-dim);
-  color: var(--text-dim);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-align: center;
-  padding: 24px;
-  transition: border-color var(--transition);
-  cursor: pointer;
+/* ══════════════════════════════
+   IMAGE SYSTEM — fixed properly
+══════════════════════════════ */
+.img-frame {
   position: relative;
   overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--navy-700);
+  cursor: zoom-in;
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
 }
 
-.image-placeholder:hover {
-  border-color: var(--cyan);
-  color: var(--text-secondary);
+.img-frame::after {
+  content: '⤢ VIEW';
+  position: absolute;
+  bottom: 12px; right: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.6);
+  background: rgba(0,0,0,0.55);
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.15);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
 }
 
+.img-frame:hover {
+  border-color: var(--border-bright);
+  box-shadow: 0 0 32px rgba(0,212,255,0.12);
+  transform: translateY(-2px);
+}
 
-.image-placeholder img {
+.img-frame:hover::after {
+  opacity: 1;
+  transform: none;
+}
+
+.img-frame img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
 }
 
-.image-placeholder .ph-icon {
-  font-size: 28px;
-  opacity: 0.5;
+.img-frame:hover img {
+  transform: scale(1.03);
 }
 
-.image-placeholder .ph-dims {
-  font-size: 10px;
-  opacity: 0.5;
-}
-
-.hero-image-slot {
-  animation: fadeUp 0.7s 0.3s ease both;
-  margin-bottom: 40px;
+/* Specific slot sizes */
+.img-hero {
+  width: 100%;
   max-width: 680px;
+  aspect-ratio: 16/7;
+  margin-bottom: 40px;
+  animation: fadeUp 0.7s 0.45s ease both;
 }
 
-.hero-image-slot .image-placeholder {
-  height: 220px;
+.img-workflow {
+  width: 100%;
+  max-width: 1040px;
+  aspect-ratio: 21/9;
+  margin-top: 48px;
 }
 
+.img-skills-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.img-skills-row .img-frame {
+  aspect-ratio: 4/3;
+}
+
+/* ══════════════════════════════
+   LIGHTBOX
+══════════════════════════════ */
+#lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(2,7,18,0.96);
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#lightbox.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+#lightbox-img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-bright);
+  box-shadow: 0 0 80px rgba(0,212,255,0.15), 0 32px 80px rgba(0,0,0,0.7);
+  transform: scale(0.88);
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+#lightbox.open #lightbox-img {
+  transform: scale(1);
+}
+
+#lightbox-close {
+  position: absolute;
+  top: 24px; right: 28px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(0,212,255,0.1);
+  border: 1px solid rgba(0,212,255,0.3);
+  color: var(--cyan);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1;
+}
+
+#lightbox-close:hover {
+  background: rgba(0,212,255,0.2);
+  border-color: var(--cyan);
+  box-shadow: 0 0 16px var(--cyan-glow);
+  transform: rotate(90deg);
+}
+
+#lightbox-caption {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── HERO STATS ── */
 .hero-stats {
   display: flex;
   gap: 32px;
   flex-wrap: wrap;
-  animation: fadeUp 0.7s 0.35s ease both;
+  animation: fadeUp 0.7s 0.5s ease both;
 }
 
 .stat {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  position: relative;
 }
+
+.stat::after {
+  content: '';
+  position: absolute;
+  bottom: -8px; left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--cyan);
+  transition: width 0.4s ease;
+}
+
+.stat:hover::after { width: 100%; }
 
 .stat-num {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 36px;
   color: var(--cyan);
   line-height: 1;
+  transition: text-shadow 0.3s;
+}
+
+.stat:hover .stat-num {
+  text-shadow: 0 0 20px var(--cyan-glow);
 }
 
 .stat-label {
@@ -304,9 +578,7 @@ section {
 }
 
 /* ── SECTION HEADER ── */
-.section-header {
-  margin-bottom: 40px;
-}
+.section-header { margin-bottom: 40px; }
 
 .section-tag {
   font-family: 'JetBrains Mono', monospace;
@@ -330,12 +602,26 @@ section {
   background: var(--cyan);
   margin-top: 14px;
   border-radius: 2px;
+  position: relative;
+  overflow: hidden;
 }
 
-/* ── SECTION SPACING ── */
-.section-pad {
-  padding: 90px 0;
+.section-rule::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: white;
+  transform: translateX(-100%);
+  animation: rule-shimmer 3s 1s ease-in-out infinite;
 }
+
+@keyframes rule-shimmer {
+  0%   { transform: translateX(-100%); opacity: 0.8; }
+  40%  { transform: translateX(100%);  opacity: 0.8; }
+  100% { transform: translateX(100%);  opacity: 0; }
+}
+
+.section-pad { padding: 90px 0; }
 
 /* ── SEARCH ── */
 .search-bar {
@@ -410,6 +696,11 @@ section {
   border: 2px solid var(--cyan);
   background: var(--navy-900);
   display: flex; align-items: center; justify-content: center;
+  transition: box-shadow 0.3s;
+}
+
+.tl-item:hover .tl-dot {
+  box-shadow: 0 0 12px var(--cyan-glow);
 }
 
 .tl-dot::after {
@@ -421,8 +712,10 @@ section {
 
 .tl-item:nth-child(2) .tl-dot { border-color: var(--violet); }
 .tl-item:nth-child(2) .tl-dot::after { background: var(--violet); }
+.tl-item:nth-child(2):hover .tl-dot { box-shadow: 0 0 12px rgba(157,111,255,0.4); }
 .tl-item:nth-child(3) .tl-dot { border-color: var(--amber); }
 .tl-item:nth-child(3) .tl-dot::after { background: var(--amber); }
+.tl-item:nth-child(3):hover .tl-dot { box-shadow: 0 0 12px rgba(245,166,35,0.4); }
 
 .tl-time {
   font-family: 'JetBrains Mono', monospace;
@@ -465,6 +758,7 @@ section {
   border-color: var(--border-bright);
   color: var(--text-primary);
   background: var(--card-hover);
+  transform: translateY(-2px);
 }
 
 .tl-card .icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
@@ -489,6 +783,17 @@ section {
   overflow: hidden;
 }
 
+.task-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity var(--transition);
+  pointer-events: none;
+}
+
+.task-card:hover::after { opacity: 1; }
 .task-card.visible { opacity: 1; transform: none; }
 
 .task-card::before {
@@ -525,7 +830,10 @@ section {
   font-size: 28px;
   margin-bottom: 14px;
   display: block;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
 }
+
+.task-card:hover .tc-icon { transform: scale(1.15); }
 
 .tc-title {
   font-family: 'Bebas Neue', sans-serif;
@@ -555,7 +863,10 @@ section {
   color: var(--text-dim);
   padding-left: 14px;
   position: relative;
+  transition: color var(--transition);
 }
+
+.task-card:hover .tc-bullets li { color: var(--text-secondary); }
 
 .tc-bullets li::before {
   content: '→';
@@ -565,18 +876,6 @@ section {
 }
 
 .task-card.hidden { display: none; }
-
-/* ── IMAGE ROW ── */
-.image-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-  gap: 16px;
-  margin: 40px 0;
-}
-
-.image-row .image-placeholder {
-  height: 180px;
-}
 
 /* ── CAREER PATHS ── */
 .career-grid {
@@ -591,13 +890,13 @@ section {
   border-radius: var(--radius-lg);
   overflow: hidden;
   backdrop-filter: blur(10px);
-  transition: border-color var(--transition);
+  transition: border-color var(--transition), transform var(--transition);
   opacity: 0;
   transform: translateY(12px);
 }
 
 .career-card.visible { opacity: 1; transform: none; }
-.career-card:hover { border-color: var(--border-bright); }
+.career-card:hover { border-color: var(--border-bright); transform: translateY(-2px); }
 .career-card.hidden { display: none; }
 
 .career-header {
@@ -611,8 +910,8 @@ section {
 }
 
 .career-header:hover { background: var(--card-hover); }
-
-.career-icon { font-size: 22px; flex-shrink: 0; }
+.career-icon { font-size: 22px; flex-shrink: 0; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+.career-card:hover .career-icon { transform: scale(1.1) rotate(-5deg); }
 
 .career-title {
   font-family: 'Bebas Neue', sans-serif;
@@ -669,11 +968,7 @@ section {
   margin-bottom: 12px;
 }
 
-.career-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
+.career-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 
 .ctag {
   font-family: 'JetBrains Mono', monospace;
@@ -683,14 +978,13 @@ section {
   border: 1px solid var(--border);
   border-radius: 3px;
   color: var(--text-dim);
+  transition: all var(--transition);
 }
 
+.ctag:hover { border-color: var(--border-bright); color: var(--text-secondary); }
+
 /* ── SKILLS ── */
-.skills-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
+.skills-wrap { display: flex; flex-wrap: wrap; gap: 10px; }
 
 .skill-tag {
   font-family: 'JetBrains Mono', monospace;
@@ -704,13 +998,27 @@ section {
   transition: all var(--transition);
   backdrop-filter: blur(8px);
   letter-spacing: 0.04em;
+  position: relative;
+  overflow: hidden;
 }
+
+.skill-tag::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.08), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.skill-tag:hover::before { transform: translateX(100%); }
 
 .skill-tag:hover {
   border-color: var(--cyan);
   color: var(--cyan);
   background: var(--cyan-dim);
   box-shadow: 0 0 12px var(--cyan-glow);
+  transform: translateY(-2px);
 }
 
 /* ── CALLOUT ── */
@@ -736,6 +1044,7 @@ section {
   width: 500px; height: 300px;
   background: radial-gradient(ellipse, rgba(0,212,255,0.06) 0%, transparent 70%);
   pointer-events: none;
+  animation: pulse-glow 8s ease-in-out infinite;
 }
 
 .callout-label {
@@ -808,28 +1117,338 @@ footer {
   to   { opacity: 1; transform: none; }
 }
 
+/* ── SCAN LINE EFFECT on sections ── */
+.section-pad::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
 /* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  .nav-portfolio-links { display: none; }
+  .nav-pipe { display: none; }
+}
+@media (max-width: 760px) {
+  .nav-section-label { display: none; }
+  .nav-divider { display: none; }
+  .nav-scroll-links { display: none; }
+}
 @media (max-width: 640px) {
-  .nav-links { display: none; }
   .tasks-grid { grid-template-columns: 1fr; }
   .career-grid { grid-template-columns: 1fr; }
   .tl-cards { grid-template-columns: 1fr; }
   .hero-stats { gap: 20px; }
+  .img-skills-row { grid-template-columns: 1fr; }
 }
+
+/* Floating scan line animation */
+@keyframes scanline {
+  0%   { opacity: 0; transform: translateY(-100vh); }
+  10%  { opacity: 0.4; }
+  90%  { opacity: 0.4; }
+  100% { opacity: 0; transform: translateY(100vh); }
+}
+
+.scanline-overlay {
+  position: fixed;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.15), transparent);
+  pointer-events: none;
+  z-index: 0;
+  animation: scanline 8s linear infinite;
+}
+
+
+/* ══════════════════════════════
+   EXACT TOP BAR STYLE + SECONDARY HUD NAV
+   Main nav matches the GN&C page style. Secondary nav keeps
+   Workflow / Tasks / Career Paths / Skills without crowding top bar.
+══════════════════════════════ */
+:root {
+  --nav-h: 72px;
+  --total-header: 72px;
+}
+
+nav.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-h);
+  background: rgba(4,11,24,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(16px, 4vw, 48px);
+  gap: 12px;
+  z-index: 300;
+}
+
+.site-nav .logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.site-nav .logo-mark {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+.site-nav .logo-mark svg {
+  width: 48px;
+  height: 48px;
+}
+
+.site-nav .logo-hex {
+  fill: none;
+  stroke: var(--cyan);
+  stroke-width: 1.5;
+  animation: hex-rotate 12s linear infinite;
+  transform-origin: 24px 24px;
+}
+
+.site-nav .logo-inner { fill: rgba(0,212,255,0.08); }
+
+.site-nav .logo-text-mark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  font-size: 0.9rem;
+  color: var(--cyan);
+  text-shadow: 0 0 12px var(--cyan-glow);
+  letter-spacing: 1px;
+}
+
+.site-nav .logo-name { display: flex; flex-direction: column; gap: 1px; }
+
+.site-nav .logo-name-top {
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.site-nav .logo-name-sub {
+  font-size: 0.6rem;
+  color: var(--cyan);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.site-nav .nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  list-style: none;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0;
+}
+
+.site-nav .nav-links a {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: all var(--transition);
+  white-space: nowrap;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.site-nav .nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 12px;
+  width: 0;
+  height: 1px;
+  background: var(--cyan);
+  transition: width 0.3s;
+}
+
+.site-nav .nav-links a:hover {
+  color: var(--cyan);
+  border-color: var(--border-bright);
+  background: var(--cyan-dim);
+}
+
+.site-nav .nav-links a:hover::after { width: calc(100% - 24px); }
+.site-nav .nav-links a.active { color: var(--cyan); border-color: var(--border-bright); }
+.site-nav .nav-links a.active::after { width: calc(100% - 24px); }
+
+.section-nav {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 180;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px clamp(16px, 4vw, 48px);
+  background: rgba(4,11,24,0.78);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(0,212,255,0.08);
+  border-bottom: 1px solid rgba(0,212,255,0.14);
+}
+
+.section-nav-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-right: 8px;
+}
+
+.section-nav a {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  border: 1px solid rgba(42,90,168,0.25);
+  border-radius: 4px;
+  background: rgba(12,32,64,0.35);
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.section-nav a:hover {
+  color: var(--cyan);
+  border-color: var(--border-bright);
+  background: var(--cyan-dim);
+  box-shadow: 0 0 18px rgba(0,212,255,0.08);
+}
+
+@media (max-width: 760px) {
+  :root { --nav-h: 96px; --total-header: 96px; }
+
+  nav.site-nav {
+    height: var(--nav-h);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 10px clamp(16px,4vw,48px);
+    gap: 8px;
+    overflow: hidden;
+  }
+
+  .site-nav .logo-mark,
+  .site-nav .logo-mark svg { width: 36px; height: 36px; }
+  .site-nav .logo-text-mark { font-size: 0.7rem; }
+  .site-nav .logo-name-top { font-size: 0.85rem; }
+  .site-nav .logo-name-sub { font-size: 0.5rem; letter-spacing: 3px; }
+
+  .site-nav .nav-links {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 6px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .site-nav .nav-links::-webkit-scrollbar { display: none; }
+
+  .site-nav .nav-links a {
+    font-size: 0.52rem;
+    padding: 5px 8px;
+    letter-spacing: 1.2px;
+    flex-shrink: 0;
+  }
+
+  .section-nav {
+    justify-content: flex-start;
+    overflow-x: auto;
+    top: var(--nav-h);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .section-nav::-webkit-scrollbar { display: none; }
+  .section-nav-label { display: none; }
+
+  .section-nav a {
+    flex-shrink: 0;
+    font-size: 0.52rem;
+    padding: 6px 10px;
+    letter-spacing: 1.2px;
+  }
+}
+
 </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
-<nav>
-  <a href="#hero" class="nav-logo">AERO · ELECTRICAL</a>
-  <ul class="nav-links">
-    <li><a href="#workflow">Workflow</a></li>
-    <li><a href="#tasks">Tasks</a></li>
-    <li><a href="#careers">Career Paths</a></li>
-    <li><a href="#skills">Skills</a></li>    
+<!-- Floating scan line -->
+<div class="scanline-overlay"></div>
+
+<!-- ── UNIFIED TOP PORTFOLIO NAV ── -->
+<nav class="site-nav">
+  <a class="logo" href="index.html" aria-label="Benneth Perez home">
+    <div class="logo-mark">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <polygon class="logo-hex" points="24,2 44,13 44,35 24,46 4,35 4,13"/>
+        <polygon class="logo-inner" points="24,8 40,17 40,31 24,40 8,31 8,17"/>
+        <polygon fill="none" stroke="rgba(0,212,255,0.3)" stroke-width="0.8"
+          points="24,13 37,20 37,28 24,35 11,28 11,20"/>
+      </svg>
+      <div class="logo-text-mark">BP</div>
+    </div>
+    <div class="logo-name">
+      <span class="logo-name-top">BENNETH</span>
+      <span class="logo-name-sub">PEREZ</span>
+    </div>
+  </a>
+
+  <ul class="nav-links" aria-label="Main portfolio navigation">
+    <li><a href="index.html">Biography</a></li>
+    <li><a href="GNC.html">Build Experience</a></li>
+    <li><a href="career_map.html">Career Map</a></li>
+    <li><a href="day-to-day.html" class="active">Day To Day</a></li>
+    <li><a href="platforms.html">Platforms</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
   </ul>
 </nav>
+
+<!-- ══════════════════════════════
+     LIGHTBOX
+══════════════════════════════ -->
+<div id="lightbox">
+  <button id="lightbox-close" onclick="closeLightbox()" title="Close">✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <div id="lightbox-caption"></div>
+</div>
 
 <!-- ── HERO ── -->
 <section id="hero">
@@ -839,12 +1458,9 @@ footer {
     <h1 class="hero-title">DAY-TO-DAY<br><span>TECHNICAL</span><br>TASKS</h1>
     <p class="hero-subtitle">A practical look at daily engineering work in aerospace electrical systems, avionics integration, testing, and design.</p>
 
-    <!-- 📸 IMAGE SLOT — Replace with your own photo -->
-    <div class="image-placeholder" style="padding:0; max-width:680px; height:260px;">
-        <img 
-             src="Images/Avionics.png"
-             alt="Aerospace Engineering"
-             style="width:100%; height:100%; object-fit:cover; border-radius:14px;">
+    <!-- Hero image -->
+    <div class="img-frame img-hero" onclick="openLightbox(this, 'Aerospace Engineering — Avionics Systems')">
+      <img src="Images/Avionics.png" alt="Aerospace Engineering — Avionics">
     </div>
 
     <div class="hero-stats">
@@ -863,6 +1479,15 @@ footer {
     </div>
   </div>
 </section>
+
+<!-- ── THIS-PAGE HUD NAVIGATION ── -->
+<div class="section-nav" aria-label="Day-to-Day page navigation">
+  <span class="section-nav-label">PAGE NAV</span>
+  <a href="#workflow">Workflow</a>
+  <a href="#tasks">Tasks</a>
+  <a href="#careers">Career Paths</a>
+  <a href="#skills">Skills</a>
+</div>
 
 <!-- ── WORKFLOW TIMELINE ── -->
 <section id="workflow">
@@ -911,14 +1536,9 @@ footer {
 
       </div>
 
-      <!-- 📸 IMAGE SLOT -->
-      <div class="image-row" style="margin-top:48px;">
-        <div class="image-placeholder" style="height:694px; max-width:1040px; padding:0;">  
-          <img 
-            src="Images/AI.png"
-            alt="Aerospace CAD and design image"
-            style="width:100%; height:100%; object-fit:contain; border-radius:14px;">
-        </div>
+      <!-- Workflow image -->
+      <div class="img-frame img-workflow" onclick="openLightbox(this, 'Aerospace CAD & AI-Assisted Design')">
+        <img src="Images/AI.png" alt="Aerospace CAD and AI design">
       </div>
 
     </div>
@@ -1070,7 +1690,7 @@ footer {
             <span class="career-chevron">▼</span>
           </div>
           <div class="career-body">
-            <p class="career-desc">The most direct progression — own complex harness designs end-to-end, mentor junior engineers, drive standards and best practices. Deepens technical authority in electrical design and integration.</p>
+            <p class="career-desc">The most direct progression — own complex harness designs end-to-end, mentor junior engineers, drive standards and best practices.</p>
             <div class="career-tags">
               <span class="ctag">Harness Design Lead</span>
               <span class="ctag">Mentorship</span>
@@ -1088,12 +1708,10 @@ footer {
             <span class="career-chevron">▼</span>
           </div>
           <div class="career-body">
-            <p class="career-desc">Leverage integration and ICD experience to move into system-level requirements, architecture, and V&V. Your harness background makes you uniquely credible at interface boundaries.</p>
+            <p class="career-desc">Leverage integration and ICD experience to move into system-level requirements, architecture, and V&V.</p>
             <div class="career-tags">
-              <span class="ctag">MBSE</span>
-              <span class="ctag">Requirements</span>
-              <span class="ctag">V&V Plans</span>
-              <span class="ctag">Architecture</span>
+              <span class="ctag">MBSE</span><span class="ctag">Requirements</span>
+              <span class="ctag">V&V Plans</span><span class="ctag">Architecture</span>
             </div>
           </div>
         </div>
@@ -1106,12 +1724,10 @@ footer {
             <span class="career-chevron">▼</span>
           </div>
           <div class="career-body">
-            <p class="career-desc">Transition technical depth into program leadership — managing schedule, cost, and risk across harness and avionics deliverables. Strong fit for engineers who enjoy stakeholder coordination.</p>
+            <p class="career-desc">Transition technical depth into program leadership — managing schedule, cost, and risk across harness and avionics deliverables.</p>
             <div class="career-tags">
-              <span class="ctag">EVM</span>
-              <span class="ctag">Risk Management</span>
-              <span class="ctag">IMP/IMS</span>
-              <span class="ctag">CDR/PDR</span>
+              <span class="ctag">EVM</span><span class="ctag">Risk Management</span>
+              <span class="ctag">IMP/IMS</span><span class="ctag">CDR/PDR</span>
             </div>
           </div>
         </div>
@@ -1124,17 +1740,15 @@ footer {
             <span class="career-chevron">▼</span>
           </div>
           <div class="career-body">
-            <p class="career-desc">Own the electrical architecture across a vehicle or system — power distribution, grounding, bonding, and EMC strategy. Leadership role that expands well beyond harness into full EE scope.</p>
+            <p class="career-desc">Own the electrical architecture across a vehicle or system — power distribution, grounding, bonding, and EMC strategy.</p>
             <div class="career-tags">
-              <span class="ctag">Power Architecture</span>
-              <span class="ctag">Grounding</span>
-              <span class="ctag">EMC Strategy</span>
-              <span class="ctag">Team Lead</span>
+              <span class="ctag">Power Architecture</span><span class="ctag">Grounding</span>
+              <span class="ctag">EMC Strategy</span><span class="ctag">Team Lead</span>
             </div>
           </div>
         </div>
 
-        <div class="career-card" data-kw="technical specialist SME subject matter expert expert connector">
+        <div class="career-card" data-kw="technical specialist SME subject matter expert connector">
           <div class="career-header" onclick="toggleCareer(this)">
             <span class="career-icon">🎯</span>
             <div class="career-title">Technical Specialist / SME</div>
@@ -1142,7 +1756,7 @@ footer {
             <span class="career-chevron">▼</span>
           </div>
           <div class="career-body">
-            <p class="career-desc">Become the organization's go-to expert in wire harness design, connector selection, or avionics wiring standards. SME roles carry high influence with minimal management overhead.</p>
+            <p class="career-desc">Become the organization's go-to expert in wire harness design, connector selection, or avionics wiring standards.</p>
             <div class="career-tags">
               <span class="ctag">MIL-SPEC Authority</span>
               <span class="ctag">Design Reviews</span>
@@ -1159,7 +1773,7 @@ footer {
             <span class="career-chevron">▼</span>
           </div>
           <div class="career-body">
-            <p class="career-desc">Apply hands-on experience to next-generation programs — advanced materials, optical fiber harnesses, high-voltage aircraft, or novel connector technologies for DARPA/AFRL programs.</p>
+            <p class="career-desc">Apply hands-on experience to next-generation programs — advanced materials, optical fiber harnesses, high-voltage aircraft, or novel connector technologies.</p>
             <div class="career-tags">
               <span class="ctag">Advanced Concepts</span>
               <span class="ctag">IRAD/CRAD</span>
@@ -1176,12 +1790,10 @@ footer {
             <span class="career-chevron">▼</span>
           </div>
           <div class="career-body">
-            <p class="career-desc">Move into production and quality assurance — translating design intent into manufacturability, writing work instructions, and driving AS9100 / NADCAP process compliance.</p>
+            <p class="career-desc">Move into production and quality assurance — translating design intent into manufacturability and driving AS9100 / NADCAP process compliance.</p>
             <div class="career-tags">
-              <span class="ctag">AS9100</span>
-              <span class="ctag">DFM/DFA</span>
-              <span class="ctag">NCR / SCAR</span>
-              <span class="ctag">NADCAP</span>
+              <span class="ctag">AS9100</span><span class="ctag">DFM/DFA</span>
+              <span class="ctag">NCR / SCAR</span><span class="ctag">NADCAP</span>
             </div>
           </div>
         </div>
@@ -1196,10 +1808,8 @@ footer {
           <div class="career-body">
             <p class="career-desc">Specialize in airworthiness certification — guiding harness and electrical system compliance through FAA/EASA processes, DO-160 environmental qualification, and DAL assurance.</p>
             <div class="career-tags">
-              <span class="ctag">DO-160</span>
-              <span class="ctag">FAR 25</span>
-              <span class="ctag">DER Coordination</span>
-              <span class="ctag">Airworthiness</span>
+              <span class="ctag">DO-160</span><span class="ctag">FAR 25</span>
+              <span class="ctag">DER Coordination</span><span class="ctag">Airworthiness</span>
             </div>
           </div>
         </div>
@@ -1212,12 +1822,10 @@ footer {
             <span class="career-chevron">▼</span>
           </div>
           <div class="career-body">
-            <p class="career-desc">Lead a team of electrical and harness engineers — staffing, development, performance, and technical strategy. Requires balancing people leadership with technical credibility.</p>
+            <p class="career-desc">Lead a team of electrical and harness engineers — staffing, development, performance, and technical strategy.</p>
             <div class="career-tags">
-              <span class="ctag">People Management</span>
-              <span class="ctag">Hiring</span>
-              <span class="ctag">Budget</span>
-              <span class="ctag">Strategic Planning</span>
+              <span class="ctag">People Management</span><span class="ctag">Hiring</span>
+              <span class="ctag">Budget</span><span class="ctag">Strategic Planning</span>
             </div>
           </div>
         </div>
@@ -1230,7 +1838,7 @@ footer {
             <span class="career-chevron">▼</span>
           </div>
           <div class="career-body">
-            <p class="career-desc">Apply 10+ years of expertise independently — supporting startups, primes, or government labs on harness design, airworthiness, or avionics integration on a contract basis.</p>
+            <p class="career-desc">Apply 10+ years of expertise independently — supporting startups, primes, or government labs on harness design, airworthiness, or avionics integration.</p>
             <div class="career-tags">
               <span class="ctag">Independent Consulting</span>
               <span class="ctag">Contract Work</span>
@@ -1257,31 +1865,15 @@ footer {
         <div class="section-rule"></div>
       </div>
 
-<!-- 📷 IMAGE SLOT -->
-
-<div style="
-  margin-bottom:36px;
-  display:flex;
-  gap:24px;
-  align-items:stretch;
-  flex-wrap:wrap;
-">
-
-  <div class="image-placeholder" style="height:360px; max-width:540px; padding:0; flex:1;">
-    <img
-      src="Images/tracking.png"
-      alt="Aerospace engineering workspace image"
-      style="width:100%; height:100%; object-fit:cover; border-radius:14px;">
-  </div>
-
-  <div class="image-placeholder" style="height:360px; padding:0; flex:1;">
-    <img
-      src="Images/Harnesses.png"
-      alt="Aerospace lab and workflow image"
-      style="width:100%; height:100%; object-fit:cover; border-radius:14px;">
-  </div>
-
-</div>
+      <!-- Skills image pair -->
+      <div class="img-skills-row">
+        <div class="img-frame" onclick="openLightbox(this, 'Engineering Tracking & Systems')">
+          <img src="Images/tracking.png" alt="Aerospace engineering workspace">
+        </div>
+        <div class="img-frame" onclick="openLightbox(this, 'Wire Harness Assembly')">
+          <img src="Images/Harnesses.png" alt="Wire harness assembly">
+        </div>
+      </div>
 
       <div class="skills-wrap">
         <span class="skill-tag">Wire Harness Design</span>
@@ -1327,7 +1919,7 @@ footer {
 <script>
 // ── SCROLL REVEAL ──
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
+  entries.forEach((e) => {
     if (e.isIntersecting) {
       setTimeout(() => e.target.classList.add('visible'), e.target.dataset.delay || 0);
     }
@@ -1337,6 +1929,41 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.tl-item, .task-card, .career-card').forEach((el, i) => {
   el.dataset.delay = (i % 4) * 70;
   observer.observe(el);
+});
+
+// ── LIGHTBOX ──
+function openLightbox(frame, caption) {
+  const img = frame.querySelector('img');
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  const lbCap = document.getElementById('lightbox-caption');
+
+  lbImg.src = img.src;
+  lbImg.alt = img.alt;
+  lbCap.textContent = caption || img.alt;
+
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  const lb = document.getElementById('lightbox');
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+  // Clear src after transition
+  setTimeout(() => {
+    document.getElementById('lightbox-img').src = '';
+  }, 300);
+}
+
+// Close on backdrop click
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+
+// Close on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeLightbox();
 });
 
 // ── TASK FILTER ──
@@ -1370,6 +1997,22 @@ function toggleCareer(header) {
   const card = header.closest('.career-card');
   card.classList.toggle('open');
 }
+
+// ── ACTIVE NAV LINK on scroll ──
+const sections = document.querySelectorAll('section[id]');
+const identityLinks = document.querySelectorAll('.identity-links a');
+
+// Highlight identity bar active state based on scroll section
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    // Subtle active tracking — just for visual polish
+    if (e.isIntersecting && e.target.id) {
+      const id = e.target.id;
+    }
+  });
+}, { threshold: 0.3 });
+
+sections.forEach(s => sectionObserver.observe(s));
 </script>
 </body>
 </html>
