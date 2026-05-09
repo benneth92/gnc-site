@@ -45,16 +45,20 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 100%;
 }
 
 body {
+  min-height: 100%;
   background: var(--navy-900);
   color: var(--text-primary);
   font-family: 'DM Sans', sans-serif;
   font-weight: 400;
   line-height: 1.6;
   overflow-x: hidden;
-  overscroll-behavior-y: none;
+  overflow-y: auto;
+  touch-action: pan-y;
 }
 
 body::before {
@@ -91,7 +95,8 @@ body::after {
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
-  height: var(--nav-h);
+  min-height: var(--nav-h);
+  height: auto;
   background: rgba(4,11,24,0.92);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
@@ -99,7 +104,7 @@ nav {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 0 clamp(16px, 4vw, 48px);
+  padding: 10px clamp(16px, 4vw, 48px);
   gap: 12px;
   z-index: 100;
 }
@@ -612,17 +617,18 @@ footer {
 
 @media (max-width: 760px) {
   :root {
-    --nav-h: 96px;
+    --nav-h: 128px;
   }
 
   nav {
-    height: var(--nav-h);
+    min-height: var(--nav-h);
+    height: auto;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     padding: 10px clamp(16px,4vw,48px);
     gap: 8px;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .logo-mark {
@@ -651,23 +657,18 @@ footer {
   .nav-links {
     width: 100%;
     display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: visible;
     gap: 6px;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-
-  .nav-links::-webkit-scrollbar {
-    display: none;
   }
 
   .nav-links a {
-    font-size: 0.52rem;
+    font-size: 0.50rem;
     padding: 5px 8px;
-    letter-spacing: 1.2px;
-    flex-shrink: 0;
+    letter-spacing: 1px;
+    flex-shrink: 1;
   }
 
   #hero {
