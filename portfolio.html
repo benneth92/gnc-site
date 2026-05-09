@@ -395,6 +395,35 @@
       text-shadow: 0 0 18px rgba(255,255,255,0.5), 0 0 90px rgba(255,255,255,0.14);
       background: linear-gradient(180deg, #fff 0%, #d8d8d8 42%, #777 100%);
       -webkit-background-clip: text; color: transparent;
+      position: relative;
+      animation: signalLock 2.4s ease forwards;
+    }
+
+    @keyframes signalLock {
+      0%   { filter: blur(22px) brightness(0.25); opacity: 0.15; letter-spacing: 0.32em; }
+      35%  { filter: blur(10px) brightness(0.6);  opacity: 0.55; letter-spacing: 0.14em; }
+      65%  { filter: blur(3px)  brightness(1.1);  opacity: 0.85; letter-spacing: 0.08em; }
+      82%  { filter: blur(0px)  brightness(1.5);  opacity: 1;    letter-spacing: 0.072em; }
+      91%  { filter: blur(1.5px) brightness(0.95); }
+      100% { filter: blur(0px)  brightness(1);    opacity: 1;    letter-spacing: 0.07em; }
+    }
+
+    .hero-scan {
+      position: absolute;
+      left: 0; right: 0; top: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 5%, rgba(0,229,200,0.9) 50%, transparent 95%);
+      pointer-events: none;
+      z-index: 5;
+      opacity: 0;
+      animation: scanSweep 2.4s ease forwards;
+    }
+
+    @keyframes scanSweep {
+      0%   { top: 5%;  opacity: 0; }
+      8%   { opacity: 1; }
+      88%  { opacity: 0.7; top: 95%; }
+      100% { opacity: 0;   top: 100%; }
     }
 
     .hero-subtitle {
@@ -724,7 +753,10 @@
         SYSTEMS ACTIVE
       </div>
 
-      <h1>TECHNICAL PORTFOLIO</h1>
+      <div style="position:relative; display:inline-block; width:100%;">
+        <div class="hero-scan"></div>
+        <h1>TECHNICAL PORTFOLIO</h1>
+      </div>
 
       <p class="hero-subtitle">
         Tracking · Estimation · Sensor Fusion · Autonomous Aerospace Systems
