@@ -683,34 +683,23 @@
     }
 
 @media(max-width:768px) {
-  .hero {
-    padding:125px 6% 100px;
+  nav {
+    flex-direction:column;
     align-items:flex-start;
+    gap:16px;
   }
 
-  .hero-inner {
-    grid-template-columns: 1fr;
-    gap: 42px;
-  }
-
-  .photo-col {
-    order: 2;
-    width: 100%;
-    margin-top: 30px;
-  }
-
-  .bio-col {
-    order: 1;
-    width: 100%;
-  }
-
-  .photo-frame {
-    max-width: 300px;
-    margin: 0 auto;
+  .nav-links {
+    flex-wrap:wrap;
+    gap:16px;
   }
 
   .spec-grid {
     grid-template-columns:1fr;
+  }
+
+  .hero {
+    padding:125px 6% 100px;
   }
 
   .scroll-cue {
