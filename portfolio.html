@@ -716,10 +716,16 @@
     @media (max-width: 620px) {
       .container { width: min(100% - 26px, 1180px); }
       .section { padding: 78px 0; }
-      /* HUD corners: small but clearly visible on mobile */
+      .nav {
+        top: 10px;
+        width: calc(100% - 20px);
+        border-radius: 12px;
+        border: 1px solid rgba(255,255,255,0.15); /* full border on mobile — floats above corners */
+      }
+      /* HUD corners sit below the floating nav */
       .hud-corner { width: 44px; height: 44px; opacity: 0.55; border-width: 1px; }
-      .hud-corner.tl { left: 10px; top: 10px; }
-      .hud-corner.tr { right: 10px; top: 10px; }
+      .hud-corner.tl { left: 10px; top: 90px; }
+      .hud-corner.tr { right: 10px; top: 90px; }
       .hud-corner.bl { left: 10px; bottom: 10px; }
       .hud-corner.br { right: 10px; bottom: 10px; }
       .hero-subtitle { letter-spacing: 0.05em; }
@@ -727,8 +733,8 @@
       .project-card { padding: 18px; }
       .media-placeholder { min-height: 230px; }
       .project-media { height: 230px; }
-      /* push hero content down so nav doesn't overlap title */
-      .hero-content { padding-top: 120px; }
+      /* pull TECHNICAL PORTFOLIO closer under the nav */
+      .hero-content { padding-top: 80px; }
     }
   </style>
 </head>
