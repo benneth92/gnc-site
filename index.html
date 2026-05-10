@@ -683,29 +683,11 @@
     }
 
     @media(max-width:768px) {
-  nav {
-    flex-direction:column;
-    align-items:flex-start;
-    gap:16px;
-  }
-
-  .nav-links {
-    flex-wrap:wrap;
-    gap:16px;
-  }
-
-  .spec-grid {
-    grid-template-columns:1fr;
-  }
-
-  .hero {
-    padding:125px 6% 100px !important;
-  }
-
-  .scroll-cue {
-    bottom:20px;
-  }
-}
+      nav {
+        flex-direction:column;
+        align-items:flex-start;
+        gap:16px;
+      }
 
       .nav-links {
         flex-wrap:wrap;
@@ -716,9 +698,22 @@
         grid-template-columns:1fr;
       }
 
+      /* Mobile: enough top padding to clear stacked unified nav (~120px tall) */
       .hero {
-        padding:100px 6% 100px;
+        padding: 130px 6% 80px;
       }
+
+      /* Push photo down so it doesn't crowd the nav */
+      .photo-col {
+        margin-top: 24px;
+      }
+
+      /* Bio col: no extra shift — red line stays exactly where it belongs */
+      .bio-col {
+        margin-top: 0;
+      }
+
+      /* hero-line is position:absolute so it's unaffected by padding — stays correct */
 
       .scroll-cue {
         bottom:20px;
