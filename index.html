@@ -682,30 +682,43 @@
       }
     }
 
-    @media(max-width:768px) {
-      nav {
-        flex-direction:column;
-        align-items:flex-start;
-        gap:16px;
-      }
+@media(max-width:768px) {
+  nav {
+    flex-direction:column;
+    align-items:flex-start;
+    gap:16px;
+  }
 
-      .nav-links {
-        flex-wrap:wrap;
-        gap:16px;
-      }
+  .nav-links {
+    flex-wrap:wrap;
+    gap:16px;
+  }
 
-      .spec-grid {
-        grid-template-columns:1fr;
-      }
+  .spec-grid {
+    grid-template-columns:1fr;
+  }
 
-      .hero {
-        padding:100px 6% 100px;
-      }
+  .hero {
+    padding:165px 6% 100px;
+    align-items:flex-start;
+  }
 
-      .scroll-cue {
-        bottom:20px;
-      }
-    }
+  .hero-inner {
+    gap:56px;
+  }
+
+  .photo-col {
+    margin-top:42px;
+  }
+
+  .photo-frame {
+    max-width:300px;
+  }
+
+  .scroll-cue {
+    bottom:20px;
+  }
+}
   
   /* ═══════════════════════════════════════════
      UNIFIED NAV — matches portfolio.html exactly
