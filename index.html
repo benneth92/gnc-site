@@ -76,127 +76,12 @@
       border-bottom:1px solid var(--border);
     }
 
-    .logo {
-      display:flex;
-      align-items:center;
-      gap:14px;
-      text-decoration:none;
-    }
-
-    .logo-mark {
-      position:relative;
-      width:52px;
-      height:52px;
-    }
-
-    .logo-mark svg {
-      width:52px;
-      height:52px;
-    }
-
-    .logo-hex {
-      fill:none;
-      stroke:var(--red);
-      stroke-width:1.5;
-      animation:hex-rotate 12s linear infinite;
-      transform-origin:26px 26px;
-    }
-
-    @keyframes hex-rotate {
-      to { transform:rotate(360deg); }
-    }
-
-    .logo-inner {
-      fill:rgba(255,32,32,0.08);
-    }
-
-    .logo-text-mark {
-      position:absolute;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-family:'Orbitron',monospace;
-      font-weight:900;
-      font-size:1rem;
-      color:var(--red);
-      text-shadow:0 0 12px var(--red-glow);
-      letter-spacing:1px;
-    }
-
-    .logo-name {
-      display:flex;
-      flex-direction:column;
-      gap:1px;
-    }
-
-    .logo-name-top {
-      font-family:'Orbitron',monospace;
-      font-weight:700;
-      font-size:1.05rem;
-      color:#fff;
-      letter-spacing:2px;
-      line-height:1;
-    }
-
-    .logo-name-sub {
-      font-size:.65rem;
-      color:var(--red);
-      letter-spacing:4px;
-      text-transform:uppercase;
-    }
-
-    .nav-links {
-      display:flex;
-      gap:28px;
-      align-items:center;
-    }
-
-    .nav-links a {
-      font-family:'Orbitron',monospace;
-      font-size:.65rem;
-      font-weight:600;
-      letter-spacing:2px;
-      color:var(--muted);
-      text-decoration:none;
-      text-transform:uppercase;
-      transition:color .3s;
-      position:relative;
-    }
-
-    .nav-links a::after {
-      content:'';
-      position:absolute;
-      bottom:-4px;
-      left:0;
-      width:0;
-      height:1px;
-      background:var(--red);
-      transition:width .3s;
-    }
-
-    .nav-links a:hover {
-      color:#fff;
-    }
-
-    .nav-links a:hover::after {
-      width:100%;
-    }
-
-    .nav-links a.active {
-      color:var(--red);
-    }
-
-    .nav-links a.active::after {
-      width:100%;
-    }
-
     .hero {
       position:relative;
       min-height:100vh;
       display:flex;
       align-items:center;
-      padding:178px 8% 100px;
+      padding:178px 8% 150px;
       z-index:1;
       overflow:hidden;
     }
@@ -350,81 +235,6 @@
       to { opacity:1; transform:translateX(0); }
     }
 
-    .hero-action-row {
-      display:flex;
-      align-items:center;
-      gap:16px;
-      flex-wrap:wrap;
-      margin-bottom:28px;
-    }
-
-    .status-pill,
-    .bio-linkedin {
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:44px;
-      padding:11px 22px;
-      border-radius:999px;
-      font-family:'Orbitron',monospace;
-      font-size:.65rem;
-      font-weight:700;
-      letter-spacing:2px;
-      text-decoration:none;
-      text-transform:uppercase;
-      white-space:nowrap;
-    }
-
-    .status-pill {
-      gap:8px;
-      border:1px solid rgba(255,32,32,0.4);
-      background:rgba(255,32,32,0.07);
-      color:var(--red);
-    }
-
-    .consulting-pill {
-      border:1px solid rgba(0,255,140,0.38);
-      background:rgba(0,255,140,0.07);
-      color:var(--green);
-      box-shadow:
-        0 0 18px rgba(0,255,140,0.16),
-        inset 0 0 10px rgba(0,255,140,0.04);
-      transition:
-        transform .25s ease,
-        border-color .25s ease,
-        box-shadow .25s ease,
-        background .25s ease;
-    }
-
-    .consulting-pill:hover {
-      transform:translateY(-2px);
-      border-color:rgba(0,255,140,0.75);
-      background:rgba(0,255,140,0.10);
-      box-shadow:
-        0 0 24px rgba(0,255,140,0.30),
-        0 0 60px rgba(0,255,140,0.14);
-    }
-
-    .status-dot {
-      width:6px;
-      height:6px;
-      border-radius:50%;
-      background:var(--red);
-      box-shadow:0 0 8px var(--red);
-      animation:blink 1.4s ease-in-out infinite;
-      flex-shrink:0;
-    }
-
-    .green-dot {
-      background:var(--green);
-      box-shadow:0 0 10px var(--green);
-    }
-
-    @keyframes blink {
-      0%,100%{opacity:1;}
-      50%{opacity:.2;}
-    }
-
     .bio-col h1 {
       font-family:'Orbitron',monospace;
       font-size:clamp(2rem,4vw,3.6rem);
@@ -459,7 +269,7 @@
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:12px;
-      margin-bottom:36px;
+      margin-bottom:34px;
     }
 
     .spec-item {
@@ -489,6 +299,71 @@
       font-weight:500;
     }
 
+    .hero-action-row {
+      display:flex;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-top:4px;
+      margin-bottom:70px;
+    }
+
+    .status-pill,
+    .bio-linkedin {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:44px;
+      padding:11px 22px;
+      border-radius:999px;
+      font-family:'Orbitron',monospace;
+      font-size:.65rem;
+      font-weight:700;
+      letter-spacing:2px;
+      text-decoration:none;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+
+    .status-pill {
+      gap:8px;
+      border:1px solid rgba(0,255,140,0.38);
+      background:rgba(0,255,140,0.07);
+      color:var(--green);
+      box-shadow:
+        0 0 18px rgba(0,255,140,0.16),
+        inset 0 0 10px rgba(0,255,140,0.04);
+      transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+    }
+
+    .status-pill:hover {
+      transform:translateY(-2px);
+      border-color:rgba(0,255,140,0.75);
+      background:rgba(0,255,140,0.10);
+      box-shadow:
+        0 0 24px rgba(0,255,140,0.30),
+        0 0 60px rgba(0,255,140,0.14);
+    }
+
+    .status-dot {
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 10px var(--green);
+      animation:blink 1.4s ease-in-out infinite;
+      flex-shrink:0;
+    }
+
+    @keyframes blink {
+      0%,100%{opacity:1;}
+      50%{opacity:.2;}
+    }
+
     .bio-linkedin {
       gap:10px;
       background:rgba(10,102,194,0.12);
@@ -513,7 +388,7 @@
 
     .scroll-cue {
       position:absolute;
-      bottom:35px;
+      bottom:4px;
       left:50%;
       transform:translateX(-50%);
       display:flex;
@@ -848,7 +723,7 @@
       }
 
       .hero {
-        padding:130px 5% 80px;
+        padding:130px 5% 120px;
       }
 
       .hero-inner {
@@ -873,11 +748,12 @@
       }
 
       .scroll-cue {
-        bottom:20px;
+        bottom:4px;
       }
 
       .hero-action-row {
         gap:12px;
+        margin-bottom:78px;
       }
 
       .status-pill,
@@ -974,20 +850,6 @@
 
       <div class="bio-col">
 
-        <div class="hero-action-row">
-          <a href="consulting.html" class="status-pill consulting-pill">
-            <span class="status-dot green-dot"></span>
-            CAREER CONSULTATION
-          </a>
-
-          <a href="https://www.linkedin.com/in/benneth-perez/" target="_blank" class="bio-linkedin">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
-            CONNECT ON LINKEDIN
-          </a>
-        </div>
-
         <h1>Benneth<br>Perez</h1>
 
         <div class="bio-title">
@@ -1023,6 +885,20 @@
             <div class="spec-label">PLATFORMS</div>
             <div class="spec-val">Experimental · Air Dominance · Autonomous Systems</div>
           </div>
+        </div>
+
+        <div class="hero-action-row">
+          <a href="consulting.html" class="status-pill consulting-pill">
+            <span class="status-dot green-dot"></span>
+            CAREER CONSULTATION
+          </a>
+
+          <a href="https://www.linkedin.com/in/benneth-perez/" target="_blank" class="bio-linkedin">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            CONNECT ON LINKEDIN
+          </a>
         </div>
 
       </div>
