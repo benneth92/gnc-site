@@ -1,6 +1,3 @@
-# Full Updated HTML
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,12 +61,140 @@
       50%{opacity:1;transform:translateX(-50%) scale(1.1);}
     }
 
+    nav {
+      position:sticky;
+      top:0;
+      z-index:1000;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:16px 6%;
+      background:rgba(6,6,8,0.92);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--border);
+    }
+
+    .logo {
+      display:flex;
+      align-items:center;
+      gap:14px;
+      text-decoration:none;
+    }
+
+    .logo-mark {
+      position:relative;
+      width:52px;
+      height:52px;
+    }
+
+    .logo-mark svg {
+      width:52px;
+      height:52px;
+    }
+
+    .logo-hex {
+      fill:none;
+      stroke:var(--red);
+      stroke-width:1.5;
+      animation:hex-rotate 12s linear infinite;
+      transform-origin:26px 26px;
+    }
+
+    @keyframes hex-rotate {
+      to { transform:rotate(360deg); }
+    }
+
+    .logo-inner {
+      fill:rgba(255,32,32,0.08);
+    }
+
+    .logo-text-mark {
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family:'Orbitron',monospace;
+      font-weight:900;
+      font-size:1rem;
+      color:var(--red);
+      text-shadow:0 0 12px var(--red-glow);
+      letter-spacing:1px;
+    }
+
+    .logo-name {
+      display:flex;
+      flex-direction:column;
+      gap:1px;
+    }
+
+    .logo-name-top {
+      font-family:'Orbitron',monospace;
+      font-weight:700;
+      font-size:1.05rem;
+      color:#fff;
+      letter-spacing:2px;
+      line-height:1;
+    }
+
+    .logo-name-sub {
+      font-size:.65rem;
+      color:var(--red);
+      letter-spacing:4px;
+      text-transform:uppercase;
+    }
+
+    .nav-links {
+      display:flex;
+      gap:28px;
+      align-items:center;
+    }
+
+    .nav-links a {
+      font-family:'Orbitron',monospace;
+      font-size:.65rem;
+      font-weight:600;
+      letter-spacing:2px;
+      color:var(--muted);
+      text-decoration:none;
+      text-transform:uppercase;
+      transition:color .3s;
+      position:relative;
+    }
+
+    .nav-links a::after {
+      content:'';
+      position:absolute;
+      bottom:-4px;
+      left:0;
+      width:0;
+      height:1px;
+      background:var(--red);
+      transition:width .3s;
+    }
+
+    .nav-links a:hover {
+      color:#fff;
+    }
+
+    .nav-links a:hover::after {
+      width:100%;
+    }
+
+    .nav-links a.active {
+      color:var(--red);
+    }
+
+    .nav-links a.active::after {
+      width:100%;
+    }
+
     .hero {
       position:relative;
       min-height:100vh;
       display:flex;
       align-items:center;
-      padding:178px 8% 120px;
+      padding: 178px 8% 100px;
       z-index:1;
       overflow:hidden;
     }
@@ -132,6 +257,19 @@
       max-width:340px;
     }
 
+    .photo-frame svg.hex-ring {
+      position:absolute;
+      inset:-20px;
+      width:calc(100% + 40px);
+      height:calc(100% + 40px);
+      animation:hex-spin 20s linear infinite;
+      z-index:0;
+    }
+
+    @keyframes hex-spin {
+      to { transform:rotate(360deg); }
+    }
+
     .photo-wrapper {
       position:relative;
       z-index:1;
@@ -144,6 +282,29 @@
         inset 0 0 20px rgba(255,32,32,0.05);
       aspect-ratio:3/4;
       background:linear-gradient(145deg,rgba(20,8,8,0.9),rgba(8,8,16,0.95));
+    }
+
+    .photo-wrapper::before,
+    .photo-wrapper::after {
+      content:'';
+      position:absolute;
+      width:28px;
+      height:28px;
+      z-index:3;
+    }
+
+    .photo-wrapper::before {
+      top:10px;
+      left:10px;
+      border-top:2px solid var(--red);
+      border-left:2px solid var(--red);
+    }
+
+    .photo-wrapper::after {
+      bottom:10px;
+      right:10px;
+      border-bottom:2px solid var(--red);
+      border-right:2px solid var(--red);
     }
 
     .photo-scan {
@@ -187,6 +348,35 @@
       to { opacity:1; transform:translateX(0); }
     }
 
+    .status-pill {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 18px;
+      border-radius:999px;
+      border:1px solid rgba(255,32,32,0.4);
+      background:rgba(255,32,32,0.07);
+      color:var(--red);
+      font-family:'Orbitron',monospace;
+      font-size:.65rem;
+      letter-spacing:3px;
+      margin-bottom:28px;
+    }
+
+    .status-dot {
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:var(--red);
+      box-shadow:0 0 8px var(--red);
+      animation:blink 1.4s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%,100%{opacity:1;}
+      50%{opacity:.2;}
+    }
+
     .bio-col h1 {
       font-family:'Orbitron',monospace;
       font-size:clamp(2rem,4vw,3.6rem);
@@ -217,117 +407,570 @@
       padding-left:20px;
     }
 
-    .hero-button-row {
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:24px;
-      flex-wrap:wrap;
-      margin-top:34px;
-      margin-bottom:86px;
+    .spec-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-bottom:36px;
     }
 
-    .status-pill {
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:12px 26px;
-      border-radius:999px;
+    .spec-item {
+      padding:14px 16px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.02);
+      border:1px solid rgba(255,32,32,0.15);
+      transition:border-color .3s, background .3s;
+    }
+
+    .spec-item:hover {
+      border-color:rgba(255,32,32,0.4);
+      background:rgba(255,32,32,0.05);
+    }
+
+    .spec-label {
       font-family:'Orbitron',monospace;
-      font-size:.68rem;
-      letter-spacing:3px;
-      white-space:nowrap;
+      font-size:.58rem;
+      letter-spacing:2px;
+      color:var(--red);
+      margin-bottom:5px;
     }
 
-    .consulting-pill{
-      text-decoration:none;
-      border:1px solid rgba(0,255,140,0.35);
-      background:rgba(0,255,140,0.05);
-      color:#00ff99;
-      box-shadow:
-        0 0 18px rgba(0,255,140,0.12),
-        inset 0 0 10px rgba(0,255,140,0.03);
-      transition:
-        transform .25s ease,
-        border-color .25s ease,
-        box-shadow .25s ease,
-        background .25s ease;
-    }
-
-    .consulting-pill:hover{
-      transform:translateY(-2px);
-      border-color:rgba(0,255,140,0.7);
-      background:rgba(0,255,140,0.08);
-      box-shadow:
-        0 0 24px rgba(0,255,140,0.28),
-        0 0 60px rgba(0,255,140,0.12);
-    }
-
-    .status-dot {
-      width:6px;
-      height:6px;
-      border-radius:50%;
-      animation:blink 1.4s ease-in-out infinite;
-    }
-
-    .green-dot{
-      background:#00ff99;
-      box-shadow:0 0 10px #00ff99;
-    }
-
-    @keyframes blink {
-      0%,100%{opacity:1;}
-      50%{opacity:.2;}
+    .spec-val {
+      font-size:.88rem;
+      color:#ddd;
+      font-weight:500;
     }
 
     .bio-linkedin {
-      display:inline-flex;
-      align-items:center;
-      gap:12px;
-      padding:14px 28px;
-      border-radius:8px;
-      background:rgba(10,102,194,0.12);
-      border:1px solid rgba(10,102,194,0.5);
-      color:#6ea8ff;
-      font-family:'Orbitron',monospace;
-      font-size:.7rem;
-      font-weight:700;
-      letter-spacing:.18em;
-      text-decoration:none;
-      text-transform:uppercase;
-      box-shadow:0 0 18px rgba(10,102,194,0.25), 0 0 40px rgba(10,102,194,0.1);
-      transition:background .3s, border-color .3s, box-shadow .3s, transform .2s;
-      white-space:nowrap;
-    }
-
-    .linkedin-icon {
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:17px;
-      height:17px;
-      border-radius:3px;
-      background:#6ea8ff;
-      color:#07111f;
-      font-family:Arial, sans-serif;
-      font-size:.68rem;
-      font-weight:900;
-      letter-spacing:0;
-      text-transform:none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 28px;
+      padding: 13px 24px;
+      border-radius: 8px;
+      background: rgba(10, 102, 194, 0.12);
+      border: 1px solid rgba(10, 102, 194, 0.5);
+      color: #4ea1ff;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-decoration: none;
+      text-transform: uppercase;
+      box-shadow: 0 0 18px rgba(10,102,194,0.25), 0 0 40px rgba(10,102,194,0.1);
+      transition: background 0.3s, border-color 0.3s, box-shadow 0.3s, transform 0.2s;
     }
 
     .bio-linkedin:hover {
-      background:rgba(10,102,194,0.22);
-      border-color:rgba(10,102,194,0.8);
-      box-shadow:0 0 28px rgba(10,102,194,0.5), 0 0 60px rgba(10,102,194,0.2);
-      transform:translateY(-2px);
+      background: rgba(10, 102, 194, 0.22);
+      border-color: rgba(10, 102, 194, 0.8);
+      box-shadow: 0 0 28px rgba(10,102,194,0.5), 0 0 60px rgba(10,102,194,0.2);
+      transform: translateY(-2px);
     }
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .btn-primary,
+    .btn-outline,
+    .btn-linkedin {
+      padding:14px 28px;
+      border-radius:8px;
+      background:transparent;
+      color:#ddd;
+      font-family:'Orbitron',monospace;
+      font-size:.7rem;
+      font-weight:700;
+      letter-spacing:2px;
+      text-decoration:none;
+      text-transform:uppercase;
+      border:1px solid rgba(255,255,255,0.2);
+      cursor:pointer;
+      transition:
+        border-color .3s,
+        color .3s,
+        box-shadow .3s,
+        transform .2s,
+        background .3s;
+    }
+
+    .btn-primary:hover,
+    .btn-outline:hover {
+      transform:translateY(-2px);
+      border-color:var(--red);
+      color:var(--red);
+      background:rgba(255,32,32,0.05);
+      box-shadow:0 0 28px rgba(255,32,32,0.35);
+    }
+
+    .btn-linkedin:hover {
+      transform:translateY(-2px);
+      border-color:#0a66c2;
+      color:#4ea1ff;
+      background:rgba(10,102,194,0.08);
+      box-shadow:0 0 28px rgba(10,102,194,0.45);
+    }
+
+    .scroll-cue {
+      position:absolute;
+      bottom:35px;
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:8px;
+      z-index:2;
+      opacity:.5;
+    }
+
+    .scroll-cue span {
+      font-family:'Orbitron',monospace;
+      font-size:.55rem;
+      letter-spacing:3px;
+      color:var(--muted);
+    }
+
+    .scroll-arrow {
+      width:1px;
+      height:40px;
+      background:linear-gradient(to bottom,var(--red),transparent);
+      animation:arrow-drop 1.6s ease-in-out infinite;
+    }
+
+    @keyframes arrow-drop {
+      0%{transform:scaleY(0);transform-origin:top;}
+      50%{transform:scaleY(1);transform-origin:top;}
+      51%{transform-origin:bottom;}
+      100%{transform:scaleY(0);transform-origin:bottom;}
+    }
+
+    .expertise {
+      padding:80px 8% 100px;
+      position:relative;
+      z-index:1;
+    }
+
+    .expertise-header {
+      margin-bottom:50px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      border-bottom:1px solid var(--border);
+      padding-bottom:24px;
+    }
+
+    .expertise-header h2 {
+      font-family:'Orbitron',monospace;
+      font-size:1.5rem;
+      font-weight:700;
+      letter-spacing:2px;
+    }
+
+    .expertise-header p {
+      color:var(--muted);
+      font-size:.85rem;
+      max-width:360px;
+      text-align:right;
+      line-height:1.6;
+    }
+
+    .skills-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:20px;
+    }
+
+    .skill-card {
+      padding:26px;
+      border-radius:18px;
+      background:rgba(255,255,255,0.02);
+      border:1px solid var(--border);
+      position:relative;
+      overflow:hidden;
+      transition:transform .35s, border-color .35s, box-shadow .35s;
+      opacity:0;
+      transform:translateY(40px);
+    }
+
+    .skill-card.visible {
+      animation:card-reveal .65s ease forwards;
+    }
+
+    @keyframes card-reveal {
+      to { opacity:1; transform:translateY(0); }
+    }
+
+    .skill-card:hover {
+      transform:translateY(-8px);
+      border-color:rgba(255,50,50,.5);
+      box-shadow:0 20px 50px rgba(255,0,0,.15);
+    }
+
+    .skill-card::before {
+      content:'';
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:2px;
+      background:linear-gradient(90deg,transparent,var(--red),transparent);
+      transform:scaleX(0);
+      transition:transform .4s;
+    }
+
+    .skill-card:hover::before {
+      transform:scaleX(1);
+    }
+
+    .skill-icon {
+      font-size:1.8rem;
+      margin-bottom:14px;
+      display:block;
+    }
+
+    .skill-card h3 {
+      font-family:'Orbitron',monospace;
+      font-size:.9rem;
+      font-weight:700;
+      letter-spacing:1px;
+      margin-bottom:10px;
+      color:#fff;
+    }
+
+    .skill-card p {
+      color:#999;
+      font-size:.85rem;
+      line-height:1.65;
+      margin-bottom:16px;
+    }
+
+    .skill-bar-wrap {
+      height:3px;
+      background:rgba(255,255,255,0.06);
+      border-radius:99px;
+      overflow:hidden;
+    }
+
+    .skill-bar {
+      height:100%;
+      background:linear-gradient(90deg,#7a0000,var(--red));
+      border-radius:99px;
+      width:0;
+      transition:width 1.2s ease;
+      box-shadow:0 0 8px var(--red-glow);
+    }
+
+    .skill-card.visible .skill-bar {
+      width:var(--pct);
+    }
+
+    footer {
+      padding:30px 8%;
+      text-align:center;
+      color:#555;
+      border-top:1px solid var(--border);
+      font-family:'Orbitron',monospace;
+      font-size:.65rem;
+      letter-spacing:3px;
+    }
+
+    @media(max-width:900px) {
+      .hero-inner {
+        grid-template-columns:1fr;
+        gap:48px;
+      }
+
+      .photo-col {
+        max-width:320px;
+        margin:auto;
+      }
+
+      .bio-col {
+        animation:fade-up .9s ease forwards .4s;
+      }
+
+      @keyframes fade-up {
+        to { opacity:1; transform:translateY(0); }
+      }
+
+      .expertise-header {
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .expertise-header p {
+        text-align:left;
+        max-width:100%;
+        margin-top:8px;
+      }
+    }
+
+    @media(max-width:768px) {
+      nav {
+        flex-direction:column;
+        align-items:flex-start;
+        gap:16px;
+      }
+
+      .nav-links {
+        flex-wrap:wrap;
+        gap:16px;
+      }
+
+      .spec-grid {
+        grid-template-columns:1fr;
+      }
+
+      /* Mobile: clear the stacked nav, use consistent side padding */
+      .hero {
+        padding: 130px 5% 80px;
+      }
+
+      /* hero-inner: full width, centered, proper padding */
+      .hero-inner {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+      }
+
+      /* photo stays centered */
+      .photo-col {
+        margin-top: 16px;
+        max-width: 260px;
+      }
+
+      /* bio col: centered with breathing room on both sides */
+      .bio-col {
+        margin-top: 0;
+        width: 100%;
+        padding: 0 4px;
+      }
+
+      /* hero-line stays absolute — shift it to match content padding */
+      .hero-line {
+        left: 5%;
+      }
+
+      .scroll-cue {
+        bottom:20px;
+      }
+    }
+  
+  /* ═══════════════════════════════════════════
+     UNIFIED NAV — matches portfolio.html exactly
+     Same across all pages for uniformity
+  ═══════════════════════════════════════════ */
+  .unified-nav {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1020px, calc(100% - 320px));
+    z-index: 9999;
+    height: 58px;
+    padding: 0 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+
+    background: rgba(3, 4, 8, 0.68);
+    backdrop-filter: blur(20px) saturate(1.3);
+    -webkit-backdrop-filter: blur(20px) saturate(1.3);
+    border: 1px solid rgba(255,255,255,0.13);
+    border-top: none;
+    border-radius: 0 0 14px 14px;
+    box-shadow: inset 0 0 28px rgba(255,255,255,0.018), 0 8px 32px rgba(0,0,0,0.55);
+
+    opacity: 1;
+    transition: opacity 0.36s ease, transform 0.36s ease;
+  }
+
+  .unified-nav.hidden {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-14px);
+    pointer-events: none;
+  }
+
+  /* teal hairline at bottom */
+  .unified-nav::after {
+    content: "";
+    position: absolute;
+    bottom: -1px; left: 15%; right: 15%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #00e5c8, transparent);
+    opacity: 0.32;
+    border-radius: 999px;
+  }
+
+  /* Logo */
+  .unav-logo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .unav-hex {
+    position: relative;
+    width: 34px; height: 34px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .unav-hex svg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; overflow: visible;
+  }
+
+  .unav-hex svg polygon {
+    fill: rgba(0,229,200,0.07);
+    stroke: #00e5c8;
+    stroke-width: 1.4;
+    transition: fill 0.3s ease, filter 0.3s ease;
+  }
+
+  .unav-logo:hover .unav-hex svg polygon {
+    fill: rgba(0,229,200,0.15);
+    filter: drop-shadow(0 0 5px #00e5c8);
+  }
+
+  .unav-initials {
+    position: relative; z-index: 2;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.64rem; font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #00e5c8; line-height: 1;
+  }
+
+  .unav-text { display: flex; flex-direction: column; gap: 2px; }
+
+  .unav-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.14em; color: #ffffff; line-height: 1;
+  }
+
+  .unav-sub {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.52rem; letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.38); line-height: 1;
+  }
+
+  /* Links */
+  .unav-links {
+    display: flex; align-items: center;
+    gap: 2px; list-style: none;
+    flex-shrink: 1; min-width: 0;
+  }
+
+  .unav-links a {
+    display: block;
+    padding: 6px 9px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.58rem; letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.44);
+    text-decoration: none; text-transform: uppercase;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+  }
+
+  .unav-links a:hover {
+    color: rgba(255,255,255,0.88);
+    background: rgba(255,255,255,0.055);
+  }
+
+  .unav-links a.active {
+    color: #00e5c8;
+    border-color: rgba(0,229,200,0.38);
+    background: rgba(0,229,200,0.07);
+    box-shadow: 0 0 14px rgba(0,229,200,0.35), 0 0 36px rgba(0,229,200,0.12);
+  }
+
+  .unav-li {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+    padding: 6px 10px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.56rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 6px;
+    white-space: nowrap;
+    transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  }
+
+  .unav-li:hover {
+    color: #fff;
+    border-color: rgba(255,255,255,0.55);
+    background: rgba(255,255,255,0.06);
+  }
+
+  @media (max-width: 820px) {
+    .unav-li { display: none; }
+  }
+
+  @media (max-width: 820px) {
+    .unified-nav {
+      width: calc(100% - 24px);
+      height: auto; padding: 10px 14px;
+      flex-wrap: wrap; justify-content: center; gap: 8px 10px;
+    }
+    .unav-logo { flex-basis: 100%; justify-content: center; }
+    .unav-links { width: 100%; justify-content: center; flex-wrap: wrap; gap: 5px; }
+    .unav-links a { font-size: 0.52rem; padding: 5px 8px; }
+  }
+
+  @media (max-width: 480px) {
+    .unified-nav { width: calc(100% - 16px); border-radius: 12px; }
+    .unav-links a { font-size: 0.46rem; padding: 4px 6px; letter-spacing: 0.08em; }
+    .unav-hex { width: 28px; height: 28px; }
+  }
 
   </style>
 </head>
 
 <body>
   <div class="ambient"></div>
+
+    <nav class="unified-nav" id="unifiedNav">
+    <a href="index.html" class="unav-logo">
+      <div class="unav-hex">
+        <svg viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="19,2 35,10.5 35,27.5 19,36 3,27.5 3,10.5"/>
+        </svg>
+        <span class="unav-initials">BP</span>
+      </div>
+      <div class="unav-text">
+        <span class="unav-name">BENNETH</span>
+        <span class="unav-sub">PEREZ</span>
+      </div>
+    </a>
+    <ul class="unav-links">
+      <li><a href="index.html" class="active">BIOGRAPHY</a></li>
+      <li><a href="GNC.html">BUILD EXPERIENCE</a></li>
+      <li><a href="career_map.html">CAREER MAP</a></li>
+      <li><a href="day-to-day.html">DAY TO DAY</a></li>
+      <li><a href="platforms.html">PLATFORMS</a></li>
+      <li><a href="portfolio.html">PORTFOLIO</a></li>
+    </ul>
+    <a href="https://www.linkedin.com/in/benneth-perez/" target="_blank" class="unav-li">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      </svg>
+      LI
+    </a>
+  </nav>
 
   <section class="hero">
     <div class="hero-grid"></div>
@@ -338,12 +981,18 @@
       <div class="photo-col">
         <div class="photo-frame">
 
+          <svg class="hex-ring" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon stroke="rgba(255,32,32,0.2)" stroke-width="1"
+              points="200,10 380,110 380,390 200,490 20,390 20,110"/>
+          </svg>
+
           <div class="photo-wrapper">
             <img
               src="Images/profile.jpg"
               alt="Benneth Perez"
               style="width:100%; height:100%; object-fit:cover; display:block;"
             >
+
             <div class="photo-scan"></div>
           </div>
 
@@ -356,6 +1005,10 @@
       </div>
 
       <div class="bio-col">
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          GN&amp;C ENGINEER
+        </div>
 
         <h1>Benneth<br>Perez</h1>
 
@@ -372,25 +1025,149 @@
           verification &amp; validation, and tracking and estimation technologies.
         </p>
 
-        <div class="hero-button-row">
+        <div class="spec-grid">
+          <div class="spec-item">
+            <div class="spec-label">DOMAIN</div>
+            <div class="spec-val">Aerospace &amp; Defense</div>
+          </div>
 
-          <a href="consulting.html" class="status-pill consulting-pill">
-            <span class="status-dot green-dot"></span>
-            Career Consultation
-          </a>
+          <div class="spec-item">
+            <div class="spec-label">SPECIALIZATION</div>
+            <div class="spec-val">GN&amp;C Systems</div>
+          </div>
 
-          <a href="https://www.linkedin.com/in/benneth-perez/" target="_blank" class="bio-linkedin">
-            <span class="linkedin-icon">in</span>
-            CONNECT ON LINKEDIN
-          </a>
+          <div class="spec-item">
+            <div class="spec-label">FOCUS AREA</div>
+            <div class="spec-val">Missile Defense</div>
+          </div>
 
+          <div class="spec-item">
+            <div class="spec-label">PLATFORMS</div>
+            <div class="spec-val">Experimental · Air Dominance · Autonomous Systems</div>
+          </div>
         </div>
 
+        <a href="https://www.linkedin.com/in/benneth-perez/" target="_blank" class="bio-linkedin">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          CONNECT ON LINKEDIN
+        </a>
+
+
+      </div>
+
+    </div>
+
+    <div class="scroll-cue">
+      <span>SCROLL</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <section class="expertise">
+    <div class="expertise-header">
+      <h2>CORE EXPERTISE</h2>
+      <p>Technical disciplines spanning GN&amp;C, mission systems, avionics, tracking, and integration.</p>
+    </div>
+
+    <div class="skills-grid">
+
+      <div class="skill-card" data-reveal data-delay="0">
+        <span class="skill-icon">📡</span>
+        <h3>Radar Tracking &amp; Estimation</h3>
+        <p>Kalman filtering, covariance analysis, radar measurements, coordinate transformations, gating, and tracking applications.</p>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" style="--pct:92%"></div>
+        </div>
+      </div>
+
+      <div class="skill-card" data-reveal data-delay="100">
+        <span class="skill-icon">🧭</span>
+        <h3>Navigation &amp; Estimation</h3>
+        <p>State estimation, sensor fusion concepts, INS/GPS integration, covariance behavior, and real-time navigation analysis.</p>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" style="--pct:88%"></div>
+        </div>
+      </div>
+
+      <div class="skill-card" data-reveal data-delay="200">
+        <span class="skill-icon">✈️</span>
+        <h3>Avionics Integration</h3>
+        <p>Integration of avionics hardware, communication interfaces, requirements verification, test planning, and aircraft system compatibility.</p>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" style="--pct:90%"></div>
+        </div>
+      </div>
+
+      <div class="skill-card" data-reveal data-delay="0">
+        <span class="skill-icon">🔌</span>
+        <h3>Wire Harness &amp; Electrical Design</h3>
+        <p>Electrical interconnect design, wire routing, connector selection, signal compatibility, and aircraft-level integration support.</p>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" style="--pct:88%"></div>
+        </div>
+      </div>
+
+      <div class="skill-card" data-reveal data-delay="100">
+        <span class="skill-icon">🤖</span>
+        <h3>AI &amp; Autonomy</h3>
+        <p>Machine learning, graph neural networks, autonomous systems, model evaluation, and AI-assisted engineering development.</p>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" style="--pct:80%"></div>
+        </div>
+      </div>
+
+      <div class="skill-card" data-reveal data-delay="200">
+        <span class="skill-icon">🛰️</span>
+        <h3>Mission Systems</h3>
+        <p>Mission system integration, sensor and data interface compatibility, hardware/software coordination, and system-level verification.</p>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar" style="--pct:90%"></div>
+        </div>
       </div>
 
     </div>
   </section>
 
+  <footer>
+    Benneth Perez &nbsp;|&nbsp; Aerospace · GN&amp;C · Defense · Sensor Fusion
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('[data-reveal]');
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const delay = e.target.dataset.delay || 0;
+          setTimeout(() => e.target.classList.add('visible'), parseInt(delay));
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach(el => obs.observe(el));
+
+    window.addEventListener('scroll', () => {
+      const s = window.scrollY;
+      document.querySelector('.ambient').style.transform =
+        `translateX(-50%) translateY(${s * 0.12}px)`;
+    });
+  </script>
+  <script>
+  // Unified nav: hide on scroll down, show on scroll up
+  (function() {
+    var nav = document.getElementById('unifiedNav');
+    var lastY = window.scrollY;
+    window.addEventListener('scroll', function() {
+      var y = window.scrollY;
+      var delta = y - lastY;
+      if (delta > 6 && y > 80) nav.classList.add('hidden');
+      else if (delta < -4) nav.classList.remove('hidden');
+      lastY = y;
+    }, { passive: true });
+  })();
+  </script>
 </body>
 </html>
-```
