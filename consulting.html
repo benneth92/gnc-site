@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Engineering Career Consulting</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050b18;
+      --bg2: #08152b;
+      --navy: #0b1f3a;
+      --navy-light: #12345f;
+      --gold: #d8a83f;
+      --gold-soft: #f3d27a;
+      --white: #f5f7fb;
+      --muted: #aeb9c8;
+      --panel: rgba(9, 24, 48, 0.78);
+      --border: rgba(216, 168, 63, 0.32);
+      --glow: 0 0 28px rgba(216, 168, 63, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Inter", sans-serif;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(216, 168, 63, 0.13), transparent 28%),
+        radial-gradient(circle at 80% 15%, rgba(18, 52, 95, 0.65), transparent 35%),
+        linear-gradient(135deg, var(--bg), var(--bg2) 52%, #020611);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(216, 168, 63, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(216, 168, 63, 0.055) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.75), transparent 85%);
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.025) 0,
+        rgba(255,255,255,0.025) 1px,
+        transparent 1px,
+        transparent 5px
+      );
+      opacity: 0.4;
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      padding: 18px clamp(18px, 5vw, 72px);
+      background: rgba(5, 11, 24, 0.82);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: max-content;
+    }
+
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--gold-soft);
+      font-family: "Orbitron", sans-serif;
+      font-weight: 800;
+      box-shadow: var(--glow), inset 0 0 18px rgba(216,168,63,0.18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      width: 120%;
+      height: 2px;
+      background: var(--gold-soft);
+      transform: rotate(-30deg);
+      animation: scan 3.8s linear infinite;
+      opacity: 0.65;
+    }
+
+    @keyframes scan {
+      0% { top: -20%; }
+      100% { top: 120%; }
+    }
+
+    .brand-text {
+      font-family: "Orbitron", sans-serif;
+      letter-spacing: 0.08em;
+      font-size: 0.85rem;
+      color: var(--gold-soft);
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-soft);
+      text-shadow: 0 0 16px rgba(216,168,63,0.5);
+    }
+
+    .nav-cta,
+    .btn-primary,
+    .btn-secondary {
+      border-radius: 999px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      transition: 0.25s ease;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .nav-cta {
+      padding: 11px 18px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+      color: #07101f;
+      box-shadow: var(--glow);
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover,
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 38px rgba(216,168,63,0.45);
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      place-items: center;
+      padding: 96px clamp(18px, 6vw, 86px) 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .radar {
+      position: absolute;
+      width: min(760px, 90vw);
+      height: min(760px, 90vw);
+      border: 1px solid rgba(216,168,63,0.18);
+      border-radius: 50%;
+      opacity: 0.45;
+      box-shadow: inset 0 0 70px rgba(216,168,63,0.08);
+    }
+
+    .radar::before,
+    .radar::after {
+      content: "";
+      position: absolute;
+      inset: 18%;
+      border: 1px solid rgba(216,168,63,0.15);
+      border-radius: 50%;
+    }
+
+    .radar::after {
+      inset: 35%;
+    }
+
+    .sweep {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      left: 50%;
+      top: 50%;
+      transform-origin: 0 0;
+      background: linear-gradient(45deg, rgba(216,168,63,0.32), transparent 68%);
+      animation: rotateSweep 7s linear infinite;
+      border-top: 1px solid rgba(216,168,63,0.5);
+    }
+
+    @keyframes rotateSweep {
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1050px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(9,24,48,0.58);
+      color: var(--gold-soft);
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.76rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      box-shadow: var(--glow);
+    }
+
+    .pulse {
+      width: 9px;
+      height: 9px;
+      background: var(--gold-soft);
+      border-radius: 50%;
+      box-shadow: 0 0 16px var(--gold-soft);
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.45; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    h1 {
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(2.4rem, 7vw, 6.6rem);
+      line-height: 0.95;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-shadow: 0 0 36px rgba(216,168,63,0.3);
+      margin-bottom: 22px;
+    }
+
+    .gold-text {
+      color: var(--gold-soft);
+    }
+
+    .subtitle {
+      max-width: 780px;
+      margin: 0 auto 34px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      min-width: 190px;
+      padding: 14px 22px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+      color: #06101f;
+      border: 1px solid transparent;
+      box-shadow: var(--glow);
+    }
+
+    .btn-secondary {
+      color: var(--gold-soft);
+      border: 1px solid var(--border);
+      background: rgba(9,24,48,0.62);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(216,168,63,0.08);
+      transform: translateY(-2px);
+    }
+
+    .section {
+      padding: 86px clamp(18px, 6vw, 86px);
+      position: relative;
+    }
+
+    .section-header {
+      max-width: 850px;
+      margin: 0 auto 42px;
+      text-align: center;
+    }
+
+    .section-kicker {
+      color: var(--gold-soft);
+      font-family: "Orbitron", sans-serif;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      font-size: 0.76rem;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(1.75rem, 4vw, 3.2rem);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 14px;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 1.02rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(12,32,61,0.82), rgba(5,13,28,0.86));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 22px 55px rgba(0,0,0,0.32);
+      position: relative;
+      overflow: hidden;
+      transition: 0.28s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(216,168,63,0.08), transparent);
+      transform: translateX(-100%);
+      transition: 0.55s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(243,210,122,0.62);
+      box-shadow: 0 0 35px rgba(216,168,63,0.2), 0 28px 70px rgba(0,0,0,0.42);
+    }
+
+    .card:hover::before {
+      transform: translateX(100%);
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      border: 1px solid var(--border);
+      background: rgba(216,168,63,0.1);
+      color: var(--gold-soft);
+      font-size: 1.45rem;
+      box-shadow: inset 0 0 18px rgba(216,168,63,0.13);
+    }
+
+    .card h3 {
+      font-size: 1.18rem;
+      margin-bottom: 10px;
+      color: var(--white);
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.96rem;
+    }
+
+    .card ul {
+      margin-top: 14px;
+      padding-left: 18px;
+    }
+
+    .pricing-card {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .price-box {
+      background: linear-gradient(160deg, rgba(216,168,63,0.22), rgba(9,24,48,0.92));
+      border: 1px solid rgba(243,210,122,0.5);
+      border-radius: 28px;
+      padding: 34px;
+      box-shadow: var(--glow);
+    }
+
+    .price {
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(3rem, 8vw, 5rem);
+      color: var(--gold-soft);
+      margin: 8px 0;
+      line-height: 1;
+    }
+
+    .price span {
+      font-size: 1.15rem;
+      color: var(--muted);
+      font-family: "Inter", sans-serif;
+    }
+
+    .details-box {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 34px;
+    }
+
+    .details-box ul {
+      display: grid;
+      gap: 12px;
+      list-style: none;
+      margin-top: 18px;
+    }
+
+    .details-box li {
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .details-box li::before {
+      content: "✦";
+      color: var(--gold-soft);
+      margin-right: 10px;
+    }
+
+    .calendly-shell {
+      max-width: 1100px;
+      margin: 0 auto;
+      border: 1px solid rgba(243,210,122,0.42);
+      border-radius: 28px;
+      overflow: hidden;
+      background: rgba(5,11,24,0.8);
+      box-shadow: 0 0 45px rgba(216,168,63,0.16), 0 30px 80px rgba(0,0,0,0.45);
+    }
+
+    .calendly-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(9,24,48,0.82);
+      flex-wrap: wrap;
+    }
+
+    .calendly-top strong {
+      color: var(--gold-soft);
+      font-family: "Orbitron", sans-serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+    }
+
+    .calendly-top span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .calendly-inline-widget {
+      min-width: 320px;
+      height: 720px;
+      background: #fff;
+    }
+
+    .note {
+      max-width: 850px;
+      margin: 18px auto 0;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .footer {
+      padding: 38px 20px;
+      text-align: center;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      background: rgba(5,11,24,0.76);
+    }
+
+    @media (max-width: 900px) {
+      .navbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+      }
+
+      .grid,
+      .pricing-card {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 76px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .navbar {
+        padding: 15px 16px;
+      }
+
+      .brand-text {
+        font-size: 0.72rem;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .nav-links a {
+        font-size: 0.8rem;
+      }
+
+      .nav-cta {
+        width: 100%;
+      }
+
+      .hero-actions a {
+        width: 100%;
+      }
+
+      .card,
+      .price-box,
+      .details-box {
+        padding: 22px;
+      }
+
+      .calendly-inline-widget {
+        height: 760px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+    <a href="index.html" class="brand" aria-label="Back to home">
+      <div class="logo-mark">BP</div>
+      <div class="brand-text">Engineering Career Systems</div>
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#schedule">Schedule</a>
+    </div>
+
+    <a class="nav-cta" href="#schedule">Book Consultation</a>
+  </nav>
+
+  <header class="hero">
+    <div class="radar">
+      <div class="sweep"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="eyebrow"><span class="pulse"></span> Career Signal Online</div>
+      <h1>Engineering Career <span class="gold-text">Consulting</span></h1>
+      <p class="subtitle">
+        Resume strategy, role targeting, interview preparation, and career positioning for engineers pursuing aerospace,
+        defense, avionics, GN&amp;C, sensor fusion, tracking, systems, and technical leadership roles.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#schedule">Schedule a Session</a>
+        <a class="btn-secondary" href="#services">Explore Services</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" id="services">
+    <div class="section-header">
+      <div class="section-kicker">Consulting Areas</div>
+      <h2>Build a Career Strategy Like an Engineering System</h2>
+      <p>
+        The goal is to turn your background into a clear, marketable technical story that recruiters and hiring managers
+        can quickly understand.
+      </p>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <div class="icon">▣</div>
+        <h3>Resume & LinkedIn Positioning</h3>
+        <p>
+          Convert scattered technical experience into a focused engineering profile with stronger keywords, project framing,
+          and role alignment.
+        </p>
+        <ul>
+          <li>Resume bullet review</li>
+          <li>LinkedIn headline/about section</li>
+          <li>Technical branding cleanup</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="icon">⌁</div>
+        <h3>Role Targeting</h3>
+        <p>
+          Identify which roles actually match your experience instead of relying only on generic titles.
+        </p>
+        <ul>
+          <li>GN&amp;C vs tracking vs avionics</li>
+          <li>Systems vs software vs algorithms</li>
+          <li>Level 2 / 3 / 4 positioning</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="icon">◎</div>
+        <h3>Interview Preparation</h3>
+        <p>
+          Prepare technical talking points, behavioral examples, and project explanations that sound confident and grounded.
+        </p>
+        <ul>
+          <li>STAR story development</li>
+          <li>Technical project walkthroughs</li>
+          <li>Mock question strategy</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="icon">△</div>
+        <h3>Project Portfolio Guidance</h3>
+        <p>
+          Pick projects that make sense for the roles you want and present them in a way that looks professional.
+        </p>
+        <ul>
+          <li>MATLAB / Python / C++ projects</li>
+          <li>Sensor fusion and tracking projects</li>
+          <li>GitHub and portfolio structure</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="icon">◇</div>
+        <h3>Career Transition Strategy</h3>
+        <p>
+          Plan moves between mechanical, electrical, systems, software, aerospace, defense, or technical leadership paths.
+        </p>
+        <ul>
+          <li>Skill gap mapping</li>
+          <li>Certification guidance</li>
+          <li>Long-term roadmap planning</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="icon">✦</div>
+        <h3>Offer & Salary Framing</h3>
+        <p>
+          Prepare your value statement before recruiter screens, salary discussions, and level negotiation conversations.
+        </p>
+        <ul>
+          <li>Compensation positioning</li>
+          <li>Level justification</li>
+          <li>Recruiter response drafting</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="pricing">
+    <div class="section-header">
+      <div class="section-kicker">Starter Rate</div>
+      <h2>Simple Hourly Consulting</h2>
+      <p>
+        Start with a focused one-hour session. Bring your resume, LinkedIn, job posting, interview target, or career question.
+      </p>
+    </div>
+
+    <div class="pricing-card">
+      <div class="price-box">
+        <div class="section-kicker">Consultation</div>
+        <div class="price">$30<span>/hr</span></div>
+        <p style="color: var(--muted); line-height: 1.7;">
+          Best for resume review, role targeting, project planning, or preparing for an upcoming recruiter screen/interview.
+        </p>
+      </div>
+
+      <div class="details-box">
+        <h3>What a session can include</h3>
+        <ul>
+          <li>Resume feedback and bullet improvement</li>
+          <li>LinkedIn profile positioning</li>
+          <li>Job posting match review</li>
+          <li>Career path comparison</li>
+          <li>Technical project ideas for your target role</li>
+          <li>Interview talking points and recruiter response prep</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="schedule">
+    <div class="section-header">
+      <div class="section-kicker">Schedule</div>
+      <h2>Book a Consultation</h2>
+      <p>
+        Replace the Calendly link below with your own free Calendly event link when you create it.
+      </p>
+    </div>
+
+    <div class="calendly-shell">
+      <div class="calendly-top">
+        <strong>Calendly Embedded Scheduler</strong>
+        <span>$30/hr engineering career consultation</span>
+      </div>
+
+      <!--
+        Replace this URL with your own Calendly event URL.
+        Example:
+        data-url="https://calendly.com/YOUR-USERNAME/engineering-career-consultation"
+      -->
+      <div
+        class="calendly-inline-widget"
+        data-url="https://calendly.com/YOUR-USERNAME/engineering-career-consultation?hide_gdpr_banner=1">
+      </div>
+    </div>
+
+    <p class="note">
+      After creating your Calendly account, make a one-hour event called “Engineering Career Consultation,” set the price/payment instructions however you prefer, then paste that event link into the embedded widget above.
+    </p>
+  </section>
+
+  <footer class="footer">
+    <p>© 2026 Engineering Career Consulting · Built for technical career clarity.</p>
+  </footer>
+
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+</body>
+</html>
