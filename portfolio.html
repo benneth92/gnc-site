@@ -736,14 +736,16 @@
       /* pull TECHNICAL PORTFOLIO closer under the nav */
       .hero-content { padding-top: 80px; }
     }
-    .data-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 12px;
-  position: relative;
-  z-index: 2;
-}
+      .data-image {
+      width: 100%;
+      height: auto;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 12px;
+      position: relative;
+      z-index: 2;
+      display: block;
+    }
   </style>
 </head>
 
